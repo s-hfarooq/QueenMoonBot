@@ -142,6 +142,10 @@ client.on("message", async message => {
                    'u thirsty hoe',
                    'It is important to drink 8 glasses of water a day.',
                    "goddammit i'm running out of creative ways to insult you people"];
+  
+  // rng generator for 8ball and thirst commands
+  
+  Random randIndex = new Random();
 
 
   // Counting game stuff
@@ -223,8 +227,7 @@ client.on("message", async message => {
       return;
     } else if(command.match(/\bquote\b/) != null) {
       getMessagesWithImages(client.channels.cache.get("697329980044083220")).then(output => {
-        let rand = Math.floor(Math.random() * output.length);
-        message.channel.send({files: [output[rand].attachments.first().url]});
+        message.channel.send({files: [output[randIndex.nextInt(0,output.length)].attachments.first().url]});
       });
     }else if(command.match(/\bbrownout\b/) != null) {
       if(message.channel.id === '697639057592811650') {
@@ -236,17 +239,17 @@ client.on("message", async message => {
         message.channel.send("That command can only be used in <#697639057592811650>");
       }
     } else if(command.match(/\bhelp\b/) != null) {
-      message.channel.send(File.ReadAllText(@"c:\commands.txt"));
+      message.channel.send(File.ReadAllText("commands.txt"));
     } else if(command.match(/\b8ball\b/) != null) {
       if(message.channel.id === '654838387160907777') {
-        var rand = Math.floor(Math.random() * responses.length);
-        message.channel.send("Question: " + message.content.substring(12) + "\nAnswer: " + responses[rand]);
+        //the part of the message to be deleted
+        String commandString = "queen 8ball ";
+        message.channel.send("Question: " + message.content.substring(commandString.length) + "\nAnswer: " + responses[randIndex.nextInt(0,responses.length)]);
       } else {
         message.channel.send("That command can only be used in <#654838387160907777>");
       }
     } else if(command.match(/\bthirst\b/) !=null) {
-        var rand = Math.floor(Math.random() * reminders.length);
-        message.channel.send(reminders[rand]);
+        message.channel.send(reminders[randIndex.nextInt(0,reminders.length)]);
     }
   }
 });
