@@ -99,6 +99,21 @@ client.on("message", async message => {
     'Outlook not so good',
     'Very doubtful'
   ];
+//!ping to run ping
+client.on('message', message => {
+if (message.author.bot) return;
+if (!message.content.startsWith('!')) return;
+if (message.content.startsWith('!' + 'ping')) {
+    message.channel.send({embed: {
+        color: 0x2ed32e,
+        fields: [{
+            name: "Your Ping",
+            value: "My Ping: " + Math.round(client.ws.ping) + ' ms'
+      }
+     ],
+}
+})
+}})
 
   // reminders for thirst command
   var reminders = ['A friendly reminder to stay hydrated.',
@@ -124,6 +139,7 @@ client.on("message", async message => {
         message.delete(lastMessage[1]);
         return;
       }
+        
 
       // If past 2 messages sent by same user, delete newest
       if (lastMessage[0].member.id == lastMessage[1].member.id) {
@@ -267,9 +283,6 @@ client.on("message", async message => {
       message.channel.send(reminders[rand]);
     } else if (command.match(/\blofi\b/) != null) {
       message.channel.send("https://open.spotify.com/playlist/1DcvziAZBZk1Ji1c65ePtk?si=Qtvu64zsQQurDtQa60tPBg");
-    } else if (command.match(/\bping\b/) != null) {
-      var ping = Date.now() - message.createdTimestamp;
-      message.channel.send("Your ping is `" + `${ping}` + " ms`");
     } else {
       message.channel.send("That command doesn't exist. Run `queen help` to see the available commands");
     }
