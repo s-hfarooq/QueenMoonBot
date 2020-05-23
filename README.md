@@ -30,6 +30,7 @@ A bot for the [UIUC 2024 Discord server](https://discord.gg/2pFv4Wq)
 * `queen thirst` to get water messages
 * `queen lofi` to get a good lofi playlist
 * `queen ping` to get your ping
+* `queen earring` to see a nice earring
 * ~~`queen class [SUBJECT-NUMBER]` to the name, credit hours, and recent avg. GPA of a UIUC course (NOTE: not case-sensitive)~~ now depreciated, use [class bot](https://github.com/timot3/uiuc-classes-bot) instead.
 
 
