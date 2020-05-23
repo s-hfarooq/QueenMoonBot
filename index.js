@@ -166,7 +166,9 @@ client.on("message", async message => {
     override = true;
 
   if (override) {
-    if (command.match(/\busercount\b/) != null) {
+    if (message.channel.id === '669726484772159488') {
+      message.channel.send('Commands are disabled in this channel.');
+    } else if (command.match(/\busercount\b/) != null) {
       const userAmnt = client.guilds.cache.get('654783232969277450').memberCount;
       message.channel.send("There are currently " + userAmnt + " people in this server");
       //console.log(client.guilds.cache.get('654783232969277450').memberCount);
