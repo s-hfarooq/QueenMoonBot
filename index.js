@@ -157,13 +157,15 @@ client.on("message", async message => {
   if (message.author.bot)
     return;
 
-  const command = message.content.toLowerCase();
+  var command = message.content.toLowerCase();
 
   let override = false;
 
-  // Make sure message starts with 'queen'
-  if (command.startsWith("queen"))
+  // Make sure message starts with 'queen' or 'q'
+  if (command.startsWith("queen ") || command.startsWith("q ")) {
     override = true;
+    command = command.substr(command.indexOf(" ") + 1);
+  }
 
   if (override) {
     if (message.channel.id === '669726484772159488') {
@@ -272,7 +274,7 @@ client.on("message", async message => {
             files: ['https://i.kym-cdn.com/entries/icons/original/000/026/699/soup.jpg']
         });
     } else if (command.match(/\bhelp\b/) != null) {
-        message.channel.send("Commands:\n```* `queen usercount` to see how many users are currently in the server\n* `queen buffnooble` for buff nooble\n* `queen hackathon` to get the done with hackathons picture\n* `queen gc` to get the Facebook group screenshot\n* `queen head` to get the Mater screenshot\n* `queen rat` to post this rat\n* `queen no anime` to get the no anime picture\n* `queen contribute` to get a like to the GitHub repo\n* `queen waitwhen` to get the when did I ask screenshot\n* `queen corn` to get a corn video`\n* `queen illinois` to get a map of Illinois\n* `queen catgirl` to see a catgirl\n* `queen gwagwa` to get the gwagwa video\n* `queen quote` to get a random image from #quotes\n* `queen brownout` to get a random attachment from #brownoutposting (only works in #brownoutposting)\n* `queen soup` to get soup\n* `queen 8ball [message]` to get an 8ball reply (only works in #spam)\n* `queen thirst` to get water messages\n* `queen lofi` to get a good lofi playlist\n* `queen ping` to get your ping\n* `queen brasil` to get the Ronaldinho Soccer 64 video\n* `queen earring` to see a nice earring```");
+        message.channel.send("Commands:\n```* `queen usercount` to see how many users are currently in the server\n* `queen buffnooble` for buff nooble\n* `queen hackathon` to get the done with hackathons picture\n* `queen gc` to get the Facebook group screenshot\n* `queen head` to get the Mater screenshot\n* `queen rat` to post this rat\n* `queen no anime` to get the no anime picture\n* `queen contribute` to get a like to the GitHub repo\n* `queen waitwhen` to get the when did I ask screenshot\n* `queen corn` to get a corn video`\n* `queen illinois` to get a map of Illinois\n* `queen catgirl` to see a catgirl\n* `queen gwagwa` to get the gwagwa video\n* `queen quote` to get a random image from #quotes\n* `queen brownout` to get a random attachment from #brownoutposting (only works in #brownoutposting)\n* `queen soup` to get soup\n* `queen 8ball [message]` to get an 8ball reply (only works in #spam)\n* `queen thirst` to get water messages\n* `queen lofi` to get a good lofi playlist\n* `queen ping` to get your ping\n* `queen brasil` to get the Ronaldinho Soccer 64 video\n* `queen earring` to see a nice earring```\nNOTE: `queen` can also be substituted with `q` for all of these commands");
     } else if (command.match(/\b8ball\b/) != null) {
       if (message.channel.id === '654838387160907777') {
         var rand = Math.floor(Math.random() * responses.length);
