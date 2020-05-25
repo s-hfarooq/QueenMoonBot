@@ -208,7 +208,7 @@ client.on("message", async message => {
       message.channel.send({
         files: ['https://cdn.discordapp.com/attachments/654838387160907777/713538844582084691/Mundial_Ronaldinho_Soccer_64_Full_HD_Intro.mp4']
       });
-    } else if (command.match(/\bwaitwhen\b/) != null) {
+    } else if (command.match(/\bwaitwhen\b/) != null || command.match(/\bww\b/) != null) {
       message.channel.send({
         files: ['https://cdn.discordapp.com/attachments/710425704524677211/711129644992036884/tim.png']
       });
