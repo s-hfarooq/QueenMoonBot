@@ -9,6 +9,8 @@ var quotesOut = [];
 var lastQuoteUpdate;
 var lastBrownoutUpdate;
 var updateInteval = (1000 * 60 * 60 * 24);
+var generalID = '669726484772159488';
+var brownoutID = '697639057592811650';
 
 const client = new Discord.Client({
     partials: ['MESSAGE']
@@ -18,7 +20,7 @@ const client = new Discord.Client({
 client.on("ready", () => {
     console.log(`Bot has started, with ${client.users.size} users, in ${client.channels.size} channels of ${client.guilds.size} guilds.`);
     client.user.setActivity(`queen help`);
-    getMessagesWithImages(client.channels.cache.get("697639057592811650")).then(output => {
+    getMessagesWithImages(client.channels.cache.get(brownoutID)).then(output => {
       brownoutOut = output;
     });
 
@@ -168,9 +170,7 @@ client.on("message", async message => {
   }
 
   if (override) {
-    if (message.channel.id === '669726484772159488') {
-      message.channel.send('Commands are disabled in this channel.');
-    } else if (command.match(/\busercount\b/) != null) {
+    if (command.match(/\busercount\b/) != null) {
       const userAmnt = client.guilds.cache.get('654783232969277450').memberCount;
       message.channel.send("There are currently " + userAmnt + " people in this server");
       //console.log(client.guilds.cache.get('654783232969277450').memberCount);
@@ -188,12 +188,14 @@ client.on("message", async message => {
       message.channel.send({
         files: ['https://cdn.discordapp.com/attachments/669726484772159488/708103493918916709/unknown.png']
       });
-      return;
     } else if (command.match(/\brat\b/) != null) {
-      message.channel.send({
-        files: ['https://cdn.discordapp.com/attachments/697639057592811650/713237658020872192/image0.jpg']
-      });
-      return;
+      if(message.channel.id !== generalID) {
+        message.channel.send({
+          files: ['https://cdn.discordapp.com/attachments/697639057592811650/713237658020872192/image0.jpg']
+        });
+      } else {
+        message.channel.send("That command cannot be used in this channel!");
+      }
     } else if (command.match(/\bno anime\b/) != null) {
       message.channel.send({
         files: ['https://cdn.discordapp.com/attachments/697639057592811650/708536846531035226/image0.jpg']
@@ -233,7 +235,7 @@ client.on("message", async message => {
         files: ['https://cdn.discordapp.com/attachments/669726484772159488/713289328985505792/gwa_gwa-QPYcuA0b6gA.mp4']
       });
     } else if (command.match(/\bquote\b/) != null) {
-      if (!(message.channel.id === '669726484772159488' || message.channel.id === '654784430409252904')) {
+      if (!(message.channel.id === generalID || message.channel.id === '654784430409252904')) {
         // Update
         if(Math.abs(lastQuoteUpdate - Date.now()) > updateInteval) {
           getMessagesWithImages(client.channels.cache.get("697329980044083220")).then(output => {
@@ -252,9 +254,9 @@ client.on("message", async message => {
         message.channel.send("That command cannot be used in this channel!");
       }
     } else if (command.match(/\bbrownout\b/) != null) {
-      if (message.channel.id === '697639057592811650') {
+      if (message.channel.id === brownoutID) {
         if(Math.abs(lastBrownoutUpdate - Date.now()) > updateInteval) {
-          getMessagesWithImages(client.channels.cache.get("697639057592811650")).then(output => {
+          getMessagesWithImages(client.channels.cache.get(brownoutID)).then(output => {
             brownoutOut = output;
           });
 
