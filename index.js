@@ -15,6 +15,8 @@ var brownoutID = '697639057592811650';
 
 // general cmd timestamp
 var generalLastCommandTime = 0;
+// time (in seconds) between cmd's in general
+var generalTimeGap = 5;
 
 const client = new Discord.Client({
     partials: ['MESSAGE']
@@ -176,28 +178,39 @@ client.on("message", async message => {
 
   // if command is not ran in general channel OR if the gap between last command is 5 seconds or more, command will be run
   var currentTime = Math.round((new Date().getTime() / 1000));
-  if (message.channel.id !== generalID || currentTime - generalLastCommandTime >= 5) {
+  if (message.channel.id !== generalID || currentTime - generalLastCommandTime >= generalTimeGap) {
     
     // run command
     if (override) {
+        // usercount cmd
         if (command.match(/\busercount\b/) != null) {
         const userAmnt = client.guilds.cache.get('654783232969277450').memberCount;
         message.channel.send("There are currently " + userAmnt + " people in this server");
         //console.log(client.guilds.cache.get('654783232969277450').memberCount);
+        generalLastCommandTime = Math.round((new Date().getTime() / 1000));
+        // buffnooble cmd
         } else if (command.match(/\bbuffnooble\b/) != null) {
         message.channel.send("buff nooble buff nooble");
+        generalLastCommandTime = Math.round((new Date().getTime() / 1000));
+        // hackathon cmd
         } else if (command.match(/\bhackathon\b/) != null) {
         message.channel.send({
             files: ['https://cdn.discordapp.com/attachments/654784388197908500/675113678856781834/Screenshot_20200102-213727_Discord.png']
         });
+        generalLastCommandTime = Math.round((new Date().getTime() / 1000));
+        // gc cmd
         } else if (command.match(/\bgc\b/) != null) {
         message.channel.send({
             files: ['https://cdn.discordapp.com/attachments/669726484772159488/701247357001400370/unknown.png']
         });
+        generalLastCommandTime = Math.round((new Date().getTime() / 1000));
+        // head cmd
         } else if (command.match(/\bhead\b/) != null) {
         message.channel.send({
             files: ['https://cdn.discordapp.com/attachments/669726484772159488/708103493918916709/unknown.png']
         });
+        generalLastCommandTime = Math.round((new Date().getTime() / 1000));
+        // rat cmd
         } else if (command.match(/\brat\b/) != null) {
         if(message.channel.id !== generalID) {
             message.channel.send({
@@ -206,44 +219,65 @@ client.on("message", async message => {
         } else {
             message.channel.send("That command cannot be used in this channel!");
         }
+        // no anime cmd
         } else if (command.match(/\bno anime\b/) != null) {
         message.channel.send({
             files: ['https://cdn.discordapp.com/attachments/697639057592811650/708536846531035226/image0.jpg']
         });
+        generalLastCommandTime = Math.round((new Date().getTime() / 1000));
+        // contribute cmd
         } else if (command.match(/\bcontribute\b/) != null) {
         message.channel.send("https://github.com/s-hfarooq/QueenMoonBot");
+        generalLastCommandTime = Math.round((new Date().getTime() / 1000));
+        // corn cmd
         } else if (command.match(/\bcorn\b/) != null) {
         message.channel.send({
             files: ["https://cdn.discordapp.com/attachments/697639057592811650/712531761774461008/Corn_is_the_best_crop__wheat_is_worst.mp4"]
         });
+        generalLastCommandTime = Math.round((new Date().getTime() / 1000));
+        // brasil cmd
         } else if (command.match(/\bbrasil\b/) != null) {
         message.channel.send({
             files: ['https://cdn.discordapp.com/attachments/654838387160907777/713538844582084691/Mundial_Ronaldinho_Soccer_64_Full_HD_Intro.mp4']
         });
+        generalLastCommandTime = Math.round((new Date().getTime() / 1000));
+        // waitwhen cmd
         } else if (command.match(/\bwaitwhen\b/) != null || command.match(/\bww\b/) != null) {
         message.channel.send({
             files: ['https://cdn.discordapp.com/attachments/710425704524677211/711129644992036884/tim.png']
         });
+        generalLastCommandTime = Math.round((new Date().getTime() / 1000));
+        // matt cmd
         } else if (command.match(/\bmatt\b/) != null) {
         message.channel.send({
             files: ['https://cdn.discordapp.com/attachments/669726484772159488/712182903966007296/IMG_9784.jpg']
         });
+        generalLastCommandTime = Math.round((new Date().getTime() / 1000));
+        // IL cmd
         } else if (command.match(/\billinois\b/) != null) {
         message.channel.send({
             files: ['https://media.discordapp.net/attachments/654785556215103488/692035239366885416/tempFileForShare_20200302-175024.png?width=546&height=679']
         });
+        generalLastCommandTime = Math.round((new Date().getTime() / 1000));
+        // catgirl cmd
         } else if (command.match(/\bcatgirl\b/) != null) {
         message.channel.send({
             files: ['https://img1.ak.crunchyroll.com/i/spire1/1b0597832b4aa93293041240680d6b471416589032_full.jpg']
         });
+        generalLastCommandTime = Math.round((new Date().getTime() / 1000));
+        // earring cmd
         } else if (command.match(/\bearring\b/) != null) {
         message.channel.send({
             files: ['https://cdn.discordapp.com/attachments/669726484772159488/713652674826076190/2Q.png']
         });
+        generalLastCommandTime = Math.round((new Date().getTime() / 1000));
+        // gwagwa cmd
         } else if (command.match(/\bgwagwa\b/) != null) {
         message.channel.send("GWAGWA", {
             files: ['https://cdn.discordapp.com/attachments/669726484772159488/713289328985505792/gwa_gwa-QPYcuA0b6gA.mp4']
         });
+        generalLastCommandTime = Math.round((new Date().getTime() / 1000));
+        // quote cmd
         } else if (command.match(/\bquote\b/) != null) {
         if (!(message.channel.id === generalID || message.channel.id === '654784430409252904')) {
             // Update
@@ -263,6 +297,8 @@ client.on("message", async message => {
         } else {
             message.channel.send("That command cannot be used in this channel!");
         }
+        generalLastCommandTime = Math.round((new Date().getTime() / 1000));
+        // brownout cmd
         } else if (command.match(/\bbrownout\b/) != null) {
         if (message.channel.id === brownoutID) {
             if(Math.abs(lastBrownoutUpdate - Date.now()) > updateInteval) {
@@ -281,12 +317,18 @@ client.on("message", async message => {
         } else {
             message.channel.send("That command can only be used in <#697639057592811650>");
         }
+        generalLastCommandTime = Math.round((new Date().getTime() / 1000));
+        //soup cmd
         } else if (command.match(/\bsoup\b/) != null) {
             message.channel.send({
                 files: ['https://i.kym-cdn.com/entries/icons/original/000/026/699/soup.jpg']
             });
+            generalLastCommandTime = Math.round((new Date().getTime() / 1000));
+        // help cmd
         } else if (command.match(/\bhelp\b/) != null) {
             message.channel.send("Commands:\n```* `queen usercount` to see how many users are currently in the server\n* `queen buffnooble` for buff nooble\n* `queen hackathon` to get the done with hackathons picture\n* `queen gc` to get the Facebook group screenshot\n* `queen head` to get the Mater screenshot\n* `queen rat` to post this rat\n* `queen no anime` to get the no anime picture\n* `queen contribute` to get a like to the GitHub repo\n* `queen waitwhen` to get the when did I ask screenshot\n* `queen corn` to get a corn video`\n* `queen illinois` to get a map of Illinois\n* `queen catgirl` to see a catgirl\n* `queen gwagwa` to get the gwagwa video\n* `queen quote` to get a random image from #quotes\n* `queen brownout` to get a random attachment from #brownoutposting (only works in #brownoutposting)\n* `queen soup` to get soup\n* `queen 8ball [message]` to get an 8ball reply (only works in #spam)\n* `queen thirst` to get water messages\n* `queen lofi` to get a good lofi playlist\n* `queen ping` to get your ping\n* `queen brasil` to get the Ronaldinho Soccer 64 video\n* `queen earring` to see a nice earring```\nNOTE: `queen` can also be substituted with `q` for all of these commands");
+            generalLastCommandTime = Math.round((new Date().getTime() / 1000));
+        // 8ball cmd
         } else if (command.match(/\b8ball\b/) != null) {
         if (message.channel.id === '654838387160907777') {
             var rand = Math.floor(Math.random() * responses.length);
@@ -294,13 +336,21 @@ client.on("message", async message => {
         } else {
             message.channel.send("That command can only be used in <#654838387160907777>");
         }
+        generalLastCommandTime = Math.round((new Date().getTime() / 1000));
+        // class cmd
         } else if (command.match(/\bclass\b/) != null) {
         message.channel.send("That command has been disabled. Use class bot instead.");
+        generalLastCommandTime = Math.round((new Date().getTime() / 1000));
+        // thirst cmd
         } else if (command.match(/\bthirst\b/) != null) {
         var rand = Math.floor(Math.random() * reminders.length);
         message.channel.send(reminders[rand]);
+        generalLastCommandTime = Math.round((new Date().getTime() / 1000));
+        // lofi cmd
         } else if (command.match(/\blofi\b/) != null) {
         message.channel.send("https://open.spotify.com/playlist/1DcvziAZBZk1Ji1c65ePtk?si=Qtvu64zsQQurDtQa60tPBg");
+        generalLastCommandTime = Math.round((new Date().getTime() / 1000));
+        // ping cmd
         } else if (command.match(/\bping\b/) != null) {
             const channel = message.channel;
             var apiPing = Math.round(client.ws.ping);
@@ -313,6 +363,7 @@ client.on("message", async message => {
             } else {
                 channel.send("My grandma has better internet <@" + message.author.id + ">" + ' you def need better wifi your message ping is '+ messagePing + 'ms (API ping: ' + apiPing + 'ms)');
             }
+            generalLastCommandTime = Math.round((new Date().getTime() / 1000));
         } else {
         message.channel.send("That command doesn't exist. Run `queen help` to see the available commands");
         }
