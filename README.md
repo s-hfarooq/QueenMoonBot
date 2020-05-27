@@ -1,26 +1,37 @@
 # QueenMoonBot
 
-A bot for the UIUC 2024 Discord server
+A bot for the [UIUC 2024 Discord server](https://discord.gg/2pFv4Wq)
 
 ## Add it to your server
   - NOTE: some things won't work due to hard coded channel id's
 
-  https://discordapp.com/oauth2/authorize?&client_id=684867671552294994&scope=bot&permissions=8
+  [Add it to your server by clicking here](https://discordapp.com/oauth2/authorize?&client_id=684867671552294994&scope=bot&permissions=8)
 
 ## Commands
 * Makes sure the #counting_game channel is in check. If a user sends two messages in a row, it deletes the newest one. If a user sends a number that isn't the previous number + 1, it deletes the message and assigns the `Can't Count` role (assuming the newest message was sent > 1500ms after the previous one).
-* `queen no anime` to get the no anime picture
+* `queen usercount` to see how many users are currently in the server
+* `queen buffnooble` for buff nooble
 * `queen hackathon` to get the done with hackathons picture
 * `queen gc` to get the Facebook group screenshot
-* `queen quote` to get a random image from #quotes
-* `queen brownout` to get a cringe meme from #brownoutposting (only works in #brownoutposting)
 * `queen head` to get the Mater screenshot
-* `queen usercount` to see how many users are currently in the server
+* `queen rat` to post this rat
+* `queen no anime` to get the no anime picture
 * `queen contribute` to get a like to the GitHub repo
+* `queen waitwhen` to get the when did I ask screenshot
+* `queen brasil` to get the Ronaldinho Soccer 64 video
+* `queen corn` to get a corn video`
+* `queen illinois` to get a map of Illinois
+* `queen catgirl` to see a catgirl
+* `queen gwagwa` to get the gwagwa video
+* `queen quote` to get a random image from #quotes
+* `queen brownout` to get a random attachment from #brownoutposting (only works in #brownoutposting)
+* `queen soup` to get soup
 * `queen 8ball [message]` to get an 8ball reply (only works in #spam)
-* `queen thirst` to remind your friends to H Y D R A T E
-* `queen lofi` to get a nice lofi playlist
-* `queen class [SUBJECT-NUMBER]` to the name, credit hours, and recent avg. GPA of a UIUC course (NOTE: not case-sensitive)
+* `queen thirst` to get water messages
+* `queen lofi` to get a good lofi playlist
+* `queen ping` to get your ping
+* `queen earring` to see a nice earring
+* ~~`queen class [SUBJECT-NUMBER]` to the name, credit hours, and recent avg. GPA of a UIUC course (NOTE: not case-sensitive)~~ now depreciated, use [class bot](https://github.com/timot3/uiuc-classes-bot) instead.
 
 
 
@@ -36,4 +47,4 @@ Make a file named `config.json` in the root directory of the repo. Head over to 
 Then run the bot by running `node index.js` in a terminal. To run even after closing the terminal window (ie. on an AWS EC2 instance) use the command `forever start index.js`.
 
 ## Contribute
-Make some contributions, it's open source.
+Make some contributions, it's open source. Just make a pull request, I'll probably accept it.
