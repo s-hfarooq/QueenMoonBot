@@ -370,7 +370,7 @@ client.on("message", async message => {
 
         return;
     }
-  } else {
+  } else if(override && currentTime - generalLastCommandTime < generalTimeGap) {
       message.channel.send("Slow down!");
   }
   
