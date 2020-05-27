@@ -369,8 +369,11 @@ client.on("message", async message => {
         }
 
         return;
-        }
     }
+  } else {
+      message.channel.send("Slow down!");
+  }
+  
 });
 
 client.login(config.token);
