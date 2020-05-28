@@ -10,7 +10,7 @@ A bot for the [UIUC 2024 Discord server](https://discord.gg/2pFv4Wq)
 ## Commands
 * Makes sure the #counting_game channel is in check. If a user sends two messages in a row, it deletes the newest one. If a user sends a number that isn't the previous number + 1, it deletes the message and assigns the `Can't Count` role (assuming the newest message was sent > 1500ms after the previous one).
 * `queen usercount` to see how many users are currently in the server
-* `queen buffnooble` for buff nooble
+* `queen buff[name]` for buff [name]
 * `queen hackathon` to get the done with hackathons picture
 * `queen gc` to get the Facebook group screenshot
 * `queen head` to get the Mater screenshot
