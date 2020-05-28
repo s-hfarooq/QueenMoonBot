@@ -1,7 +1,6 @@
 // Load requirements
 const Discord = require("discord.js");
 const fs = require('fs');
-const count = require('./count.json');
 const config = require("./config.json");
 
 // general var's
