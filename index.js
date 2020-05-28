@@ -193,7 +193,10 @@ client.on("message", async message => {
         // buff[name] cmd
       } else if (command.match(/buff/) != null) {
         const name = command.substr(4).trim();
-        message.channel.send("buff " + name + " buff " + name);
+        var output = "buff " + name + " buff " + name;
+        if(output.length > 2000)
+          output = "too buff";
+        message.channel.send(output);
         resetTime = true;
         // hackathon cmd
       } else if (command.match(/\bhackathon\b/) != null) {
