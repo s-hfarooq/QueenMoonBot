@@ -192,7 +192,7 @@ client.on("message", async message => {
         resetTime = true;
         // buff[name] cmd
       } else if (command.match(/buff/) != null) {
-        const name = command.substr(4);
+        const name = command.substr(4).trim();
         message.channel.send("buff " + name + " buff " + name);
         resetTime = true;
         // hackathon cmd
