@@ -12,12 +12,8 @@ var updateInteval = (1000 * 60 * 60 * 24);
 var generalID = '669726484772159488';
 var brownoutID = '697639057592811650';
 
-var generalLastCommandTime = 0; // general cmd timestamp
-var generalTimeGap = 5; // time (in seconds) between cmd's in general
-
-const client = new Discord.Client({
-  partials: ['MESSAGE']
-});
+var generalLastCommandTime = 0; // general command timestamp
+var generalTimeGap = 5; // time (in seconds) between command's in general
 
 // responses for 8ball
 var responses = ['It is certain.',
@@ -53,6 +49,9 @@ var reminders = ['A friendly reminder to stay hydrated.',
   "goddammit i'm running out of creative ways to insult you people"
 ];
 
+const client = new Discord.Client({
+  partials: ['MESSAGE']
+});
 
 // Run on start
 client.on("ready", () => {
@@ -177,7 +176,7 @@ client.on("message", async message => {
   }
 
 
-  // If command is not ran in general channel OR if the gap between last command is 5 seconds or more, command will be run
+  // If command is not run in general channel or if the gap between last command is greater than generalTimeGap, command will be run
   var currentTime = Math.round((new Date().getTime() / 1000));
   var timeDiff = currentTime - generalLastCommandTime;
 
