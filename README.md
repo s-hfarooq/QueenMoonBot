@@ -17,7 +17,7 @@ A bot for the [UIUC 2024 Discord server](https://discord.gg/2pFv4Wq)
 * `queen rat` to post this rat
 * `queen no anime` to get the no anime picture
 * `queen contribute` to get a like to the GitHub repo
-* `queen waitwhen` to get the when did I ask screenshot
+* `queen waitwhen` or `queen ww` to get the when did I ask screenshot
 * `queen brasil` to get the Ronaldinho Soccer 64 video
 * `queen corn` to get a corn video`
 * `queen illinois` to get a map of Illinois
@@ -33,6 +33,7 @@ A bot for the [UIUC 2024 Discord server](https://discord.gg/2pFv4Wq)
 * `queen earring` to see a nice earring
 * ~~`queen class [SUBJECT-NUMBER]` to the name, credit hours, and recent avg. GPA of a UIUC course (NOTE: not case-sensitive)~~ now depreciated, use [class bot](https://github.com/timot3/uiuc-classes-bot) instead.
 
+Note: For all commands, `queen` can be substituted with `q`
 
 
 ## To run the bot yourself
