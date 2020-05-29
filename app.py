@@ -179,4 +179,4 @@ async def await_ping(ctx):
 async def await_ping(ctx):
     await ctx.send('https://cdn.discordapp.com/attachments/669726484772159488/713652674826076190/2Q.png')
 
-bot.run('NjA4ODk4NDkwNjU0OTE2NjA4.XtCzwg.vM6Be2A6aItXCCy_jJdlr7yMUnU')
+bot.run('TOKEN')
