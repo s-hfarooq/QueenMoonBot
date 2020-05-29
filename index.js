@@ -319,7 +319,7 @@ client.on("message", async message => {
       } else if (command.startsWith("help")) {
         const exampleEmbed = new Discord.MessageEmbed()
 	.setColor("#ffffff")
-	.Author("Help")
+	.setAuthor("Help")
 	.addField('queen usercount', 'to see how many users are currently in the server', false)
 	.addField('queen buff[name]', 'for buff [name]', false)
 	.addField('queen hackathon', 'to get the done with hackathons picture', false)
