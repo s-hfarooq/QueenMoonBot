@@ -320,17 +320,16 @@ client.on("message", async message => {
         const helpCommand = new Discord.MessageEmbed()
             	.setColor('#ffffff')
             	.setAuthor('Help')
-            	.addField('queen usercount', 'to see how many users are currently in the server', false)
-            	.addField('queen buff[name]', 'for buff [name]', false)
-            	.addField('queen contribute', 'to get a like to the GitHub repo', false)
-            	.addField('queen waitwhen', 'to get the when did I ask screenshot', false)
-            	.addField('queen illinois', 'to get a map of Illinois',false)
-            	.addField('queen quote', 'to get a random image from #quotes', false)
-            	.addField('queen brownout', 'to get a random attachment from #brownoutposting (only works in #brownoutposting)', false)
-            	.addField('queen 8ball [message]', 'to get an 8ball reply (only works in #spam)', false)
-            	.addField('queen thirst', 'to get water messages', false)
-            	.addField('queen ping', 'to get your ping', false)
-              .addField('View all commands', '[Click here](https://github.com/s-hfarooq/QueenMoonBot/blob/master/README.md)', false);
+            	.addField('queen usercount', 'See how many users are currently in the server', false)
+            	.addField('queen buff[name]', 'Buff [name]', false)
+            	.addField('queen waitwhen', 'Get the when did I ask screenshot', false)
+            	.addField('queen illinois', 'Get a map of Illinois',false)
+            	.addField('queen quote', 'Get a random image from #quotes', false)
+            	.addField('queen 8ball [message]', 'Get an 8ball reply (only works in #spam)', false)
+            	.addField('queen thirst', 'Get water messages', false)
+            	.addField('queen ping', 'Get your ping', false)
+              .addField('queen contribute', 'Get [a link to the GitHub repo](https://github.com/s-hfarooq/QueenMoonBot)', false)
+              .addField('View all commands', '[View the README on Github](https://github.com/s-hfarooq/QueenMoonBot/blob/master/README.md)', false);
         message.channel.send({ embed: helpCommand });
         // 8ball cmd
       } else if (command.startsWith("8ball")) {
