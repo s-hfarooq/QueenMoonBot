@@ -317,7 +317,32 @@ client.on("message", async message => {
         });
         // help cmd
       } else if (command.startsWith("help")) {
-        message.channel.send("Commands:\n```* `queen usercount` to see how many users are currently in the server\n* `queen buff[name]` for buff [name]\n* `queen hackathon` to get the done with hackathons picture\n* `queen gc` to get the Facebook group screenshot\n* `queen head` to get the Mater screenshot\n* `queen rat` to post this rat\n* `queen no anime` to get the no anime picture\n* `queen contribute` to get a like to the GitHub repo\n* `queen waitwhen` to get the when did I ask screenshot\n* `queen corn` to get a corn video`\n* `queen illinois` to get a map of Illinois\n* `queen catgirl` to see a catgirl\n* `queen gwagwa` to get the gwagwa video\n* `queen quote` to get a random image from #quotes\n* `queen brownout` to get a random attachment from #brownoutposting (only works in #brownoutposting)\n* `queen soup` to get soup\n* `queen 8ball [message]` to get an 8ball reply (only works in #spam)\n* `queen thirst` to get water messages\n* `queen lofi` to get a good lofi playlist\n* `queen ping` to get your ping\n* `queen brasil` to get the Ronaldinho Soccer 64 video\n* `queen earring` to see a nice earring```\nNOTE: `queen` can also be substituted with `q` for all of these commands");
+        const exampleEmbed = new Discord.MessageEmbed()
+	.setColor("#ffffff")
+	.Author("Help")
+	.addField('queen usercount', 'to see how many users are currently in the server', false)
+	.addField('queen buff[name]', 'for buff [name]', false)
+	.addField('queen hackathon', 'to get the done with hackathons picture', false)
+	.addField('queen gc', 'to get the Facebook group screenshot', false)
+	.addField('queen head', 'to get the Mater screenshot', false)
+	.addField('queen rat','to post this rat',false)
+	.addField('queen no anime','to get the no anime picture',false)
+	.addField('queen contribute','to get a like to the GitHub repo',false)
+	.addField('queen waitwhen','to get the when did I ask screenshot',false)
+	.addField('queen corn','to get a corn video',false)
+	.addField('queen illinois','to get a map of Illinois',false)
+	.addField('queen catgirl','to see a catgirl',false)
+	.addField('queen gwagwa','to get the gwagwa video',false)
+	.addField('queen quote','to get a random image from #quotes',false)
+	.addField('queen brownout','to get a random attachment from #brownoutposting (only works in #brownoutposting)',false)
+	.addField('queen soup','to get soup',false)
+	.addField('queen 8ball [message]','to get an 8ball reply (only works in #spam)',false)
+	.addField('queen thirst','to get water messages',false)
+	.addField('queen lofi','to get a good lofi playlist',false)
+	.addField('queen ping','to get your ping',false)
+	.addField('queen brasil','to get the Ronaldinho Soccer 64 video',false)
+	.addField('queen earring','to see a nice earring',false);
+        message.channel.send({ embed: exampleEmbed });
         // 8ball cmd
       } else if (command.startsWith("8ball")) {
         if (message.channel.id === '654838387160907777') {
