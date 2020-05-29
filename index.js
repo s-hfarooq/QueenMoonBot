@@ -1,21 +1,14 @@
 // Load requirements
 const Discord = require("discord.js");
-const fs = require('fs');
 const config = require("./config.json");
 
-// general var's
-var brownoutOut = [];
-var quotesOut = [];
-var lastQuoteUpdate;
-var lastBrownoutUpdate;
-var updateInteval = (1000 * 60 * 60 * 24);
-var generalID = '669726484772159488';
-var brownoutID = '697639057592811650';
+// General variables
+var brownoutOut = [], quotesOut = [];
+var lastQuoteUpdate, lastBrownoutUpdate, updateInteval = (1000 * 60 * 60 * 24);
+var generalID = '669726484772159488', brownoutID = '697639057592811650';
+var generalLastCommandTime = 0, generalTimeGap = 5;
 
-var generalLastCommandTime = 0; // general command timestamp
-var generalTimeGap = 5; // time (in seconds) between command's in general
-
-// responses for 8ball
+// Responses for 8ball
 var responses = ['It is certain.',
   'It is decidedly so.',
   'Without a doubt.',
@@ -38,7 +31,7 @@ var responses = ['It is certain.',
   'Very doubtful'
 ];
 
-// reminders for thirst command
+// Responses for thirst command
 var reminders = ['A friendly reminder to stay hydrated.',
   'Quench your thirst.',
   'Did you drink enough water today?',
@@ -53,10 +46,11 @@ const client = new Discord.Client({
   partials: ['MESSAGE']
 });
 
-// Run on start
+// Runs on start
 client.on("ready", () => {
   console.log(`Bot has started, with ${client.users.size} users, in ${client.channels.size} channels of ${client.guilds.size} guilds.`);
   client.user.setActivity(`queen help`);
+
   getMessagesWithImages(client.channels.cache.get(brownoutID)).then(output => {
     brownoutOut = output;
   });
@@ -79,7 +73,7 @@ client.on("guildCreate", guild => {
 
 // Runs on leave server
 client.on("guildDelete", guild => {
-  console.log(`I have been removed from: ${guild.name} (id: ${guild.id})`);
+  console.log(`Bot has been removed from: ${guild.name} (id: ${guild.id})`);
   client.user.setActivity(`queen help`);
 });
 
@@ -88,11 +82,11 @@ async function getMessagesWithImages(channel, limit = 500) {
   const sum_messages = [];
   let last_id;
 
-  while (true) {
-    const options = {
-      limit: 100
-    };
+  const options = {
+    limit: 100
+  };
 
+  while (true) {
     if (last_id)
       options.before = last_id;
 
@@ -114,18 +108,11 @@ async function getMessagesWithImages(channel, limit = 500) {
   return output;
 }
 
-function getCommand(cmd) {
-
-}
-
 // Runs when a new message is sent on a server
 client.on("message", async message => {
   // Counting game stuff
   if (message.channel.id === '698313651186040923') {
-    message.channel.messages.fetch({
-      limit: 2
-    }).then(messages => {
-
+    message.channel.messages.fetch({ limit: 2 }).then(messages => {
       // Delete bot messages
       const lastMessage = messages.array();
       if (lastMessage[1].author.bot) {
@@ -143,11 +130,8 @@ client.on("message", async message => {
       if (Number(lastMessage[0].content).toString() !== lastMessage[0].content || Number(lastMessage[0].content) - 1 != Number(lastMessage[1].content)) {
         // Add Can't Count role if number isn't next in counting game and > 1500 ms between the two messages
         if (Math.abs(lastMessage[0].createdTimestamp - lastMessage[1].createdTimestamp) > 1500) {
-          // Because Gloria is special
-          if (lastMessage[0].member.id !== '242067290479132675') {
-            const tMember = lastMessage[0].member.guild.roles.cache.find(role => role.name === "Can't Count");
-            lastMessage[0].member.roles.add(tMember).catch(console.error);
-          }
+          const tMember = lastMessage[0].member.guild.roles.cache.find(role => role.name === "Can't Count");
+          lastMessage[0].member.roles.add(tMember).catch(console.error);
         }
 
         // Delete incorrect number
@@ -193,9 +177,17 @@ client.on("message", async message => {
 
     if (override) {
       switch (keyword) {
+        case "contribute":
+          message.channel.send("https://github.com/s-hfarooq/QueenMoonBot");
+          break;
+
         case "usercount":
           const userAmnt = client.guilds.cache.get('654783232969277450').memberCount;
           message.channel.send("There are currently " + userAmnt + " people in this server");
+          break;
+
+        case "class":
+          message.channel.send("That command has been disabled. Use class bot instead.");
           break;
 
         case "buff":
@@ -203,6 +195,24 @@ client.on("message", async message => {
           if(output.length > 2000)
             output = "too buff";
           message.channel.send(output);
+          break;
+
+        case "8ball":
+          if (message.channel.id === '654838387160907777') {
+            var rand = Math.floor(Math.random() * responses.length);
+            message.channel.send("Question: " + message.content.substring(7) + "\nAnswer: " + responses[rand]);
+          } else {
+            message.channel.send("That command can only be used in <#654838387160907777>");
+          }
+          break;
+
+        case "thirst":
+          var rand = Math.floor(Math.random() * reminders.length);
+          message.channel.send(reminders[rand]);
+          break;
+
+        case "lofi":
+          message.channel.send("https://open.spotify.com/playlist/1DcvziAZBZk1Ji1c65ePtk?si=Qtvu64zsQQurDtQa60tPBg");
           break;
 
         case "hackathon":
@@ -223,25 +233,10 @@ client.on("message", async message => {
           });
           break;
 
-        case "rat":
-          if (message.channel.id !== generalID) {
-            message.channel.send({
-              files: ['https://cdn.discordapp.com/attachments/697639057592811650/713237658020872192/image0.jpg']
-            });
-          } else {
-            message.channel.send("That command cannot be used in this channel!");
-          }
-
-          break;
-
         case "no anime":
           message.channel.send({
             files: ['https://cdn.discordapp.com/attachments/697639057592811650/708536846531035226/image0.jpg']
           });
-          break;
-
-        case "contribute":
-          message.channel.send("https://github.com/s-hfarooq/QueenMoonBot");
           break;
 
         case "corn":
@@ -253,13 +248,6 @@ client.on("message", async message => {
         case "brasil":
           message.channel.send({
             files: ['https://cdn.discordapp.com/attachments/654838387160907777/713538844582084691/Mundial_Ronaldinho_Soccer_64_Full_HD_Intro.mp4']
-          });
-          break;
-
-        case "waitwhen":
-        case "ww":
-          message.channel.send({
-            files: ['https://cdn.discordapp.com/attachments/710425704524677211/711129644992036884/tim.png']
           });
           break;
 
@@ -293,8 +281,31 @@ client.on("message", async message => {
           });
           break;
 
+        case "soup":
+          message.channel.send({
+            files: ['https://i.kym-cdn.com/entries/icons/original/000/026/699/soup.jpg']
+          });
+          break;
+
+        case "waitwhen":
+        case "ww":
+          message.channel.send({
+            files: ['https://cdn.discordapp.com/attachments/710425704524677211/711129644992036884/tim.png']
+          });
+          break;
+
+        case "rat":
+          if (message.channel.id !== generalID) {
+            message.channel.send({
+              files: ['https://cdn.discordapp.com/attachments/697639057592811650/713237658020872192/image0.jpg']
+            });
+          } else {
+            message.channel.send("That command cannot be used in this channel!");
+          }
+          break;
+
         case "quote":
-          if (!(message.channel.id === generalID || message.channel.id === '654784430409252904')) {
+          if (message.channel.id !== generalID) {
             // Update
             if (Math.abs(lastQuoteUpdate - Date.now()) > updateInteval) {
               getMessagesWithImages(client.channels.cache.get("697329980044083220")).then(output => {
@@ -338,14 +349,8 @@ client.on("message", async message => {
               });
             }
           } else {
-            message.channel.send("That command can only be used in <#697639057592811650>");
+            message.channel.send("That command can only be used in <#" + brownoutID + ">");
           }
-          break;
-
-        case "soup":
-          message.channel.send({
-            files: ['https://i.kym-cdn.com/entries/icons/original/000/026/699/soup.jpg']
-          });
           break;
 
         case "help":
@@ -363,28 +368,6 @@ client.on("message", async message => {
                 .addField('queen contribute', 'Get [a link to the GitHub repo](https://github.com/s-hfarooq/QueenMoonBot)', false)
                 .addField('View all commands', '[View the README on Github](https://github.com/s-hfarooq/QueenMoonBot/blob/master/README.md)', false);
           message.channel.send({ embed: helpCommand });
-          break;
-
-        case "8ball":
-          if (message.channel.id === '654838387160907777') {
-            var rand = Math.floor(Math.random() * responses.length);
-            message.channel.send("Question: " + message.content.substring(7) + "\nAnswer: " + responses[rand]);
-          } else {
-            message.channel.send("That command can only be used in <#654838387160907777>");
-          }
-          break;
-
-        case "class":
-          message.channel.send("That command has been disabled. Use class bot instead.");
-          break;
-
-        case "thirst":
-          var rand = Math.floor(Math.random() * reminders.length);
-          message.channel.send(reminders[rand]);
-          break;
-
-        case "lofi":
-          message.channel.send("https://open.spotify.com/playlist/1DcvziAZBZk1Ji1c65ePtk?si=Qtvu64zsQQurDtQa60tPBg");
           break;
 
         case "ping":
