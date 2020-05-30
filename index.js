@@ -375,6 +375,23 @@ client.on("message", async message => {
           var messagePing = Date.now() - message.createdTimestamp;
           message.channel.send('Client ping: ' + messagePing + 'ms (API ping: ' + apiPing + 'ms)');
           break;
+        
+        case "cock":
+          // responses for queen cock
+          var links = [
+              // nooble
+              'https://bit.ly/2AoeBB6', 
+              // kitty
+              'https://bit.ly/36IMybE',
+              // rooster
+              'https://bit.ly/2ZONFoU', 
+              // badminton
+              'https://bit.ly/2M9b5xl', 
+          ]
+          var rand = Math.floor(Math.random() * links.length);  
+          message.channel.send({ files: [links[rand]] });  
+          break;
+
 
         default:
           message.channel.send("That command doesn't exist. Run `queen help` to see the available commands");
