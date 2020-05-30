@@ -375,21 +375,21 @@ client.on("message", async message => {
           var messagePing = Date.now() - message.createdTimestamp;
           message.channel.send('Client ping: ' + messagePing + 'ms (API ping: ' + apiPing + 'ms)');
           break;
-        
+
         case "cock":
           // responses for queen cock
           var links = [
               // nooble
-              'https://bit.ly/2AoeBB6', 
+              'https://cdn.discordapp.com/attachments/714931864413929512/716093335185522688/image0.png',
               // kitty
-              'https://bit.ly/36IMybE',
+              'https://cdn.discordapp.com/attachments/714931864413929512/716094595309633597/image0.jpg',
               // rooster
-              'https://bit.ly/2ZONFoU', 
+              'https://cdn.discordapp.com/attachments/714931864413929512/716103472444997673/image0.jpg',
               // badminton
-              'https://bit.ly/2M9b5xl', 
+              'https://cdn.discordapp.com/attachments/714931864413929512/716103629454442516/image0.jpg', 
           ]
-          var rand = Math.floor(Math.random() * links.length);  
-          message.channel.send({ files: [links[rand]] });  
+          var rand = Math.floor(Math.random() * links.length);
+          message.channel.send({ files: [links[rand]] });
           break;
 
 
