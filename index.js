@@ -323,7 +323,7 @@ client.on("message", async message => {
               message.channel.send("Images are still loading. Try again in a few seconds.");
             } else {
               var amnt = isNaN(parseInt(command)) ? 1 : parseInt(command);
-              if(amnt > 10 || amnt < 0)
+              if(amnt > 5 || amnt < 0)
                 amnt = 1;
 
               for (let i = 0; i < amnt; i++) {
@@ -354,7 +354,7 @@ client.on("message", async message => {
               message.channel.send("Images are still loading. Try again in a few seconds.");
             } else {
               var amnt = isNaN(parseInt(command)) ? 1 : parseInt(command);
-              if(amnt > 10 || amnt < 0)
+              if(amnt > 5 || amnt < 0)
                 amnt = 1;
 
               for (let i = 0; i < amnt; i++) {
