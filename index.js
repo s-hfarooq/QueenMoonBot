@@ -168,12 +168,15 @@ client.on("message", async message => {
     // Get command keyword
     var keyword = command.replace(/ .*/,'');
 
+
     // If trying to use buff command, get the [name] desired
     var buffName = "";
     if(keyword.startsWith("buff")) {
       keyword = "buff";
       buffName = command.substr(4).trim();
     }
+
+    var command = command.substr(keyword.length + 1);
 
     if (override) {
       switch (keyword) {
@@ -306,7 +309,7 @@ client.on("message", async message => {
 
         case "quote":
           if (message.channel.id !== generalID) {
-            // Update
+            // Update array once a day
             if (Math.abs(lastQuoteUpdate - Date.now()) > updateInteval) {
               getMessagesWithImages(client.channels.cache.get("697329980044083220")).then(output => {
                 quotesOut = output;
@@ -319,10 +322,16 @@ client.on("message", async message => {
             if (quotesOut.length == 0) {
               message.channel.send("Images are still loading. Try again in a few seconds.");
             } else {
-              let rand = Math.floor(Math.random() * quotesOut.length);
-              message.channel.send({
-                files: [quotesOut[rand].attachments.first().url]
-              });
+              var amnt = isNaN(parseInt(command)) ? 1 : parseInt(command);
+              if(amnt > 10 || amnt < 0)
+                amnt = 1;
+
+              for (let i = 0; i < amnt; i++) {
+                let rand = Math.floor(Math.random() * quotesOut.length);
+                message.channel.send({
+                  files: [quotesOut[rand].attachments.first().url]
+                });
+              }
             }
           } else {
             message.channel.send("That command cannot be used in this channel!");
@@ -331,6 +340,7 @@ client.on("message", async message => {
 
         case "brownout":
           if (message.channel.id === brownoutID) {
+            // Update array once a day
             if (Math.abs(lastBrownoutUpdate - Date.now()) > updateInteval) {
               getMessagesWithImages(client.channels.cache.get(brownoutID)).then(output => {
                 brownoutOut = output;
@@ -343,10 +353,16 @@ client.on("message", async message => {
             if (brownoutOut.length == 0) {
               message.channel.send("Images are still loading. Try again in a few seconds.");
             } else {
-              let rand = Math.floor(Math.random() * brownoutOut.length);
-              message.channel.send({
-                files: [brownoutOut[rand].attachments.first().url]
-              });
+              var amnt = isNaN(parseInt(command)) ? 1 : parseInt(command);
+              if(amnt > 10 || amnt < 0)
+                amnt = 1;
+
+              for (let i = 0; i < amnt; i++) {
+                let rand = Math.floor(Math.random() * brownoutOut.length);
+                message.channel.send({
+                  files: [brownoutOut[rand].attachments.first().url]
+                });
+              }
             }
           } else {
             message.channel.send("That command can only be used in <#" + brownoutID + ">");
@@ -366,7 +382,7 @@ client.on("message", async message => {
               	.addField('queen thirst', 'Get water messages', false)
               	.addField('queen ping', 'Get your ping', false)
                 .addField('queen contribute', 'Get [a link to the GitHub repo](https://github.com/s-hfarooq/QueenMoonBot)', false)
-                .addField('View all commands', '[View the README on Github](https://github.com/s-hfarooq/QueenMoonBot/blob/master/README.md)', false);
+                .addField('View all commands', '[View the README on GitHub](https://github.com/s-hfarooq/QueenMoonBot/blob/master/README.md)', false);
           message.channel.send({ embed: helpCommand });
           break;
 
@@ -386,7 +402,7 @@ client.on("message", async message => {
               // rooster
               'https://cdn.discordapp.com/attachments/714931864413929512/716103472444997673/image0.jpg',
               // badminton
-              'https://cdn.discordapp.com/attachments/714931864413929512/716103629454442516/image0.jpg', 
+              'https://cdn.discordapp.com/attachments/714931864413929512/716103629454442516/image0.jpg',
           ]
           var rand = Math.floor(Math.random() * links.length);
           message.channel.send({ files: [links[rand]] });
