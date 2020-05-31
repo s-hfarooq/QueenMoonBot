@@ -416,29 +416,36 @@ client.on("message", async message => {
           break;
 
         case "orgy":
-          if (message.channel.id !== generalID)
+          if (message.channel.id !== generalID) {
             message.channel.send({
               files: ['https://cdn.discordapp.com/attachments/714931864413929512/716715109552095300/43hgta.gif']
             });
+          } else {
+            message.channel.send("That command cannot be used in this channel!");
+          }
           break;
 
         case "owoify":
-          message.channel.messages.fetch({ limit: 2 }).then(messages => {
-            const lastMessage = messages.array();
-            if (command) {
-              message.channel.send(owoify(command) + "\n - <@" + lastMessage[0].author.id + ">");
-              message.delete(lastMessage[0]);
-            } else {
-              if (lastMessage[1].content) {
-                message.channel.send(owoify(lastMessage[1].content) + "\n - owoified by <@" + lastMessage[0].author.id + ">");
-                message.delete(lastMessage[0]);
+          if (message.channel.id !== generalID) {
+            message.channel.messages.fetch({ limit: 2 }).then(messages => {
+              const lastMessage = messages.array();
+              if (command) {
+                message.channel.send(owoify(command) + "\n - <@" + message.author.id + ">");
+                message.delete(message);
               } else {
-                message.channel.send("Previous message had no text");
+                if (lastMessage[1].content) {
+                  message.channel.send(owoify(lastMessage[1].content) + "\n - owoified by <@" + message.author.id + ">");
+                  message.delete(message);
+                } else {
+                  message.channel.send("Previous message had no text");
+                }
               }
-            }
-          }).catch(err => {
-            console.error(err);
-          });
+            }).catch(err => {
+              console.error(err);
+            });
+          } else {
+            message.channel.send("That command cannot be used in this channel!");
+          }
           break;
 
         default:
