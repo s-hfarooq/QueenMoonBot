@@ -394,20 +394,25 @@ client.on("message", async message => {
 
         case "cock":
           // responses for queen cock
-          var links = [
-              // nooble
-              'https://cdn.discordapp.com/attachments/714931864413929512/716093335185522688/image0.png',
-              // kitty
-              'https://cdn.discordapp.com/attachments/714931864413929512/716094595309633597/image0.jpg',
-              // rooster
-              'https://cdn.discordapp.com/attachments/714931864413929512/716103472444997673/image0.jpg',
-              // badminton
-              'https://cdn.discordapp.com/attachments/714931864413929512/716103629454442516/image0.jpg',
-          ]
-          var rand = Math.floor(Math.random() * links.length);
-          message.channel.send({ files: [links[rand]] });
+          if (message.channel.id !== generalID) {
+            var links = [
+                // nooble
+                'https://cdn.discordapp.com/attachments/714931864413929512/716093335185522688/image0.png',
+                // kitty
+                'https://cdn.discordapp.com/attachments/714931864413929512/716094595309633597/image0.jpg',
+                // rooster
+                'https://cdn.discordapp.com/attachments/714931864413929512/716103472444997673/image0.jpg',
+                // badminton
+                'https://cdn.discordapp.com/attachments/714931864413929512/716103629454442516/image0.jpg',
+                // anime
+                'https://cdn.discordapp.com/attachments/697639057592811650/716491275192500254/image0.jpg',
+            ]
+            var rand = Math.floor(Math.random() * links.length);
+            message.channel.send({ files: [links[rand]] });
+          } else {
+            message.channel.send("That command cannot be used in this channel!");
+          }
           break;
-
 
         default:
           message.channel.send("That command doesn't exist. Run `queen help` to see the available commands");
