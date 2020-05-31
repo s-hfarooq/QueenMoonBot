@@ -417,9 +417,9 @@ client.on("message", async message => {
 
         case "orgy":
           if (message.channel.id !== generalID)
-          message.channel.send({
-            files: ['https://imgflip.com/gif/43hgta']
-          });
+            message.channel.send({
+              files: ['https://imgflip.com/gif/43hgta']
+            });
           break;
 
         case "owoify":
