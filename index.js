@@ -420,7 +420,7 @@ client.on("message", async message => {
           message.channel.send({
             files: ['https://imgflip.com/gif/43hgta']
           });
-            break;
+          break;
 
         case "owoify":
           if (command) {
