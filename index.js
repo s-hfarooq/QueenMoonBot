@@ -423,7 +423,10 @@ client.on("message", async message => {
             // owoify previous sent message
             message.channel.messages.fetch({ limit: 2 }).then(messages => {
               const lastMessage = messages.array();
-              message.channel.send(owoify(lastMessage[1].content));
+              if(lastMessage[1].content)
+                message.channel.send(owoify(lastMessage[1].content));
+              else
+                message.channel.send("Previous message had no text");
             }).catch(err => {
               console.error(err);
             });
