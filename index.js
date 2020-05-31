@@ -418,7 +418,7 @@ client.on("message", async message => {
         case "orgy":
           if (message.channel.id !== generalID)
             message.channel.send({
-              files: ['https://imgflip.com/gif/43hgta']
+              files: ['https://cdn.discordapp.com/attachments/714931864413929512/716715109552095300/43hgta.gif']
             });
           break;
 
