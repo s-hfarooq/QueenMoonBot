@@ -417,10 +417,17 @@ client.on("message", async message => {
 
         case "orgy":
           if (message.channel.id !== generalID)
+<<<<<<< HEAD
           message.channel.send(
             https://discord.com/channels/654783232969277450/714931864413929512/716715109845696632
           );
             break;
+=======
+          message.channel.send({
+            files: ['https://imgflip.com/gif/43hgta']
+          });
+          break;
+>>>>>>> 6ecbe6548de7741ad5d6734ccd74a017377ea64c
 
         case "owoify":
           if (command) {
