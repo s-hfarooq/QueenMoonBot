@@ -1,6 +1,7 @@
 // Load requirements
 const Discord = require("discord.js");
 const config = require("./config.json");
+const owoify = require('owoify-js').default;
 
 // General variables
 var brownoutOut = [], quotesOut = [];
@@ -411,6 +412,21 @@ client.on("message", async message => {
             message.channel.send({ files: [links[rand]] });
           } else {
             message.channel.send("That command cannot be used in this channel!");
+          }
+          break;
+
+        case "owoify":
+          if (command) {
+            // owoify message within message calling command
+            message.channel.send(owoify(command));
+          } else {
+            // owoify previous sent message
+            message.channel.messages.fetch({ limit: 2 }).then(messages => {
+              const lastMessage = messages.array();
+              message.channel.send(owoify(lastMessage[1].content));
+            }).catch(err => {
+              console.error(err);
+            });
           }
           break;
 
