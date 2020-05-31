@@ -415,6 +415,11 @@ client.on("message", async message => {
           }
           break;
 
+        case "orgy":
+          if (message.channel.id !== generalID)
+            message.channel.send("https://imgflip.com/gif/43hgta");
+            break;
+
         case "owoify":
           if (command) {
             // owoify message within message calling command
