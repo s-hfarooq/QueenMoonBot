@@ -425,11 +425,10 @@ client.on("message", async message => {
           }
           break;
         
-          case "rankdegen":
-            var degenrank = Math.floor(Math.random() * 100);
-            message.channel.send("you are " + degenrank + "% degenerate");
+        case "rankdegen":
+          var degenrank = Math.floor(Math.random() * 100);
+          message.channel.send("you are " + degenrank + "% degenerate");
           break;
-       
 
         case "owoify":
           if (message.channel.id !== generalID) {
