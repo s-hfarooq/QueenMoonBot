@@ -416,27 +416,43 @@ client.on("message", async message => {
           break;
 
         case "orgy":
+<<<<<<< HEAD
           if (message.channel.id !== generalID)
           message.channel.send(
             'https://discord.com/channels/654783232969277450/714931864413929512/716715109845696632'
           );
             break;
+=======
+          if (message.channel.id !== generalID) {
+            message.channel.send({
+              files: ['https://cdn.discordapp.com/attachments/714931864413929512/716715109552095300/43hgta.gif']
+            });
+          } else {
+            message.channel.send("That command cannot be used in this channel!");
+          }
+          break;
+>>>>>>> upstream/master
 
         case "owoify":
-          if (command) {
-            // owoify message within message calling command
-            message.channel.send(owoify(command));
-          } else {
-            // owoify previous sent message
+          if (message.channel.id !== generalID) {
             message.channel.messages.fetch({ limit: 2 }).then(messages => {
               const lastMessage = messages.array();
-              if(lastMessage[1].content)
-                message.channel.send(owoify(lastMessage[1].content));
-              else
-                message.channel.send("Previous message had no text");
+              if (command) {
+                message.channel.send(owoify(command) + "\n - <@" + message.author.id + ">");
+                message.delete(message);
+              } else {
+                if (lastMessage[1].content) {
+                  message.channel.send(owoify(lastMessage[1].content) + "\n - owoified by <@" + message.author.id + ">");
+                  message.delete(message);
+                } else {
+                  message.channel.send("Previous message had no text");
+                }
+              }
             }).catch(err => {
               console.error(err);
             });
+          } else {
+            message.channel.send("That command cannot be used in this channel!");
           }
           break;
 
