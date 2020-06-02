@@ -235,7 +235,7 @@ client.on("message", async message => {
           });
           break;
 
-        case "no anime":
+        case "noanime":
           message.channel.send({
             files: ['https://cdn.discordapp.com/attachments/697639057592811650/708536846531035226/image0.jpg']
           });
