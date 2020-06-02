@@ -202,13 +202,10 @@ client.on("message", async message => {
           break;
 
         case "8ball":
-          if (message.channel.id === '654838387160907777') {
-            var rand = Math.floor(Math.random() * responses.length);
-
-            message.channel.send("Question: " + command + "\nAnswer: " + responses[rand]);
-          } else {
-            message.channel.send("That command can only be used in <#654838387160907777>");
-          }
+          var output = "That command can only be used in <#654838387160907777>";
+          if (message.channel.id === '654838387160907777')
+            output = "Question: " + command + "\nAnswer: " + responses[Math.floor(Math.random() * responses.length)];
+          message.channel.send(output);
           break;
 
         case "thirst":
