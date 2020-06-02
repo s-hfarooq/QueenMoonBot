@@ -204,7 +204,8 @@ client.on("message", async message => {
         case "8ball":
           if (message.channel.id === '654838387160907777') {
             var rand = Math.floor(Math.random() * responses.length);
-            message.channel.send("Question: " + message.content.substring(7) + "\nAnswer: " + responses[rand]);
+
+            message.channel.send("Question: " + command + "\nAnswer: " + responses[rand]);
           } else {
             message.channel.send("That command can only be used in <#654838387160907777>");
           }
