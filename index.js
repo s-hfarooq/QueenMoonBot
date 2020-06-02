@@ -416,13 +416,6 @@ client.on("message", async message => {
           break;
 
         case "orgy":
-<<<<<<< HEAD
-          if (message.channel.id !== generalID)
-          message.channel.send(
-            'https://discord.com/channels/654783232969277450/714931864413929512/716715109845696632'
-          );
-            break;
-=======
           if (message.channel.id !== generalID) {
             message.channel.send({
               files: ['https://cdn.discordapp.com/attachments/714931864413929512/716715109552095300/43hgta.gif']
@@ -431,7 +424,12 @@ client.on("message", async message => {
             message.channel.send("That command cannot be used in this channel!");
           }
           break;
->>>>>>> upstream/master
+        
+          case "rankdegen":
+            var degenrank = Math.floor(Math.random() * 100);
+            message.channel.send("you are " + degenrank + "% degenerate");
+          break;
+       
 
         case "owoify":
           if (message.channel.id !== generalID) {
