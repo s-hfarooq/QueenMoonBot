@@ -422,6 +422,11 @@ client.on("message", async message => {
             message.channel.send("That command cannot be used in this channel!");
           }
           break;
+        
+        case "rankdegen":
+          var degenrank = Math.floor(Math.random() * 100);
+          message.channel.send("you are " + degenrank + "% degenerate");
+          break;
 
         case "owoify":
           if (message.channel.id !== generalID) {
