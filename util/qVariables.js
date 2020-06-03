@@ -1,5 +1,4 @@
 // Variables used throughout various files
-
 const Discord = require("discord.js");
 
 // Client

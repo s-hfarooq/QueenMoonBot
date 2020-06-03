@@ -18,9 +18,6 @@ qVars.CLIENT.on("ready", () => {
   });
 
   qVars.lastUpdate = Date.now();
-  lastBrownoutUpdate = Date.now();
-
-  console.log("images cached");
 });
 
 // Runs on join new server

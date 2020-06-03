@@ -146,7 +146,7 @@ var cmds = function(message, keyword, command, buffName) {
 
     case "help":
       const helpCommand = new Discord.MessageEmbed()
-            .setColor('#ffffff')
+            .setColor('#d60076')
             .setAuthor('Help')
             .addField('queen usercount', 'See how many users are currently in the server', false)
             .addField('queen buff[name]', 'Buff [name]', false)
