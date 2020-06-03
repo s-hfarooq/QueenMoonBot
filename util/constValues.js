@@ -1,4 +1,10 @@
-// Constant string variables
+// Constant variables
+const Discord = require("discord.js");
+
+// Client
+const client = new Discord.Client({
+  partials: ['MESSAGE']
+});
 
 // Responses for 8ball
 const responses = ['It is certain.',
@@ -34,7 +40,6 @@ const reminders = ['A friendly reminder to stay hydrated.',
   "goddammit i'm running out of creative ways to insult you people"
 ];
 
-
 // Links for cock command
 const cLinks = [
     // nooble
@@ -50,7 +55,8 @@ const cLinks = [
 ];
 
 module.exports = {
+  CLIENT: client,
   RESPONSES: responses,
   REMINDERS: reminders,
-  CLINKS: cLinks
+  CLINKS: cLinks,
 };

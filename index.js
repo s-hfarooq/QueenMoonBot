@@ -1,29 +1,25 @@
 // Load requirements
 const Discord = require("discord.js");
 const config = require("./util/config.json");
-const constStr = require("./util/constStrings.js");
+const constVals = require("./util/constValues.js");
 const qFuncs = require("./util/functions.js");
 
 // General variables
-const generalID = '669726484772159488', brownoutID = '697639057592811650', countingGameID = '698313651186040923';
+const generalID = '669726484772159488', brownoutID = '697639057592811650', countingGameID = '698313651186040923', quoteID = '697329980044083220';
 var brownoutOut = [], quotesOut = [];
 var lastQuoteUpdate, lastBrownoutUpdate, updateInteval = (1000 * 60 * 60 * 24);
 var generalLastCommandTime = 0, generalTimeGap = 5;
 
-const client = new Discord.Client({
-  partials: ['MESSAGE']
-});
-
 // Runs on start
-client.on("ready", () => {
-  console.log(`Bot has started, with ${client.users.size} users, in ${client.channels.size} channels of ${client.guilds.size} guilds.`);
-  client.user.setActivity(`queen help`);
+constVals.CLIENT.on("ready", () => {
+  console.log(`Bot has started`);
+  constVals.CLIENT.user.setActivity(`queen help`);
 
-  getMessagesWithImages(client.channels.cache.get(brownoutID)).then(output => {
+  qFuncs.getMessagesWithAttachments(constVals.CLIENT.channels.cache.get(brownoutID)).then(output => {
     brownoutOut = output;
   });
 
-  getMessagesWithImages(client.channels.cache.get("697329980044083220")).then(output => {
+  qFuncs.getMessagesWithAttachments(constVals.CLIENT.channels.cache.get("697329980044083220")).then(output => {
     quotesOut = output;
   });
 
@@ -34,51 +30,19 @@ client.on("ready", () => {
 });
 
 // Runs on join new server
-client.on("guildCreate", guild => {
-  console.log(`New guild joined: ${guild.name} (id: ${guild.id}). This guild has ${guild.memberCount} members!`);
-  client.user.setActivity(`queen help`);
+constVals.CLIENT.on("guildCreate", guild => {
+  console.log(`New guild joined`);
+  constVals.CLIENT.user.setActivity(`queen help`);
 });
 
 // Runs on leave server
-client.on("guildDelete", guild => {
-  console.log(`Bot has been removed from: ${guild.name} (id: ${guild.id})`);
-  client.user.setActivity(`queen help`);
+constVals.CLIENT.on("guildDelete", guild => {
+  console.log(`Bot has been removed from a guild`);
+  constVals.CLIENT.user.setActivity(`queen help`);
 });
 
-// TODO: move this to a new 'function.js' file
-// Get all messages with media attached in a given channel
-async function getMessagesWithImages(channel, limit = 500) {
-  const sum_messages = [];
-  let last_id;
-
-  const options = {
-    limit: 100
-  };
-
-  while (true) {
-    if (last_id)
-      options.before = last_id;
-
-    const messages = await channel.messages.fetch(options);
-    sum_messages.push(...messages.array());
-    last_id = messages.last().id;
-
-    if (messages.size != 100 || sum_messages >= limit)
-      break;
-  }
-
-  const output = [];
-  for (let i = 0; i < sum_messages.length; i++) {
-    // Only keep messages with attachments and messages not sent by bots
-    if (sum_messages[i].attachments.size > 0 && !sum_messages[i].author.bot)
-      output.push(sum_messages[i]);
-  }
-
-  return output;
-}
-
 // Runs when a new message is sent on a server
-client.on("message", async message => {
+constVals.CLIENT.on("message", async message => {
   // Counting game moderation
   if (message.channel.id === countingGameID) {
     qFuncs.countingGameModeration(message);
@@ -90,7 +54,7 @@ client.on("message", async message => {
     return;
 
   var command = message.content.toLowerCase();
-  let override = false;
+  var override = false;
 
   // Make sure message starts with 'queen' or 'q'
   if (command.startsWith("queen ") || command.startsWith("q ")) {
@@ -122,7 +86,7 @@ client.on("message", async message => {
           break;
 
         case "usercount":
-          const userAmnt = client.guilds.cache.get('654783232969277450').memberCount;
+          const userAmnt = constVals.CLIENT.guilds.cache.get('654783232969277450').memberCount;
           message.channel.send("There are currently " + userAmnt + " people in this server");
           break;
 
@@ -140,13 +104,13 @@ client.on("message", async message => {
         case "8ball":
           var output = "That command can only be used in <#654838387160907777>";
           if (message.channel.id === '654838387160907777')
-            output = "Question: " + command + "\nAnswer: " + constStr.responses[Math.floor(Math.random() * constStr.responses.length)];
+            output = "Question: " + command + "\nAnswer: " + constVals.responses[Math.floor(Math.random() * constVals.responses.length)];
           message.channel.send(output);
           break;
 
         case "thirst":
-          var rand = Math.floor(Math.random() * constStr.REMINDERS.length);
-          message.channel.send(constStr.REMINDERS[rand]);
+          var rand = Math.floor(Math.random() * constVals.REMINDERS.length);
+          message.channel.send(constVals.REMINDERS[rand]);
           break;
 
         case "lofi":
@@ -243,66 +207,17 @@ client.on("message", async message => {
           break;
 
         case "quote":
-          // TODO: create a more general function for this and the brownout command
-          if (message.channel.id !== generalID) {
-            // Update array once a day
-            if (Math.abs(lastQuoteUpdate - Date.now()) > updateInteval) {
-              getMessagesWithImages(client.channels.cache.get("697329980044083220")).then(output => {
-                quotesOut = output;
-              });
-
-              lastQuoteUpdate = Date.now();
-            }
-
-            // Fixes UnhandledPromiseRejectionWarning when images are still being loaded
-            if (quotesOut.length == 0) {
-              message.channel.send("Images are still loading. Try again in a few seconds.");
-            } else {
-              var amnt = isNaN(parseInt(command)) ? 1 : parseInt(command);
-              if(amnt > 5 || amnt < 0)
-                amnt = 1;
-
-              for (let i = 0; i < amnt; i++) {
-                let rand = Math.floor(Math.random() * quotesOut.length);
-                message.channel.send({
-                  files: [quotesOut[rand].attachments.first().url]
-                });
-              }
-            }
-          } else {
+          if (message.channel.id !== generalID)
+            quotesOut = qFuncs.sendRandImage(message, command, quotesOut, quoteID, lastQuoteUpdate, updateInteval);
+          else
             message.channel.send("That command cannot be used in this channel!");
-          }
           break;
 
         case "brownout":
-          if (message.channel.id === brownoutID) {
-            // Update array once a day
-            if (Math.abs(lastBrownoutUpdate - Date.now()) > updateInteval) {
-              getMessagesWithImages(client.channels.cache.get(brownoutID)).then(output => {
-                brownoutOut = output;
-              });
-
-              lastBrownoutUpdate = Date.now();
-            }
-
-            // Fixes UnhandledPromiseRejectionWarning when images are still being loaded
-            if (brownoutOut.length == 0) {
-              message.channel.send("Images are still loading. Try again in a few seconds.");
-            } else {
-              var amnt = isNaN(parseInt(command)) ? 1 : parseInt(command);
-              if(amnt > 5 || amnt < 0)
-                amnt = 1;
-
-              for (let i = 0; i < amnt; i++) {
-                let rand = Math.floor(Math.random() * brownoutOut.length);
-                message.channel.send({
-                  files: [brownoutOut[rand].attachments.first().url]
-                });
-              }
-            }
-          } else {
+          if (message.channel.id === brownoutID)
+            brownoutOut = qFuncs.sendRandImage(message, command, brownoutOut, brownoutID, lastBrownoutUpdate, updateInteval);
+          else
             message.channel.send("That command can only be used in <#" + brownoutID + ">");
-          }
           break;
 
         case "help":
@@ -323,7 +238,7 @@ client.on("message", async message => {
           break;
 
         case "ping":
-          var apiPing = Math.round(client.ws.ping);
+          var apiPing = Math.round(constVals.CLIENT.ws.ping);
           var messagePing = Date.now() - message.createdTimestamp;
           message.channel.send('Client ping: ' + messagePing + 'ms (API ping: ' + apiPing + 'ms)');
           break;
@@ -331,8 +246,8 @@ client.on("message", async message => {
         case "cock":
           // responses for queen cock
           if (message.channel.id !== generalID) {
-            var rand = Math.floor(Math.random() * constStr.CLINKS.length);
-            message.channel.send({ files: [constStr.CLINKS[rand]] });
+            var rand = Math.floor(Math.random() * constVals.CLINKS.length);
+            message.channel.send({ files: [constVals.CLINKS[rand]] });
           } else {
             message.channel.send("That command cannot be used in this channel!");
           }
@@ -376,4 +291,4 @@ client.on("message", async message => {
 
 });
 
-client.login(config.token);
+constVals.CLIENT.login(config.token);

@@ -1,5 +1,6 @@
 const Discord = require("discord.js");
 const owoify = require("owoify-js").default;
+const constVals = require("./constValues.js");
 
 // Makes sure that counting game is on track
 var countingGameModeration = function(message) {
@@ -59,7 +60,69 @@ var owoifyMessage = function(message, command) {
   return;
 }
 
+// Send a random attachment from a message in messageArray
+var sendRandImage = function(message, command, messageArray, channelID, updateVar, updateInteval) {
+  // Update array once a day
+  if (Math.abs(updateVar - Date.now()) > updateInteval) {
+    getMessagesWithAttachments(constVals.CLIENT.channels.cache.get(channelID)).then(output => {
+      messageArray = output;
+    });
+    console.log("UPDATED");
+  }
+
+  // Fixes UnhandledPromiseRejectionWarning when images are still being loaded
+  if (messageArray.length == 0) {
+    message.channel.send("Images are still loading. Try again in a few seconds.");
+  } else {
+    var amnt = isNaN(parseInt(command)) ? 1 : parseInt(command);
+    if(amnt > 5 || amnt < 0)
+      amnt = 1;
+
+    for (let i = 0; i < amnt; i++) {
+      let rand = Math.floor(Math.random() * messageArray.length);
+      message.channel.send({
+        files: [messageArray[rand].attachments.first().url]
+      });
+    }
+  }
+
+  return messageArray;
+}
+
+// Gets all messages with attachments in a given channel and returns as an array
+async function getMessagesWithAttachments(channel, limit = 500) {
+  const sum_messages = [];
+  let last_id;
+
+  const options = {
+    limit: 100
+  };
+
+  while (true) {
+    if (last_id)
+      options.before = last_id;
+
+    const messages = await channel.messages.fetch(options);
+    sum_messages.push(...messages.array());
+    last_id = messages.last().id;
+
+    if (messages.size != 100 || sum_messages >= limit)
+      break;
+  }
+
+  const output = [];
+  for (let i = 0; i < sum_messages.length; i++) {
+    // Only keep messages with attachments and messages not sent by bots
+    if (sum_messages[i].attachments.size > 0 && !sum_messages[i].author.bot)
+      output.push(sum_messages[i]);
+  }
+
+  return output;
+}
+
 module.exports = {
   countingGameModeration,
-  owoifyMessage
+  owoifyMessage,
+  sendRandImage,
+  getMessagesWithAttachments
 }
