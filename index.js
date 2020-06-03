@@ -1,5 +1,4 @@
 // Load requirements
-const Discord = require("discord.js");
 const config = require("./util/config.json");
 const constVals = require("./util/constValues.js");
 const qFuncs = require("./util/functions.js");
