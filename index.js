@@ -9,6 +9,8 @@ qVars.CLIENT.on("ready", () => {
   console.log(`Bot has started`);
   qVars.CLIENT.user.setActivity(`queen help`);
 
+  qFuncs.userMessages('654783232969277450', qVars.NOOBLEID);
+
   qFuncs.getMessagesWithAttachments(qVars.CLIENT.channels.cache.get(qVars.BROWNOUTID)).then(output => {
     qVars.brownoutOut = output;
   });
@@ -16,6 +18,7 @@ qVars.CLIENT.on("ready", () => {
   qFuncs.getMessagesWithAttachments(qVars.CLIENT.channels.cache.get(qVars.QUOTEID)).then(output => {
     qVars.quotesOut = output;
   });
+
 
   qVars.lastUpdate = Date.now();
 });

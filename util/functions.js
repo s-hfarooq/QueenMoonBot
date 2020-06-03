@@ -95,6 +95,66 @@ var sendRandImage = function(message, command, messageArray, channelID) {
   return;
 }
 
+var getNooble = function(message) {
+  if (qVars.noobleImgs.length == 0) {
+    message.channel.send("Either images are still loading or none were found in recent messages");
+  } else {
+    let rand = Math.floor(Math.random() * qVars.noobleImgs.length);
+    message.channel.send({
+      files: [qVars.noobleImgs[rand].attachments.first().url]
+    });
+  }
+
+  return;
+}
+
+// Get all messages in a channel from a given user
+async function userMessages(guildID, userID){
+    qVars.CLIENT.guilds.cache.get(guildID).channels.cache.forEach(ch => {
+        if (ch.type === 'text'){
+          var allImgs = [];
+          getMessagesFromUser(ch, userID).then(output => {
+            allImgs = output;
+          });
+        } else {
+          return;
+        }
+    })
+
+    return;
+}
+
+// Gets all messages with attachments from a user
+async function getMessagesFromUser(channel, userID, limit = 500) {
+  const sum_messages = [];
+  let last_id;
+
+  const options = {
+    limit: 100
+  };
+
+  while (true) {
+    if (last_id)
+      options.before = last_id;
+
+    const messages = await channel.messages.fetch(options);
+    sum_messages.push(...messages.array());
+    last_id = messages.last().id;
+
+    if (messages.size != 100 || sum_messages >= limit)
+      break;
+  }
+
+  const output = [];
+  for (let i = 0; i < sum_messages.length; i++) {
+    // Only keep messages with attachments and messages not sent by bots
+    if (sum_messages[i].attachments.size > 0 && sum_messages[i].author.id === userID)
+      qVars.noobleImgs.push(sum_messages[i]);
+  }
+
+  return output;
+}
+
 // Gets all messages with attachments in a given channel and returns as an array
 async function getMessagesWithAttachments(channel, limit = 500) {
   const sum_messages = [];
@@ -130,5 +190,7 @@ module.exports = {
   countingGameModeration,
   owoifyMessage,
   sendRandImage,
-  getMessagesWithAttachments
+  getMessagesWithAttachments,
+  userMessages,
+  getNooble
 };

@@ -141,6 +141,13 @@ var cmds = function(message, keyword, command, buffName) {
         message.channel.send("That command can only be used in <#" + qVars.BROWNOUTID + ">");
       break;
 
+    case "nooble":
+      if (message.channel.id !== qVars.GENERALID)
+        qFuncs.getNooble(message);
+      else
+        message.channel.send("That command cannot be used in this channel!");
+      break;
+
     case "help":
       const helpCommand = new Discord.MessageEmbed()
             .setColor('#d60076')

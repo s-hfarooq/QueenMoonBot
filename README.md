@@ -34,6 +34,7 @@ A bot for the [UIUC 2024 Discord server](https://discord.gg/2pFv4Wq)
 * `queen cock` to see a chicken
 * `queen owoify [message]` to turn your message into an owo (leave [message] blank to owoify the previous sent message)
 * `queen rankdegen` to see how degen you are
+* `queen nooble` to get a random image from nooble
 * ~~`queen class [SUBJECT-NUMBER]` to the name, credit hours, and recent avg. GPA of a UIUC course (NOTE: not case-sensitive)~~ now depreciated, use [class bot](https://github.com/timot3/uiuc-classes-bot) instead.
 
 Note: For all commands, `queen` can be substituted with `q`

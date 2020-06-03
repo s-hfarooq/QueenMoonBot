@@ -56,12 +56,14 @@ const cLinks = [
 
 var quotesOut = [];
 var brownoutOut = [];
+var noobleImgs = [];
 var lastUpdate;
 var generalLastCommandTime = 0;
 
 module.exports = {
   quotesOut,
   brownoutOut,
+  noobleImgs,
   lastUpdate,
   generalLastCommandTime,
   CLIENT: client,
@@ -73,5 +75,6 @@ module.exports = {
   GENERALID: '669726484772159488',
   BROWNOUTID: '697639057592811650',
   COUNTINGGAMEID: '698313651186040923',
-  QUOTEID: '697329980044083220'
+  QUOTEID: '697329980044083220',
+  NOOBLEID: '327240273098833921',
 };
