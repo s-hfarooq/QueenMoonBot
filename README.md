@@ -51,4 +51,4 @@ Make a file named `config.json` in the util folder. Head over to the [Discord De
 Then run the bot by running `node index.js` in a terminal. To run even after closing the terminal window (ie. on an AWS EC2 instance) use the command `forever start index.js`.
 
 ## Contribute
-Make some contributions, it's open source. Just make a pull request, I'll probably accept it as long as there aren't any bugs. You'll probably only want to touch the switch statement in `index.js`.
+Make some contributions, it's open source. Just make a pull request, I'll probably accept it as long as there aren't any bugs. You'll probably only want to touch the switch statement in [util/commands.js](util/commands.js).

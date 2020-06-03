@@ -1,4 +1,5 @@
-// Constant variables
+// Variables used throughout various files
+
 const Discord = require("discord.js");
 
 // Client
@@ -54,9 +55,24 @@ const cLinks = [
     'https://cdn.discordapp.com/attachments/697639057592811650/716491275192500254/image0.jpg',
 ];
 
+var quotesOut = [];
+var brownoutOut = [];
+var lastUpdate;
+var generalLastCommandTime = 0;
+
 module.exports = {
+  quotesOut: quotesOut,
+  brownoutOut: brownoutOut,
+  lastUpdate: lastUpdate,
+  generalLastCommandTime: generalLastCommandTime,
   CLIENT: client,
   RESPONSES: responses,
   REMINDERS: reminders,
   CLINKS: cLinks,
+  GENERALTIMEGAP: 5,
+  UPDATEINTERVAL: (1000 * 60 * 60 * 24),
+  GENERALID: '669726484772159488',
+  BROWNOUTID: '697639057592811650',
+  COUNTINGGAMEID: '698313651186040923',
+  QUOTEID: '697329980044083220'
 };

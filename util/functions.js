@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
 const owoify = require("owoify-js").default;
-const constVals = require("./constValues.js");
+const qVars = require("./qVariables.js");
 
 // Makes sure that counting game is on track
 var countingGameModeration = function(message) {
@@ -61,12 +61,19 @@ var owoifyMessage = function(message, command) {
 }
 
 // Send a random attachment from a message in messageArray
-var sendRandImage = function(message, command, messageArray, channelID, updateVar, updateInteval) {
-  // Update array once a day
-  if (Math.abs(updateVar - Date.now()) > updateInteval) {
-    getMessagesWithAttachments(constVals.CLIENT.channels.cache.get(channelID)).then(output => {
-      messageArray = output;
+var sendRandImage = function(message, command, messageArray, channelID) {
+  // Update image arrays once a day
+  if (Math.abs(qVars.lastUpdate - Date.now()) > qVars.UPDATEINTERVAL) {
+    message.channel.send("Images are refreshing. Try again in a few seconds.");
+    getMessagesWithAttachments(qVars.CLIENT.channels.cache.get(qVars.QUOTEID)).then(output => {
+      qVars.quotesOut = output;
     });
+
+    getMessagesWithAttachments(qVars.CLIENT.channels.cache.get(qVars.BROWNOUTID)).then(output => {
+      qVars.brownoutOut = output;
+    });
+
+    qVars.lastUpdate = Date.now();
   }
 
   // Fixes UnhandledPromiseRejectionWarning when images are still being loaded
@@ -124,4 +131,4 @@ module.exports = {
   owoifyMessage,
   sendRandImage,
   getMessagesWithAttachments
-}
+};
