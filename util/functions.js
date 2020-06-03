@@ -92,7 +92,7 @@ var sendRandImage = function(message, command, messageArray, channelID) {
     }
   }
 
-  return messageArray;
+  return;
 }
 
 // Gets all messages with attachments in a given channel and returns as an array

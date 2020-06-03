@@ -129,14 +129,14 @@ var cmds = function(message, keyword, command, buffName) {
 
     case "quote":
       if (message.channel.id !== qVars.GENERALID)
-        qVars.quotesOut = qFuncs.sendRandImage(message, command, qVars.quotesOut, qVars.QUOTEID);
+        qFuncs.sendRandImage(message, command, qVars.quotesOut, qVars.QUOTEID);
       else
         message.channel.send("That command cannot be used in this channel!");
       break;
 
     case "brownout":
       if (message.channel.id === qVars.BROWNOUTID)
-        qVars.brownoutOut = qFuncs.sendRandImage(message, command, qVars.brownoutOut, qVars.BROWNOUTID);
+        qFuncs.sendRandImage(message, command, qVars.brownoutOut, qVars.BROWNOUTID);
       else
         message.channel.send("That command can only be used in <#" + qVars.BROWNOUTID + ">");
       break;
