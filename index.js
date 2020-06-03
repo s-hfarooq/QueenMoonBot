@@ -1,47 +1,14 @@
 // Load requirements
 const Discord = require("discord.js");
-const config = require("./config.json");
-const owoify = require('owoify-js').default;
+const config = require("./util/config.json");
+const owoify = require("owoify-js").default;
+const constStr = require("./util/constStrings.js");
 
 // General variables
 var brownoutOut = [], quotesOut = [];
 var lastQuoteUpdate, lastBrownoutUpdate, updateInteval = (1000 * 60 * 60 * 24);
 var generalID = '669726484772159488', brownoutID = '697639057592811650';
 var generalLastCommandTime = 0, generalTimeGap = 5;
-
-// Responses for 8ball
-var responses = ['It is certain.',
-  'It is decidedly so.',
-  'Without a doubt.',
-  'Yes - definitely.',
-  'You may rely on it.',
-  'As I see it, yes.',
-  'Most likely.',
-  'Outlook good.',
-  'Yes.',
-  'Signs point to yes.',
-  'Reply hazy, try again.',
-  'Ask again later.',
-  'Better not tell you now.',
-  'Cannot predict now.',
-  'Concentrate and ask again.',
-  "Don't count on it.",
-  'My reply is no.',
-  'My sources say no.',
-  'Outlook not so good',
-  'Very doubtful'
-];
-
-// Responses for thirst command
-var reminders = ['A friendly reminder to stay hydrated.',
-  'Quench your thirst.',
-  'Did you drink enough water today?',
-  'BEGONE',
-  'stfu',
-  'u thirsty hoe',
-  'It is important to drink 8 glasses of water a day.',
-  "goddammit i'm running out of creative ways to insult you people"
-];
 
 const client = new Discord.Client({
   partials: ['MESSAGE']
@@ -78,6 +45,7 @@ client.on("guildDelete", guild => {
   client.user.setActivity(`queen help`);
 });
 
+// TODO: move this to a new 'function.js' file
 // Get all messages with media attached in a given channel
 async function getMessagesWithImages(channel, limit = 500) {
   const sum_messages = [];
@@ -204,13 +172,13 @@ client.on("message", async message => {
         case "8ball":
           var output = "That command can only be used in <#654838387160907777>";
           if (message.channel.id === '654838387160907777')
-            output = "Question: " + command + "\nAnswer: " + responses[Math.floor(Math.random() * responses.length)];
+            output = "Question: " + command + "\nAnswer: " + constStr.responses[Math.floor(Math.random() * constStr.responses.length)];
           message.channel.send(output);
           break;
 
         case "thirst":
-          var rand = Math.floor(Math.random() * reminders.length);
-          message.channel.send(reminders[rand]);
+          var rand = Math.floor(Math.random() * constStr.REMINDERS.length);
+          message.channel.send(constStr.REMINDERS[rand]);
           break;
 
         case "lofi":
@@ -307,6 +275,7 @@ client.on("message", async message => {
           break;
 
         case "quote":
+          // TODO: create a more general function for this and the brownout command
           if (message.channel.id !== generalID) {
             // Update array once a day
             if (Math.abs(lastQuoteUpdate - Date.now()) > updateInteval) {
@@ -422,7 +391,7 @@ client.on("message", async message => {
             message.channel.send("That command cannot be used in this channel!");
           }
           break;
-        
+
         case "rankdegen":
           var degenrank = Math.floor(Math.random() * 100);
           message.channel.send("you are " + degenrank + "% degenerate");

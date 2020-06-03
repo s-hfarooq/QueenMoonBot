@@ -40,7 +40,7 @@ Note: For all commands, `queen` can be substituted with `q`
 
 
 ## To run the bot yourself
-Make a file named `config.json` in the root directory of the repo. Head over to the [Discord Developer Portal](https://discordapp.com/developers/applications/me) and get a token for a new bot. Place that token in `config.json` in the following format:
+Make a file named `config.json` in the util folder. Head over to the [Discord Developer Portal](https://discordapp.com/developers/applications/me) and get a token for a new bot. Place that token in `config.json` in the following format:
 
 ```
 {
