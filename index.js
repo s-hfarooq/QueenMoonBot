@@ -18,7 +18,7 @@ constVals.CLIENT.on("ready", () => {
     brownoutOut = output;
   });
 
-  qFuncs.getMessagesWithAttachments(constVals.CLIENT.channels.cache.get("697329980044083220")).then(output => {
+  qFuncs.getMessagesWithAttachments(constVals.CLIENT.channels.cache.get(quoteID)).then(output => {
     quotesOut = output;
   });
 

@@ -67,7 +67,6 @@ var sendRandImage = function(message, command, messageArray, channelID, updateVa
     getMessagesWithAttachments(constVals.CLIENT.channels.cache.get(channelID)).then(output => {
       messageArray = output;
     });
-    console.log("UPDATED");
   }
 
   // Fixes UnhandledPromiseRejectionWarning when images are still being loaded
