@@ -121,13 +121,10 @@ var cmds = function(message, keyword, command, buffName) {
       break;
 
     case "rat":
-      if (message.channel.id !== qVars.GENERALID) {
-        message.channel.send({
-          files: ['https://cdn.discordapp.com/attachments/697639057592811650/713237658020872192/image0.jpg']
-        });
-      } else {
-        message.channel.send("That command cannot be used in this channel!");
-      }
+      var output = "That command cannot be used in this channel!";
+      if (message.channel.id !== qVars.GENERALID)
+        output = { files: ['https://cdn.discordapp.com/attachments/697639057592811650/713237658020872192/image0.jpg'] };
+      message.channel.send(output);
       break;
 
     case "quote":
@@ -168,23 +165,17 @@ var cmds = function(message, keyword, command, buffName) {
       break;
 
     case "cock":
-      // responses for queen cock
-      if (message.channel.id !== qVars.GENERALID) {
-        var rand = Math.floor(Math.random() * qVars.CLINKS.length);
-        message.channel.send({ files: [qVars.CLINKS[rand]] });
-      } else {
-        message.channel.send("That command cannot be used in this channel!");
-      }
+      var output = "That command cannot be used in this channel!";
+      if (message.channel.id !== qVars.GENERALID)
+        output = { files: [qVars.CLINKS[Math.floor(Math.random() * qVars.CLINKS.length)]] };
+      message.channel.send(output);
       break;
 
     case "orgy":
-      if (message.channel.id !== qVars.GENERALID) {
-        message.channel.send({
-          files: ['https://cdn.discordapp.com/attachments/714931864413929512/716715109552095300/43hgta.gif']
-        });
-      } else {
-        message.channel.send("That command cannot be used in this channel!");
-      }
+      var output = "That command cannot be used in this channel!";
+      if (message.channel.id !== qVars.GENERALID)
+        output = { files: ['https://cdn.discordapp.com/attachments/714931864413929512/716715109552095300/43hgta.gif'] };
+      message.channel.send(output);
       break;
 
     case "rankdegen":

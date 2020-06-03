@@ -60,10 +60,10 @@ var lastUpdate;
 var generalLastCommandTime = 0;
 
 module.exports = {
-  quotesOut: quotesOut,
-  brownoutOut: brownoutOut,
-  lastUpdate: lastUpdate,
-  generalLastCommandTime: generalLastCommandTime,
+  quotesOut,
+  brownoutOut,
+  lastUpdate,
+  generalLastCommandTime,
   CLIENT: client,
   RESPONSES: responses,
   REMINDERS: reminders,
