@@ -1,13 +1,13 @@
 // Load requirements
 const Discord = require("discord.js");
 const config = require("./util/config.json");
-const owoify = require("owoify-js").default;
 const constStr = require("./util/constStrings.js");
+const qFuncs = require("./util/functions.js");
 
 // General variables
+const generalID = '669726484772159488', brownoutID = '697639057592811650', countingGameID = '698313651186040923';
 var brownoutOut = [], quotesOut = [];
 var lastQuoteUpdate, lastBrownoutUpdate, updateInteval = (1000 * 60 * 60 * 24);
-var generalID = '669726484772159488', brownoutID = '697639057592811650';
 var generalLastCommandTime = 0, generalTimeGap = 5;
 
 const client = new Discord.Client({
@@ -79,39 +79,9 @@ async function getMessagesWithImages(channel, limit = 500) {
 
 // Runs when a new message is sent on a server
 client.on("message", async message => {
-  // Counting game stuff
-  if (message.channel.id === '698313651186040923') {
-    message.channel.messages.fetch({ limit: 2 }).then(messages => {
-      // Delete bot messages
-      const lastMessage = messages.array();
-      if (lastMessage[1].author.bot) {
-        message.delete(lastMessage[1]);
-        return;
-      }
-
-      // If past 2 messages sent by same user, delete newest
-      if (lastMessage[0].member.id == lastMessage[1].member.id) {
-        message.delete(lastMessage[1]);
-        return;
-      }
-
-      // If next number not old number + 1
-      if (Number(lastMessage[0].content).toString() !== lastMessage[0].content || Number(lastMessage[0].content) - 1 != Number(lastMessage[1].content)) {
-        // Add Can't Count role if number isn't next in counting game and > 1500 ms between the two messages
-        if (Math.abs(lastMessage[0].createdTimestamp - lastMessage[1].createdTimestamp) > 1500) {
-          const tMember = lastMessage[0].member.guild.roles.cache.find(role => role.name === "Can't Count");
-          lastMessage[0].member.roles.add(tMember).catch(console.error);
-        }
-
-        // Delete incorrect number
-        message.delete(lastMessage[0]);
-        return;
-      }
-    }).catch(err => {
-      console.error(err);
-      return;
-    });
-
+  // Counting game moderation
+  if (message.channel.id === countingGameID) {
+    qFuncs.countingGameModeration(message);
     return;
   }
 
@@ -128,7 +98,6 @@ client.on("message", async message => {
     command = command.substr(command.indexOf(" ") + 1);
   }
 
-
   // If command is not run in general channel or if the gap between last command is greater than generalTimeGap, command will be run
   var currentTime = Math.round((new Date().getTime() / 1000));
   var timeDiff = currentTime - generalLastCommandTime;
@@ -136,7 +105,6 @@ client.on("message", async message => {
   if (message.channel.id !== generalID || timeDiff >= generalTimeGap) {
     // Get command keyword
     var keyword = command.replace(/ .*/,'');
-
 
     // If trying to use buff command, get the [name] desired
     var buffName = "";
@@ -363,20 +331,8 @@ client.on("message", async message => {
         case "cock":
           // responses for queen cock
           if (message.channel.id !== generalID) {
-            var links = [
-                // nooble
-                'https://cdn.discordapp.com/attachments/714931864413929512/716093335185522688/image0.png',
-                // kitty
-                'https://cdn.discordapp.com/attachments/714931864413929512/716094595309633597/image0.jpg',
-                // rooster
-                'https://cdn.discordapp.com/attachments/714931864413929512/716103472444997673/image0.jpg',
-                // badminton
-                'https://cdn.discordapp.com/attachments/714931864413929512/716103629454442516/image0.jpg',
-                // anime
-                'https://cdn.discordapp.com/attachments/697639057592811650/716491275192500254/image0.jpg',
-            ]
-            var rand = Math.floor(Math.random() * links.length);
-            message.channel.send({ files: [links[rand]] });
+            var rand = Math.floor(Math.random() * constStr.CLINKS.length);
+            message.channel.send({ files: [constStr.CLINKS[rand]] });
           } else {
             message.channel.send("That command cannot be used in this channel!");
           }
@@ -393,31 +349,15 @@ client.on("message", async message => {
           break;
 
         case "rankdegen":
-          var degenrank = Math.floor(Math.random() * 100);
-          message.channel.send("you are " + degenrank + "% degenerate");
+          var degenRank = Math.floor(Math.random() * 100);
+          message.channel.send("you are " + degenRank + "% degenerate");
           break;
 
         case "owoify":
-          if (message.channel.id !== generalID) {
-            message.channel.messages.fetch({ limit: 2 }).then(messages => {
-              const lastMessage = messages.array();
-              if (command) {
-                message.channel.send(owoify(command) + "\n - <@" + message.author.id + ">");
-                message.delete(message);
-              } else {
-                if (lastMessage[1].content) {
-                  message.channel.send(owoify(lastMessage[1].content) + "\n - owoified by <@" + message.author.id + ">");
-                  message.delete(message);
-                } else {
-                  message.channel.send("Previous message had no text");
-                }
-              }
-            }).catch(err => {
-              console.error(err);
-            });
-          } else {
+          if (message.channel.id !== generalID)
+            qFuncs.owoifyMessage(message, command);
+          else
             message.channel.send("That command cannot be used in this channel!");
-          }
           break;
 
         default:

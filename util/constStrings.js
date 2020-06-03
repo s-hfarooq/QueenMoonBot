@@ -34,7 +34,23 @@ const reminders = ['A friendly reminder to stay hydrated.',
   "goddammit i'm running out of creative ways to insult you people"
 ];
 
+
+// Links for cock command
+const cLinks = [
+    // nooble
+    'https://cdn.discordapp.com/attachments/714931864413929512/716093335185522688/image0.png',
+    // kitty
+    'https://cdn.discordapp.com/attachments/714931864413929512/716094595309633597/image0.jpg',
+    // rooster
+    'https://cdn.discordapp.com/attachments/714931864413929512/716103472444997673/image0.jpg',
+    // badminton
+    'https://cdn.discordapp.com/attachments/714931864413929512/716103629454442516/image0.jpg',
+    // anime
+    'https://cdn.discordapp.com/attachments/697639057592811650/716491275192500254/image0.jpg',
+];
+
 module.exports = {
   RESPONSES: responses,
-  REMINDERS: reminders
+  REMINDERS: reminders,
+  CLINKS: cLinks
 };
