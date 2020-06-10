@@ -134,6 +134,13 @@ var cmds = function(message, keyword, command, buffName) {
         message.channel.send("That command cannot be used in this channel!");
       break;
 
+    case "meme":
+      if (message.channel.id !== qVars.GENERALID)
+        qFuncs.sendRandImage(message, command, qVars.memesOut, qVars.MEMEID);
+      else
+        message.channel.send("That command cannot be used in this channel!");
+      break;
+
     case "brownout":
       if (message.channel.id === qVars.BROWNOUTID)
         qFuncs.sendRandImage(message, command, qVars.brownoutOut, qVars.BROWNOUTID);

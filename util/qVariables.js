@@ -56,12 +56,14 @@ const cLinks = [
 
 var quotesOut = [];
 var brownoutOut = [];
+var memesOut = [];
 var lastUpdate;
 var generalLastCommandTime = 0;
 
 module.exports = {
   quotesOut,
   brownoutOut,
+  memesOut,
   lastUpdate,
   generalLastCommandTime,
   CLIENT: client,
@@ -74,4 +76,5 @@ module.exports = {
   BROWNOUTID: '697639057592811650',
   COUNTINGGAMEID: '698313651186040923',
   QUOTEID: '697329980044083220',
+  MEMEID: '654784388197908500',
 };

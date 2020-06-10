@@ -17,6 +17,10 @@ qVars.CLIENT.on("ready", () => {
     qVars.quotesOut = output;
   });
 
+  qFuncs.getMessagesWithAttachments(qVars.CLIENT.channels.cache.get(qVars.MEMEID)).then(output => {
+    qVars.memesOut = output;
+  });
+
   qVars.lastUpdate = Date.now();
 });
 
