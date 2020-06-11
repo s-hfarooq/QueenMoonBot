@@ -16,6 +16,7 @@ A bot for the [UIUC 2024 Discord server](https://discord.gg/2pFv4Wq)
 * `queen head` to get the Mater screenshot
 * `queen rat` to post this rat
 * `queen no anime` to get the no anime picture
+* `queen bean` to get a human bean
 * `queen contribute` to get a like to the GitHub repo
 * `queen waitwhen` or `queen ww` to get the when did I ask screenshot
 * `queen brasil` to get the Ronaldinho Soccer 64 video
