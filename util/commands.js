@@ -107,12 +107,6 @@ var cmds = function(message, keyword, command, buffName) {
       });
       break;
 
-    case "bean":
-      message.channel.send({
-        files: ['https://cdn.discordapp.com/attachments/654784352269369356/720517854616879174/hC2pFDm.png']
-      });
-      break;
-
     case "soup":
       message.channel.send({
         files: ['https://i.kym-cdn.com/entries/icons/original/000/026/699/soup.jpg']
