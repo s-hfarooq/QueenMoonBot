@@ -75,6 +75,9 @@ qVars.CLIENT.on("message", async message => {
       // Find command and send message
       var command = command.substr(keyword.length + 1);
       commands.cmds(message, keyword, command, buffName);
+
+      if(message.channel.id === qVars.GENERALID)
+        qVars.generalLastCommandTime = Math.round((new Date().getTime() / 1000));
     } else if (timeDiff < qVars.GENERALTIMEGAP) {
       message.channel.send("Slow down!");
     }
