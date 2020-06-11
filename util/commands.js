@@ -108,7 +108,7 @@ var cmds = function(message, keyword, command, buffName) {
       break;
 
     case "bean":
-      message.channel.send("GWAGWA", {
+      message.channel.send({
         files: ['https://cdn.discordapp.com/attachments/654784352269369356/720517854616879174/hC2pFDm.png']
       });
       break;
