@@ -198,7 +198,15 @@ var cmds = function(message, keyword, command, buffName) {
 
     case "owoify":
       if (message.channel.id !== qVars.GENERALID)
-        qFuncs.owoifyMessage(message, command);
+        qFuncs.changeMessage(message, command, 0);
+      else
+        message.channel.send("That command cannot be used in this channel!");
+      break;
+
+    case "s":
+    case "spongebobify":
+      if (message.channel.id !== qVars.GENERALID)
+        qFuncs.changeMessage(message, command, 1);
       else
         message.channel.send("That command cannot be used in this channel!");
       break;

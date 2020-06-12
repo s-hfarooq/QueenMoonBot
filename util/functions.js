@@ -1,5 +1,6 @@
 const Discord = require("discord.js");
 const owoify = require("owoify-js").default;
+const spongebobify = require("spongebobify");
 const qVars = require("./qVariables.js");
 
 // Makes sure that counting game is on track
@@ -38,16 +39,18 @@ var countingGameModeration = function(message) {
   return;
 }
 
-// owo command function
-var owoifyMessage = function(message, command) {
+// owo and spongebobify command function
+var changeMessage = function(message, command, type) {
   message.channel.messages.fetch({ limit: 2 }).then(messages => {
     const lastMessage = messages.array();
     if (command) {
-      message.channel.send(owoify(command) + "\n - <@" + message.author.id + ">");
+      var out = type == 1 ? spongebobify(command) : owoify(command);
+      message.channel.send(out + "\n - <@" + message.author.id + ">");
       message.delete(message);
     } else {
       if (lastMessage[1].content) {
-        message.channel.send(owoify(lastMessage[1].content) + "\n - owoified by <@" + message.author.id + ">");
+        var out = type == 1 ? spongebobify(lastMessage[1].content) + "\n - spongebobified" : owoify(lastMessage[1].content) + "\n - owoified";
+        message.channel.send(out + " by <@" + message.author.id + ">");
         message.delete(message);
       } else {
         message.channel.send("Previous message had no text");
@@ -132,7 +135,7 @@ async function getMessagesWithAttachments(channel, limit = 500) {
 
 module.exports = {
   countingGameModeration,
-  owoifyMessage,
+  changeMessage,
   sendRandImage,
   getMessagesWithAttachments
 };
