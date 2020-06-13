@@ -184,6 +184,10 @@ var cmds = function(message, keyword, command, buffName) {
       message.channel.send(output);
       break;
 
+    case "horny":
+      message.channel.send({ files: [qVars.HLINKS[Math.floor(Math.random() * qVars.HLINKS.length)]] });
+      break;
+
     case "orgy":
       var output = "That command cannot be used in this channel!";
       if (message.channel.id !== qVars.GENERALID)

@@ -54,6 +54,15 @@ const cLinks = [
     'https://cdn.discordapp.com/attachments/697639057592811650/716491275192500254/image0.jpg',
 ];
 
+const hLinks = [
+  'https://cdn.discordapp.com/attachments/669726484772159488/721440013895598178/Screen_Shot_2017-11-09_at_10.png',
+  'https://cdn.discordapp.com/attachments/669726484772159488/721439726607007774/d77.png',
+  'https://cdn.discordapp.com/attachments/654783232969277453/721440063770198076/e9e.png',
+  'https://cdn.discordapp.com/attachments/654783232969277453/721440038403178496/b73.png',
+  'https://cdn.discordapp.com/attachments/654783232969277453/721440006928990410/Screen_Shot_2020-04-28_at_12.png',
+  'https://cdn.discordapp.com/attachments/654783232969277453/721439958442967060/2ad.png',
+];
+
 var quotesOut = [];
 var brownoutOut = [];
 var memesOut = [];
@@ -70,6 +79,7 @@ module.exports = {
   RESPONSES: responses,
   REMINDERS: reminders,
   CLINKS: cLinks,
+  HLINKS: hLinks,
   GENERALTIMEGAP: 5,
   UPDATEINTERVAL: (1000 * 60 * 60 * 24),
   GENERALID: '669726484772159488',
