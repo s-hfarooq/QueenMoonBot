@@ -211,6 +211,13 @@ var cmds = function(message, keyword, command, buffName) {
         message.channel.send("That command cannot be used in this channel!");
       break;
 
+    case "os":
+      if (message.channel.id !== qVars.GENERALID)
+        qFuncs.changeMessage(message, command, 2);
+      else
+        message.channel.send("That command cannot be used in this channel!");
+      break;
+
     default:
       message.channel.send("That command doesn't exist. Run `queen help` to see the available commands");
   }

@@ -44,12 +44,42 @@ var changeMessage = function(message, command, type) {
   message.channel.messages.fetch({ limit: 2 }).then(messages => {
     const lastMessage = messages.array();
     if (command) {
-      var out = type == 1 ? spongebobify(command) : owoify(command);
+      var out;
+
+      switch (type) {
+        case 0:
+          out = owoify(command);
+          break;
+        case 1:
+          out = spongebobify(command);
+          break;
+        case 2:
+          out = spongebobify(owoify(command));
+          break;
+        default:
+          out = "invalid case";
+      }
+
       message.channel.send(out + "\n - <@" + message.author.id + ">");
       message.delete(message);
     } else {
       if (lastMessage[1].content) {
-        var out = type == 1 ? spongebobify(lastMessage[1].content) + "\n - spongebobified" : owoify(lastMessage[1].content) + "\n - owoified";
+        var out;
+
+        switch (type) {
+          case 0:
+            out = owoify(lastMessage[1].content) + "\n - owoified";
+            break;
+          case 1:
+            out = spongebobify(lastMessage[1].content) + "\n - spongebobified";
+            break;
+          case 2:
+            out = spongebobify(owoify(lastMessage[1].content)) + "\n owoified and spongebobified";
+            break;
+          default:
+            out = "invalid case";
+        }
+
         message.channel.send(out + " by <@" + message.author.id + ">");
         message.delete(message);
       } else {

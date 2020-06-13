@@ -35,7 +35,8 @@ A bot for the [UIUC 2024 Discord server](https://discord.gg/2pFv4Wq)
 * `queen earring` to see a nice earring
 * `queen cock` to see a chicken
 * `queen owoify [message]` to turn your message into an owo (leave [message] blank to owoify the previous sent message)
-*  `queen spongebobify` or `queen s` to convert your message to spongebob mocking text (leave [message] blank to spongebobify the previous sent message)
+* `queen spongebobify [message]` or `queen s [message]` to convert your message to spongebob mocking text (leave [message] blank to spongebobify the previous sent message)
+* `queen os [message]` to first owoify then spongebobify your message (leave [message] blank to owoify and spongebobify the previous sent message)
 * `queen rankdegen` to see how degen you are
 * ~~`queen class [SUBJECT-NUMBER]` to the name, credit hours, and recent avg. GPA of a UIUC course (NOTE: not case-sensitive)~~ now depreciated, use [class bot](https://github.com/timot3/uiuc-classes-bot) instead.
 
