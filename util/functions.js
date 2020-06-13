@@ -74,7 +74,7 @@ var changeMessage = function(message, command, type) {
             out = spongebobify(lastMessage[1].content) + "\n - spongebobified";
             break;
           case 2:
-            out = spongebobify(owoify(lastMessage[1].content)) + "\n owoified and spongebobified";
+            out = spongebobify(owoify(lastMessage[1].content)) + "\n - owoified and spongebobified";
             break;
           default:
             out = "invalid case";
