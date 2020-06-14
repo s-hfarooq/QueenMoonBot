@@ -61,6 +61,7 @@ const hLinks = [
   'https://cdn.discordapp.com/attachments/654783232969277453/721440038403178496/b73.png',
   'https://cdn.discordapp.com/attachments/654783232969277453/721440006928990410/Screen_Shot_2020-04-28_at_12.png',
   'https://cdn.discordapp.com/attachments/654783232969277453/721439958442967060/2ad.png',
+  'https://cdn.discordapp.com/attachments/714931864413929512/721844496614162561/FB_IMG_15904852374509040.jpg',
 ];
 
 var quotesOut = [];
