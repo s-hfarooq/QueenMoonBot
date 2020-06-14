@@ -66,6 +66,7 @@ const hLinks = [
 var quotesOut = [];
 var brownoutOut = [];
 var memesOut = [];
+var wholesomeOut = [];
 var lastUpdate;
 var generalLastCommandTime = 0;
 
@@ -73,6 +74,7 @@ module.exports = {
   quotesOut,
   brownoutOut,
   memesOut,
+  wholesomeOut,
   lastUpdate,
   generalLastCommandTime,
   CLIENT: client,
@@ -87,4 +89,5 @@ module.exports = {
   COUNTINGGAMEID: '698313651186040923',
   QUOTEID: '697329980044083220',
   MEMEID: '654784388197908500',
+  WHOLESOMEID: '700590295493902347'
 };

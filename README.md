@@ -27,6 +27,7 @@ A bot for the [UIUC 2024 Discord server](https://discord.gg/2pFv4Wq)
 * `queen quote` to get a random image from #quotes
 * `queen brownout` to get a random attachment from #brownoutposting (only works in #brownoutposting)
 * `queen meme` to get a random meme from #memes_of_production
+* `queen wholesome` to get a random image from #wholesome
 * `queen soup` to get soup
 * `queen 8ball [message]` to get an 8ball reply (only works in #spam)
 * `queen thirst` to get water messages

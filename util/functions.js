@@ -110,6 +110,10 @@ var sendRandImage = function(message, command, messageArray, channelID) {
       qVars.memesOut = output;
     });
 
+    getMessagesWithAttachments(qVars.CLIENT.channels.cache.get(qVars.WHOLESOMEID)).then(output => {
+      qVars.wholesomeOut = output;
+    });
+
     qVars.lastUpdate = Date.now();
   }
 

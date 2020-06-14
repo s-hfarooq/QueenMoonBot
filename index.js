@@ -21,6 +21,10 @@ qVars.CLIENT.on("ready", () => {
     qVars.memesOut = output;
   });
 
+  qFuncs.getMessagesWithAttachments(qVars.CLIENT.channels.cache.get(qVars.WHOLESOMEID)).then(output => {
+    qVars.wholesomeOut = output;
+  });
+
   qVars.lastUpdate = Date.now();
 });
 
