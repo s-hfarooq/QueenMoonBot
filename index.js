@@ -52,11 +52,11 @@ qVars.CLIENT.on("message", async message => {
   if (message.author.bot)
     return;
 
-  var command = message.content.toLowerCase();
+  var command = message.content;
   var override = false;
 
   // Make sure message starts with 'queen' or 'q'
-  if (command.startsWith("queen ") || command.startsWith("q ")) {
+  if (command.toLowerCase().startsWith("queen ") || command.toLowerCase().startsWith("q ")) {
     override = true;
     command = command.substr(command.indexOf(" ") + 1);
   }
@@ -67,7 +67,7 @@ qVars.CLIENT.on("message", async message => {
   if (override) {
     if (message.channel.id !== qVars.GENERALID || timeDiff >= qVars.GENERALTIMEGAP) {
       // Get command keyword
-      var keyword = command.replace(/ .*/,'');
+      var keyword = command.replace(/ .*/,'').toLowerCase();
 
       // If trying to use buff command, get the [name] desired
       var buffName = "";
