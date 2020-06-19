@@ -55,6 +55,10 @@ qVars.CLIENT.on("message", async message => {
   var command = message.content;
   var override = false;
 
+  // Ignore quoted section at start of message if one exists
+  while (command.startsWith(">"))
+    command = command.substr(command.indexOf("\n") + 1);
+
   // Make sure message starts with 'queen' or 'q'
   if (command.toLowerCase().startsWith("queen ") || command.toLowerCase().startsWith("q ")) {
     override = true;
@@ -67,11 +71,11 @@ qVars.CLIENT.on("message", async message => {
   if (override) {
     if (message.channel.id !== qVars.GENERALID || timeDiff >= qVars.GENERALTIMEGAP) {
       // Get command keyword
-      var keyword = command.replace(/ .*/,'').toLowerCase();
+      var keyword = command.replace(/\s.*/,'').toLowerCase();
 
       // If trying to use buff command, get the [name] desired
       var buffName = "";
-      if(keyword.startsWith("buff")) {
+      if (keyword.startsWith("buff")) {
         keyword = "buff";
         buffName = command.substr(4).trim();
       }
@@ -80,7 +84,7 @@ qVars.CLIENT.on("message", async message => {
       var command = command.substr(keyword.length + 1);
       commands.cmds(message, keyword, command, buffName);
 
-      if(message.channel.id === qVars.GENERALID)
+      if (message.channel.id === qVars.GENERALID)
         qVars.generalLastCommandTime = Math.round((new Date().getTime() / 1000));
     } else if (timeDiff < qVars.GENERALTIMEGAP) {
       message.channel.send("Slow down!");

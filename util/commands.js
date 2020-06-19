@@ -10,7 +10,7 @@ var cmds = function(message, keyword, command, buffName) {
       break;
 
     case "usercount":
-      const userAmnt = qVars.CLIENT.guilds.cache.get('654783232969277450').memberCount;
+      const userAmnt = qVars.CLIENT.guilds.cache.get(message.guild.id).memberCount;
       message.channel.send("There are currently " + userAmnt + " people in this server");
       break;
 
