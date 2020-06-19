@@ -59,6 +59,13 @@ qVars.CLIENT.on("message", async message => {
   while (command.startsWith(">"))
     command = command.substr(command.indexOf("\n") + 1);
 
+  // Ignore user mention at start of message or after quote
+  if(command.startsWith("<@!"))
+    command = command.substr(command.indexOf(">") + 1);
+  command = command.trim();
+
+  console.log(command);
+
   // Make sure message starts with 'queen' or 'q'
   if (command.toLowerCase().startsWith("queen ") || command.toLowerCase().startsWith("q ")) {
     override = true;
