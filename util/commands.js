@@ -202,10 +202,7 @@ var cmds = function(message, keyword, command, buffName) {
       break;
 
     case "orgy":
-      var output = "That command cannot be used in this channel!";
-      if (message.channel.id !== qVars.GENERALID)
-        output = { files: ['https://cdn.discordapp.com/attachments/714931864413929512/716715109552095300/43hgta.gif'] };
-      message.channel.send(output);
+      message.channel.send({ files: ['https://cdn.discordapp.com/attachments/714931864413929512/716715109552095300/43hgta.gif'] });
       break;
 
     case "rankdegen":
@@ -229,10 +226,7 @@ var cmds = function(message, keyword, command, buffName) {
       break;
 
     case "os":
-      if (message.channel.id !== qVars.GENERALID)
-        qFuncs.changeMessage(message, command, 2);
-      else
-        message.channel.send("That command cannot be used in this channel!");
+      qFuncs.changeMessage(message, command, 2);
       break;
 
     default:
