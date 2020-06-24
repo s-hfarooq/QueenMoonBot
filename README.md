@@ -21,6 +21,8 @@ A bot for the [UIUC 2024 Discord server](https://discord.gg/2pFv4Wq)
 * `queen waitwhen` or `queen ww` to get the when did I ask screenshot
 * `queen brasil` to get the Ronaldinho Soccer 64 video
 * `queen corn` to get a corn video`
+* `queen corb` to get the round corn
+* `queen lewd` to get the eye pic
 * `queen illinois` to get a map of Illinois
 * `queen catgirl` to see a catgirl
 * `queen gwagwa` to get the gwagwa video

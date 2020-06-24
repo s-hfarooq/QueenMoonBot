@@ -53,6 +53,12 @@ var cmds = function(message, keyword, command, buffName) {
       });
       break;
 
+    case "lewd":
+      message.channel.send({
+        files: ['https://cdn.discordapp.com/attachments/654783232969277453/725178137670844426/n5wukc7oxy021.png']
+      });
+      break;
+
     case "gc":
       message.channel.send({
         files: ['https://cdn.discordapp.com/attachments/669726484772159488/701247357001400370/unknown.png']
