@@ -25,6 +25,7 @@ A bot for the [UIUC 2024 Discord server](https://discord.gg/2pFv4Wq)
 * `queen lewd` to get the eye pic
 * `queen illinois` to get a map of Illinois
 * `queen catgirl` to see a catgirl
+* `queen deerchildren` to get a old picture
 * `queen gwagwa` to get the gwagwa video
 * `queen quote` to get a random image from #quotes
 * `queen brownout` to get a random attachment from #brownoutposting (only works in #brownoutposting)
