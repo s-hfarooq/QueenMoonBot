@@ -36,7 +36,6 @@ A bot for the [UIUC 2024 Discord server](https://discord.gg/2pFv4Wq)
 * `queen thirst` to get water messages
 * `queen lofi` to get a good lofi playlist
 * `queen ping` to get your ping
-* `queen earring` to see a nice earring
 * `queen cock` to see a chicken
 * `queen horny` to get bonk pictures
 * `queen owoify [message]` to turn your message into an owo (leave [message] blank to owoify the previous sent message)
