@@ -14,10 +14,6 @@ var cmds = function(message, keyword, command, buffName) {
       message.channel.send("There are currently " + userAmnt + " people in this server");
       break;
 
-    case "class":
-      message.channel.send("That command has been disabled. Use class bot instead.");
-      break;
-
     case "buff":
       var output = "buff " + buffName + " buff " + buffName;
       if(output.length > 2000)
@@ -131,10 +127,22 @@ var cmds = function(message, keyword, command, buffName) {
       });
       break;
 
+    case "orgy":
+      message.channel.send({
+        files: ['https://cdn.discordapp.com/attachments/714931864413929512/716715109552095300/43hgta.gif']
+      });
+      break;
+
     case "waitwhen":
     case "ww":
       message.channel.send({
         files: ['https://cdn.discordapp.com/attachments/710425704524677211/711129644992036884/tim.png']
+      });
+      break;
+
+    case "horny":
+      message.channel.send({
+        files: [qVars.HLINKS[Math.floor(Math.random() * qVars.HLINKS.length)]]
       });
       break;
 
@@ -201,14 +209,6 @@ var cmds = function(message, keyword, command, buffName) {
       if (message.channel.id !== qVars.GENERALID)
         output = { files: [qVars.CLINKS[Math.floor(Math.random() * qVars.CLINKS.length)]] };
       message.channel.send(output);
-      break;
-
-    case "horny":
-      message.channel.send({ files: [qVars.HLINKS[Math.floor(Math.random() * qVars.HLINKS.length)]] });
-      break;
-
-    case "orgy":
-      message.channel.send({ files: ['https://cdn.discordapp.com/attachments/714931864413929512/716715109552095300/43hgta.gif'] });
       break;
 
     case "rankdegen":
