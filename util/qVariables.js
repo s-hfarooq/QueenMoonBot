@@ -7,7 +7,8 @@ const client = new Discord.Client({
 });
 
 // Responses for 8ball
-const responses = ['It is certain.',
+const responses = [
+  'It is certain.',
   'It is decidedly so.',
   'Without a doubt.',
   'Yes - definitely.',
@@ -30,14 +31,16 @@ const responses = ['It is certain.',
 ];
 
 // Responses for thirst command
-const reminders = ['A friendly reminder to stay hydrated.',
+const reminders = [
+  'A friendly reminder to stay hydrated.',
   'Quench your thirst.',
   'Did you drink enough water today?',
   'BEGONE',
   'stfu',
   'u thirsty hoe',
   'It is important to drink 8 glasses of water a day.',
-  "goddammit i'm running out of creative ways to insult you people"
+  "goddammit i'm running out of creative ways to insult you people",
+  { files: ['https://cdn.discordapp.com/attachments/669726484772159488/725548315479113778/iqggq6rypn651.png'] }
 ];
 
 // Links for cock command
