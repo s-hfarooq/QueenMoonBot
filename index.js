@@ -67,8 +67,8 @@ qVars.CLIENT.on("message", async message => {
   if (override) {
     if (message.channel.id !== qVars.GENERALID || timeDiff >= qVars.GENERALTIMEGAP) {
       // Get command keyword
-      var keyword = command.replace(/ .*/,'').toLowerCase();
-
+      var keyword = command.replace(/\s.*/,'').toLowerCase();
+      
       // If trying to use buff command, get the [name] desired
       var buffName = "";
       if(keyword.startsWith("buff")) {
