@@ -204,6 +204,32 @@ var cmds = function(message, keyword, command, buffName) {
       message.channel.send('Client ping: ' + messagePing + 'ms (API ping: ' + apiPing + 'ms)');
       break;
 
+    case "massping":
+      // Make sure user has ESC role
+      if(message.member.roles.cache.has(qVars.ESCID)) {
+        if(!command.startsWith("<@")) {
+          message.channel.send("You must mention someone!");
+          break;
+        }
+
+        var chnl = message.channel;
+        var atUser = command.substr(command.indexOf("<"), command.indexOf(">") + 1);
+        message.delete();
+
+        // Send log message
+        qVars.CLIENT.channels.cache.get(qVars.LOGID).send("<@" + message.author + "> mentioned " + atUser + " 100 times.");
+
+        // Mass ping
+        for(let i = 0; i < 100; i++) {
+          chnl.send(atUser).then(sentMessage => {
+              sentMessage.delete();
+          });
+        }
+      } else {
+        message.channel.send("You do not have permission to use this command!");
+      }
+      break;
+
     case "cock":
       var output = "That command cannot be used in this channel!";
       if (message.channel.id !== qVars.GENERALID)
