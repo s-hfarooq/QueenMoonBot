@@ -159,7 +159,7 @@ var massPingUser = function(message, command) {
   message.delete();
 
   // Send log message
-  qVars.CLIENT.channels.cache.get(qVars.LOGID).send("<@" + message.author + "> mentioned " + atUser + " " + amnt + " times");
+  qVars.CLIENT.channels.cache.get(qVars.LOGID).send("<@" + message.author + "> mentioned " + atUser + " " + amnt + " times in <#" + message.channel.id + ">");
 
   // Mass ping
   for(let i = 0; i < amnt; i++) {
