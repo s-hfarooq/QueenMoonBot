@@ -15,7 +15,7 @@ A bot for the [UIUC 2024 Discord server](https://discord.gg/2pFv4Wq)
 * `queen gc` to get the Facebook group screenshot
 * `queen head` to get the Mater screenshot
 * `queen rat` to post this rat
-* `queen no anime` to get the no anime picture
+* `queen noanime` to get the no anime picture
 * `queen bean` to get a human bean
 * `queen contribute` to get a like to the GitHub repo
 * `queen waitwhen` or `queen ww` to get the when did I ask screenshot
@@ -25,7 +25,6 @@ A bot for the [UIUC 2024 Discord server](https://discord.gg/2pFv4Wq)
 * `queen lewd` to get the eye pic
 * `queen illinois` to get a map of Illinois
 * `queen catgirl` to see a catgirl
-* `queen deerchildren` to get a old picture
 * `queen gwagwa` to get the gwagwa video
 * `queen quote` to get a random image from #quotes
 * `queen brownout` to get a random attachment from #brownoutposting (only works in #brownoutposting)

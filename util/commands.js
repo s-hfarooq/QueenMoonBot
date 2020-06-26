@@ -103,12 +103,6 @@ var cmds = function(message, keyword, command, buffName) {
       });
       break;
 
-    case "deerchildren":
-      message.channel.send({
-        files: ['https://cdn.discordapp.com/attachments/697648147941294160/725238381046661230/bfec64902e432f04bb93e56ef471acc8--old-family-photos-family-pictures.jpg']
-      });
-      break;
-
     case "gwagwa":
       message.channel.send("GWAGWA", {
         files: ['https://cdn.discordapp.com/attachments/669726484772159488/713289328985505792/gwa_gwa-QPYcuA0b6gA.mp4']
