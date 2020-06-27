@@ -21,6 +21,13 @@ var cmds = function(message, keyword, command, buffName) {
       message.channel.send(output);
       break;
 
+    case "notbuff":
+      var output = "not buff " + buffName + " not buff " + buffName;
+      if(output.length > 2000)
+        output = "not buff enough";
+      message.channel.send(output);
+      break;
+
     case "8ball":
       var output = "That command can only be used in <#654838387160907777>";
       if (message.channel.id === '654838387160907777')
