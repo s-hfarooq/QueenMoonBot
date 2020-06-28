@@ -220,7 +220,7 @@ var cmds = function(message, keyword, command, buffName) {
           files: ['https://cdn.discordapp.com/attachments/654784430409252904/704162388194230302/im_sorry.mp4']
         });
       else
-        message.channel.send("That command canmot be used in this channel!");
+        message.channel.send("That command cannot be used in this channel!");
       break;
 
     case "owoify":
