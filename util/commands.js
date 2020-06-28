@@ -214,6 +214,15 @@ var cmds = function(message, keyword, command, buffName) {
       message.channel.send("you are " + degenRank + "% degenerate");
       break;
 
+    case "sorry":
+      if (message.channel.id !== qVars.GENERALID)
+        message.channel.send({
+          files: ['https://cdn.discordapp.com/attachments/654784430409252904/704162388194230302/im_sorry.mp4']
+        });
+      else
+        message.channel.send("That command canmot be used in this channel!");
+      break;
+
     case "owoify":
       if (message.channel.id !== qVars.GENERALID)
         qFuncs.changeMessage(message, command, 0);
