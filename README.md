@@ -26,6 +26,7 @@ A bot for the [UIUC 2024 Discord server](https://discord.gg/2pFv4Wq)
 * `queen catgirl` to see a catgirl
 * `queen sorry` to get the pogchamp video
 * `queen gwagwa` to get the gwagwa video
+* `queen hummus` because David wanted it
 * `queen quote` to get a random image from #quotes
 * `queen brownout` to get a random attachment from #brownoutposting (only works in #brownoutposting)
 * `queen meme` to get a random meme from #memes_of_production

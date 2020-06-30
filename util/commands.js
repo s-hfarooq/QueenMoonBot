@@ -50,6 +50,12 @@ var cmds = function(message, keyword, command, buffName) {
       });
       break;
 
+    case "hummus":
+      message.channel.send({
+        files: ['https://cdn.discordapp.com/attachments/697648147941294160/727645722354253965/hummus.PNG']
+      });
+      break;
+
     case "gc":
       message.channel.send({
         files: ['https://cdn.discordapp.com/attachments/669726484772159488/701247357001400370/unknown.png']
