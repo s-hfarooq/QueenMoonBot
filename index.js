@@ -41,6 +41,7 @@ qVars.CLIENT.on("guildDelete", guild => {
   qVars.CLIENT.user.setActivity(`queen help`);
 });
 
+// Runs on message deletion
 qVars.CLIENT.on('messageDelete', message => {
   if (message.cleanContent) {
     var msg = message.cleanContent;
@@ -51,10 +52,28 @@ qVars.CLIENT.on('messageDelete', message => {
     qVars.lastDeletedMessage = new Discord.MessageEmbed()
           .setColor('#FF0000')
           .setAuthor('Message Deleted')
-          .addField(message.member.user.tag, msg,  false)
-          .addField("Channel", message.channel.name, false)
-          .addField("Time", new Date().toLocaleString(), false);
+          .addField(message.member.user.tag, msg)
+          .addField("Channel", message.channel.name)
+          .addField("Time", new Date().toLocaleString());
+
     qVars.CLIENT.channels.cache.get(qVars.LOGID).send({ embed: qVars.lastDeletedMessage });
+  }
+});
+
+// Runs on message edit
+qVars.CLIENT.on('messageUpdate', (oldMessage, newMessage) => {
+  // Ensure messages aren't blank
+  if(oldMessage.cleanContent && newMessage.cleanContent) {
+    var logMsg = new Discord.MessageEmbed()
+          .setColor('#F0E68C')
+          .setAuthor('Message Edited')
+          .addField("Old message", oldMessage.cleanContent)
+          .addField("New message", newMessage.cleanContent)
+          .addField("User", newMessage.member.user.tag)
+          .addField("Channel", newMessage.channel.name)
+          .addField("Time", new Date().toLocaleString());
+
+    qVars.CLIENT.channels.cache.get(qVars.LOGID).send({ embed: logMsg });
   }
 });
 
