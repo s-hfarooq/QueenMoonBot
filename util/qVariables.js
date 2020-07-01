@@ -71,6 +71,9 @@ var quotesOut = [];
 var brownoutOut = [];
 var memesOut = [];
 var wholesomeOut = [];
+var lastDeletedMessage = new Discord.MessageEmbed()
+    .setColor('#FF0000')
+    .setAuthor('No deleted messages yet');
 var lastUpdate;
 var generalLastCommandTime = 0;
 
@@ -81,6 +84,7 @@ module.exports = {
   wholesomeOut,
   lastUpdate,
   generalLastCommandTime,
+  lastDeletedMessage,
   CLIENT: client,
   RESPONSES: responses,
   REMINDERS: reminders,

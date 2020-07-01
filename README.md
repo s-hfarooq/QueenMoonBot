@@ -37,6 +37,7 @@ A bot for the [UIUC 2024 Discord server](https://discord.gg/2pFv4Wq)
 * `queen lofi` to get a good lofi playlist
 * `queen ping` to get your ping
 * `queen cock` to see a chicken
+* `queen snipe` to get the last deleted message
 * `queen horny` to get bonk pictures
 * `queen sp @USER [amnt]` to mass ping a specific user where [amnt] is a number between 0 and 100 (must have ESC role to use this command)
 * `queen owoify [message]` to turn your message into an owo (leave [message] blank to owoify the previous sent message)

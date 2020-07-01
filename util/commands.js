@@ -248,6 +248,10 @@ var cmds = function(message, keyword, command, buffName) {
       qFuncs.changeMessage(message, command, 2);
       break;
 
+    case "snipe":
+      message.channel.send({ embed: qVars.lastDeletedMessage });
+      break;
+
     default:
       message.channel.send("That command doesn't exist. Run `queen help` to see the available commands");
   }

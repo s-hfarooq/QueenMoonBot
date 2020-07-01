@@ -1,4 +1,5 @@
 // Load requirements
+const Discord = require("discord.js");
 const config = require("./util/config.json");
 const qVars = require("./util/qVariables.js");
 const qFuncs = require("./util/functions.js");
@@ -38,6 +39,17 @@ qVars.CLIENT.on("guildCreate", guild => {
 qVars.CLIENT.on("guildDelete", guild => {
   console.log(`Bot has been removed from a guild`);
   qVars.CLIENT.user.setActivity(`queen help`);
+});
+
+qVars.CLIENT.on('messageDelete', message => {
+  if (message.cleanContent) {
+    qVars.lastDeletedMessage = new Discord.MessageEmbed()
+          .setColor('#FF0000')
+          .setAuthor('Last Deleted Message')
+          .addField(message.member.user.tag, message.cleanContent, false)
+          .addField(message.channel.name, "Channel", false);
+    qVars.CLIENT.channels.cache.get(qVars.LOGID).send("\"" + message.cleanContent + "\" sent by <@" + message.author + "> was deleted from <#" + message.channel.id + "> at " + new Date());
+  }
 });
 
 // Runs when a new message is sent on a server
