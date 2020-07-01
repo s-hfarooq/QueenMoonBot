@@ -43,12 +43,18 @@ qVars.CLIENT.on("guildDelete", guild => {
 
 qVars.CLIENT.on('messageDelete', message => {
   if (message.cleanContent) {
+    var msg = message.cleanContent;
+
+    if(message.cleanContent.length > 1950)
+      msg = msg.substr(0, 1950) + "...";
+
     qVars.lastDeletedMessage = new Discord.MessageEmbed()
           .setColor('#FF0000')
-          .setAuthor('Last Deleted Message')
-          .addField(message.member.user.tag, message.cleanContent, false)
-          .addField(message.channel.name, "Channel", false);
-    qVars.CLIENT.channels.cache.get(qVars.LOGID).send("\"" + message.cleanContent + "\" sent by <@" + message.author + "> was deleted from <#" + message.channel.id + "> at " + new Date());
+          .setAuthor('Message Deleted')
+          .addField(message.member.user.tag, msg,  false)
+          .addField("Channel", message.channel.name, false)
+          .addField("Time", new Date().toLocaleString(), false);
+    qVars.CLIENT.channels.cache.get(qVars.LOGID).send({ embed: qVars.lastDeletedMessage });
   }
 });
 
