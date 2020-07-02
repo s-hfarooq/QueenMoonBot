@@ -67,7 +67,7 @@ qVars.CLIENT.on('messageDelete', message => {
 // Runs on message edit
 qVars.CLIENT.on('messageUpdate', (oldMessage, newMessage) => {
   // Ignore bot messages
-  if (message.author.bot)
+  if (newMessage.author.bot)
     return;
 
   // Ensure messages aren't blank
