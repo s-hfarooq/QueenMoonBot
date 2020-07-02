@@ -43,6 +43,10 @@ qVars.CLIENT.on("guildDelete", guild => {
 
 // Runs on message deletion
 qVars.CLIENT.on('messageDelete', message => {
+  // Ignore bot messages
+  if (message.author.bot)
+    return;
+
   if (message.cleanContent) {
     var msg = message.cleanContent;
 
@@ -62,8 +66,9 @@ qVars.CLIENT.on('messageDelete', message => {
 
 // Runs on message edit
 qVars.CLIENT.on('messageUpdate', (oldMessage, newMessage) => {
+
   // Ensure messages aren't blank
-  if(oldMessage.cleanContent && newMessage.cleanContent) {
+  if (oldMessage.cleanContent && newMessage.cleanContent) {
     var logMsg = new Discord.MessageEmbed()
           .setColor('#F0E68C')
           .setAuthor('Message Edited')
