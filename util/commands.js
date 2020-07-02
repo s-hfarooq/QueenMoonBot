@@ -40,6 +40,10 @@ var cmds = function(message, keyword, command, buffName) {
       message.channel.send(qVars.REMINDERS[rand]);
       break;
 
+    case "tvd":
+      message.channel.send("https://youtu.be/HxkmXnRQblE");
+      break;
+    
     case "lofi":
       message.channel.send("https://open.spotify.com/playlist/1DcvziAZBZk1Ji1c65ePtk?si=Qtvu64zsQQurDtQa60tPBg");
       break;
@@ -109,7 +113,7 @@ var cmds = function(message, keyword, command, buffName) {
         files: ['https://cdn.discordapp.com/attachments/669726484772159488/713289328985505792/gwa_gwa-QPYcuA0b6gA.mp4']
       });
       break;
-
+      
     case "bean":
       message.channel.send({
         files: ['https://cdn.discordapp.com/attachments/654784352269369356/720517854616879174/hC2pFDm.png']
