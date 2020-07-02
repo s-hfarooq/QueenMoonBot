@@ -50,7 +50,7 @@ qVars.CLIENT.on('messageDelete', message => {
   if (message.cleanContent) {
     var msg = message.cleanContent;
 
-    if(message.cleanContent.length > 1950)
+    if (message.cleanContent.length > 1950)
       msg = msg.substr(0, 1950) + "...";
 
     qVars.lastDeletedMessage = new Discord.MessageEmbed()
@@ -66,6 +66,9 @@ qVars.CLIENT.on('messageDelete', message => {
 
 // Runs on message edit
 qVars.CLIENT.on('messageUpdate', (oldMessage, newMessage) => {
+  // Ignore bot messages
+  if (message.author.bot)
+    return;
 
   // Ensure messages aren't blank
   if (oldMessage.cleanContent && newMessage.cleanContent) {
