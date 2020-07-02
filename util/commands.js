@@ -10,18 +10,21 @@ var cmds = function(message, keyword, command, buffName) {
       break;
 
     case "usercount":
-      const userAmnt = qVars.CLIENT.guilds.cache.get('654783232969277450').memberCount;
+      const userAmnt = qVars.CLIENT.guilds.cache.get(message.guild.id).memberCount;
       message.channel.send("There are currently " + userAmnt + " people in this server");
-      break;
-
-    case "class":
-      message.channel.send("That command has been disabled. Use class bot instead.");
       break;
 
     case "buff":
       var output = "buff " + buffName + " buff " + buffName;
       if(output.length > 2000)
         output = "too buff";
+      message.channel.send(output);
+      break;
+
+    case "notbuff":
+      var output = "not buff " + buffName + " not buff " + buffName;
+      if(output.length > 2000)
+        output = "not buff enough";
       message.channel.send(output);
       break;
 
@@ -44,6 +47,12 @@ var cmds = function(message, keyword, command, buffName) {
     case "hackathon":
       message.channel.send({
         files: ['https://cdn.discordapp.com/attachments/654784388197908500/675113678856781834/Screenshot_20200102-213727_Discord.png']
+      });
+      break;
+
+    case "hummus":
+      message.channel.send({
+        files: ['https://cdn.discordapp.com/attachments/697648147941294160/727645722354253965/hummus.PNG']
       });
       break;
 
@@ -95,12 +104,6 @@ var cmds = function(message, keyword, command, buffName) {
       });
       break;
 
-    case "earring":
-      message.channel.send({
-        files: ['https://cdn.discordapp.com/attachments/669726484772159488/713652674826076190/2Q.png']
-      });
-      break;
-
     case "gwagwa":
       message.channel.send("GWAGWA", {
         files: ['https://cdn.discordapp.com/attachments/669726484772159488/713289328985505792/gwa_gwa-QPYcuA0b6gA.mp4']
@@ -113,10 +116,22 @@ var cmds = function(message, keyword, command, buffName) {
       });
       break;
 
+    case "orgy":
+      message.channel.send({
+        files: ['https://cdn.discordapp.com/attachments/714931864413929512/716715109552095300/43hgta.gif']
+      });
+      break;
+
     case "waitwhen":
     case "ww":
       message.channel.send({
         files: ['https://cdn.discordapp.com/attachments/710425704524677211/711129644992036884/tim.png']
+      });
+      break;
+
+    case "horny":
+      message.channel.send({
+        files: [qVars.HLINKS[Math.floor(Math.random() * qVars.HLINKS.length)]]
       });
       break;
 
@@ -137,6 +152,13 @@ var cmds = function(message, keyword, command, buffName) {
     case "meme":
       if (message.channel.id !== qVars.GENERALID)
         qFuncs.sendRandImage(message, command, qVars.memesOut, qVars.MEMEID);
+      else
+        message.channel.send("That command cannot be used in this channel!");
+      break;
+
+    case "wholesome":
+      if (message.channel.id !== qVars.GENERALID)
+        qFuncs.sendRandImage(message, command, qVars.wholesomeOut, qVars.WHOLESOMEID);
       else
         message.channel.send("That command cannot be used in this channel!");
       break;
@@ -171,17 +193,19 @@ var cmds = function(message, keyword, command, buffName) {
       message.channel.send('Client ping: ' + messagePing + 'ms (API ping: ' + apiPing + 'ms)');
       break;
 
+    case "massping":
+    case "sp":
+      // Make sure user has ESC role
+      if(message.member.roles.cache.has(qVars.ESCID))
+        qFuncs.massPingUser(message, command);
+      else
+        message.channel.send("You do not have permission to use this command!");
+      break;
+
     case "cock":
       var output = "That command cannot be used in this channel!";
       if (message.channel.id !== qVars.GENERALID)
         output = { files: [qVars.CLINKS[Math.floor(Math.random() * qVars.CLINKS.length)]] };
-      message.channel.send(output);
-      break;
-
-    case "orgy":
-      var output = "That command cannot be used in this channel!";
-      if (message.channel.id !== qVars.GENERALID)
-        output = { files: ['https://cdn.discordapp.com/attachments/714931864413929512/716715109552095300/43hgta.gif'] };
       message.channel.send(output);
       break;
 
@@ -190,11 +214,36 @@ var cmds = function(message, keyword, command, buffName) {
       message.channel.send("you are " + degenRank + "% degenerate");
       break;
 
-    case "owoify":
+    case "sorry":
       if (message.channel.id !== qVars.GENERALID)
-        qFuncs.owoifyMessage(message, command);
+        message.channel.send({
+          files: ['https://cdn.discordapp.com/attachments/654784430409252904/704162388194230302/im_sorry.mp4']
+        });
       else
         message.channel.send("That command cannot be used in this channel!");
+      break;
+
+    case "owoify":
+      if (message.channel.id !== qVars.GENERALID)
+        qFuncs.changeMessage(message, command, 0);
+      else
+        message.channel.send("That command cannot be used in this channel!");
+      break;
+
+    case "s":
+    case "spongebobify":
+      if (message.channel.id !== qVars.GENERALID)
+        qFuncs.changeMessage(message, command, 1);
+      else
+        message.channel.send("That command cannot be used in this channel!");
+      break;
+
+    case "os":
+      qFuncs.changeMessage(message, command, 2);
+      break;
+
+    case "snipe":
+      message.channel.send({ embed: qVars.lastDeletedMessage });
       break;
 
     default:

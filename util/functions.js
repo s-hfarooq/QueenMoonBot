@@ -1,5 +1,6 @@
 const Discord = require("discord.js");
 const owoify = require("owoify-js").default;
+const spongebobify = require("spongebobify");
 const qVars = require("./qVariables.js");
 
 // Makes sure that counting game is on track
@@ -38,16 +39,48 @@ var countingGameModeration = function(message) {
   return;
 }
 
-// owo command function
-var owoifyMessage = function(message, command) {
+// owo and spongebobify command function
+var changeMessage = function(message, command, type) {
   message.channel.messages.fetch({ limit: 2 }).then(messages => {
     const lastMessage = messages.array();
     if (command) {
-      message.channel.send(owoify(command) + "\n - <@" + message.author.id + ">");
+      var out;
+
+      switch (type) {
+        case 0:
+          out = owoify(command);
+          break;
+        case 1:
+          out = spongebobify(command);
+          break;
+        case 2:
+          out = spongebobify(owoify(command));
+          break;
+        default:
+          out = "invalid case";
+      }
+
+      message.channel.send(out + "\n - <@" + message.author.id + ">");
       message.delete(message);
     } else {
       if (lastMessage[1].content) {
-        message.channel.send(owoify(lastMessage[1].content) + "\n - owoified by <@" + message.author.id + ">");
+        var out;
+
+        switch (type) {
+          case 0:
+            out = owoify(lastMessage[1].content) + "\n - owoified";
+            break;
+          case 1:
+            out = spongebobify(lastMessage[1].content) + "\n - spongebobified";
+            break;
+          case 2:
+            out = spongebobify(owoify(lastMessage[1].content)) + "\n - owoified and spongebobified";
+            break;
+          default:
+            out = "invalid case";
+        }
+
+        message.channel.send(out + " by <@" + message.author.id + ">");
         message.delete(message);
       } else {
         message.channel.send("Previous message had no text");
@@ -77,6 +110,10 @@ var sendRandImage = function(message, command, messageArray, channelID) {
       qVars.memesOut = output;
     });
 
+    getMessagesWithAttachments(qVars.CLIENT.channels.cache.get(qVars.WHOLESOMEID)).then(output => {
+      qVars.wholesomeOut = output;
+    });
+
     qVars.lastUpdate = Date.now();
   }
 
@@ -97,6 +134,39 @@ var sendRandImage = function(message, command, messageArray, channelID) {
   }
 
   return;
+}
+
+var massPingUser = function(message, command) {
+  var start = command.indexOf("<@");
+  var end = command.indexOf(">");
+
+  // Make sure someone was mentioned
+  if(start < 0 || end < 0) {
+    message.channel.send("You must mention someone!");
+    return;
+  }
+
+  // Get number of @'s wanted
+  var amnt = parseInt(command.substr(end + 1));
+  if(isNaN(amnt) || amnt < 1 || amnt > 100) {
+    console.log(amnt);
+    message.channel.send("You must input a valid number! (must be between 0 and 100)");
+    return;
+  }
+
+  var chnl = message.channel;
+  var atUser = command.substr(command.indexOf("<"), command.indexOf(">") + 1);
+  message.delete();
+
+  // Send log message
+  qVars.CLIENT.channels.cache.get(qVars.LOGID).send("<@" + message.author + "> mentioned " + atUser + " " + amnt + " times in <#" + message.channel.id + ">");
+
+  // Mass ping
+  for(let i = 0; i < amnt; i++) {
+    chnl.send(atUser).then(sentMessage => {
+        sentMessage.delete();
+    });
+  }
 }
 
 // Gets all messages with attachments in a given channel and returns as an array
@@ -132,7 +202,8 @@ async function getMessagesWithAttachments(channel, limit = 500) {
 
 module.exports = {
   countingGameModeration,
-  owoifyMessage,
+  changeMessage,
   sendRandImage,
-  getMessagesWithAttachments
+  getMessagesWithAttachments,
+  massPingUser
 };
