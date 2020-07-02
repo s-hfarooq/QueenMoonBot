@@ -40,6 +40,10 @@ var cmds = function(message, keyword, command, buffName) {
       message.channel.send(qVars.REMINDERS[rand]);
       break;
 
+    case "tvd":
+      message.channel.send("https://youtu.be/HxkmXnRQblE");
+      break;
+    
     case "lofi":
       message.channel.send("https://open.spotify.com/playlist/1DcvziAZBZk1Ji1c65ePtk?si=Qtvu64zsQQurDtQa60tPBg");
       break;
