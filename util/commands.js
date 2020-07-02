@@ -113,6 +113,12 @@ var cmds = function(message, keyword, command, buffName) {
         files: ['https://cdn.discordapp.com/attachments/669726484772159488/713289328985505792/gwa_gwa-QPYcuA0b6gA.mp4']
       });
       break;
+      
+    case "bean":
+      message.channel.send({
+        files: ['https://cdn.discordapp.com/attachments/654784352269369356/720517854616879174/hC2pFDm.png']
+      });
+      break;
 
     case "soup":
       message.channel.send({
