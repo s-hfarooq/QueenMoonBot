@@ -11,7 +11,6 @@ A bot for the [UIUC 2024 Discord server](https://discord.gg/2pFv4Wq)
 * Makes sure the #counting_game channel is in check. If a user sends two messages in a row, it deletes the newest one. If a user sends a number that isn't the previous number + 1, it deletes the message and assigns the `Can't Count` role (assuming the newest message was sent > 1500ms after the previous one).
 * `queen usercount` to see how many users are currently in the server
 * `queen buff[name]` for buff [name]
-* `queen notbuff[name]` for notbuff [name]
 * `queen hackathon` to get the done with hackathons picture
 * `queen gc` to get the Facebook group screenshot
 * `queen head` to get the Mater screenshot
@@ -25,17 +24,12 @@ A bot for the [UIUC 2024 Discord server](https://discord.gg/2pFv4Wq)
 * `queen illinois` to get a map of Illinois
 * `queen catgirl` to see a catgirl
 * `queen sorry` to get the pogchamp video
-* `queen gwagwa` to get the gwagwa video
 * `queen hummus` because David wanted it
 * `queen quote` to get a random image from #quotes
 * `queen brownout` to get a random attachment from #brownoutposting (only works in #brownoutposting)
-* `queen meme` to get a random meme from #memes_of_production
-* `queen wholesome` to get a random image from #wholesome
 * `queen soup` to get soup
 * `queen 8ball [message]` to get an 8ball reply (only works in #spam)
 * `queen thirst` to get water messages
-* `queen lofi` to get a good lofi playlist
-* `queen ping` to get your ping
 * `queen cock` to see a chicken
 * `queen snipe` to get the last deleted message
 * `queen horny` to get bonk pictures

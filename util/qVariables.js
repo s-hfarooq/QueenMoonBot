@@ -69,8 +69,6 @@ const hLinks = [
 
 var quotesOut = [];
 var brownoutOut = [];
-var memesOut = [];
-var wholesomeOut = [];
 var lastDeletedMessage = new Discord.MessageEmbed()
     .setColor('#FF0000')
     .setAuthor('No deleted messages yet');
@@ -80,8 +78,6 @@ var generalLastCommandTime = 0;
 module.exports = {
   quotesOut,
   brownoutOut,
-  memesOut,
-  wholesomeOut,
   lastUpdate,
   generalLastCommandTime,
   lastDeletedMessage,

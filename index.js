@@ -18,14 +18,6 @@ qVars.CLIENT.on("ready", () => {
     qVars.quotesOut = output;
   });
 
-  qFuncs.getMessagesWithAttachments(qVars.CLIENT.channels.cache.get(qVars.MEMEID)).then(output => {
-    qVars.memesOut = output;
-  });
-
-  qFuncs.getMessagesWithAttachments(qVars.CLIENT.channels.cache.get(qVars.WHOLESOMEID)).then(output => {
-    qVars.wholesomeOut = output;
-  });
-
   qVars.lastUpdate = Date.now();
 });
 
@@ -123,9 +115,6 @@ qVars.CLIENT.on("message", async message => {
       if (keyword.startsWith("buff")) {
         keyword = "buff";
         buffName = command.substr(4).trim();
-      } else if (keyword.startsWith("notbuff")) {
-        keyword = "notbuff";
-        buffName = command.substr(7).trim();
       }
 
       // Find command and send message

@@ -21,13 +21,6 @@ var cmds = function(message, keyword, command, buffName) {
       message.channel.send(output);
       break;
 
-    case "notbuff":
-      var output = "not buff " + buffName + " not buff " + buffName;
-      if(output.length > 2000)
-        output = "not buff enough";
-      message.channel.send(output);
-      break;
-
     case "8ball":
       var output = "That command can only be used in <#654838387160907777>";
       if (message.channel.id === '654838387160907777')
@@ -42,10 +35,6 @@ var cmds = function(message, keyword, command, buffName) {
 
     case "tvd":
       message.channel.send("https://youtu.be/HxkmXnRQblE");
-      break;
-    
-    case "lofi":
-      message.channel.send("https://open.spotify.com/playlist/1DcvziAZBZk1Ji1c65ePtk?si=Qtvu64zsQQurDtQa60tPBg");
       break;
 
     case "hackathon":
@@ -108,12 +97,6 @@ var cmds = function(message, keyword, command, buffName) {
       });
       break;
 
-    case "gwagwa":
-      message.channel.send("GWAGWA", {
-        files: ['https://cdn.discordapp.com/attachments/669726484772159488/713289328985505792/gwa_gwa-QPYcuA0b6gA.mp4']
-      });
-      break;
-      
     case "bean":
       message.channel.send({
         files: ['https://cdn.discordapp.com/attachments/654784352269369356/720517854616879174/hC2pFDm.png']
@@ -159,20 +142,6 @@ var cmds = function(message, keyword, command, buffName) {
         message.channel.send("That command cannot be used in this channel!");
       break;
 
-    case "meme":
-      if (message.channel.id !== qVars.GENERALID)
-        qFuncs.sendRandImage(message, command, qVars.memesOut, qVars.MEMEID);
-      else
-        message.channel.send("That command cannot be used in this channel!");
-      break;
-
-    case "wholesome":
-      if (message.channel.id !== qVars.GENERALID)
-        qFuncs.sendRandImage(message, command, qVars.wholesomeOut, qVars.WHOLESOMEID);
-      else
-        message.channel.send("That command cannot be used in this channel!");
-      break;
-
     case "brownout":
       if (message.channel.id === qVars.BROWNOUTID)
         qFuncs.sendRandImage(message, command, qVars.brownoutOut, qVars.BROWNOUTID);
@@ -191,16 +160,9 @@ var cmds = function(message, keyword, command, buffName) {
             .addField('queen quote', 'Get a random image from #quotes', false)
             .addField('queen 8ball [message]', 'Get an 8ball reply (only works in #spam)', false)
             .addField('queen thirst', 'Get water messages', false)
-            .addField('queen ping', 'Get your ping', false)
             .addField('queen contribute', 'Get [a link to the GitHub repo](https://github.com/s-hfarooq/QueenMoonBot)', false)
             .addField('View all commands', '[View the README on GitHub](https://github.com/s-hfarooq/QueenMoonBot/blob/master/README.md)', false);
       message.channel.send({ embed: helpCommand });
-      break;
-
-    case "ping":
-      var apiPing = Math.round(qVars.CLIENT.ws.ping);
-      var messagePing = Date.now() - message.createdTimestamp;
-      message.channel.send('Client ping: ' + messagePing + 'ms (API ping: ' + apiPing + 'ms)');
       break;
 
     case "massping":
