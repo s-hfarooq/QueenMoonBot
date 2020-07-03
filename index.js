@@ -70,6 +70,10 @@ qVars.CLIENT.on('messageUpdate', (oldMessage, newMessage) => {
   if (newMessage.author.bot)
     return;
 
+  // Ignore messages that are identical (ie. when links get a preview)
+  if(oldMessage.cleanContent == newMessage.cleanContent)
+    return;
+
   // Ensure messages aren't blank
   if (oldMessage.cleanContent && newMessage.cleanContent) {
     var logMsg = new Discord.MessageEmbed()
