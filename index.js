@@ -129,6 +129,7 @@ qVars.CLIENT.on("message", async message => {
   }
 });
 
+
 qVars.on('messageReactionAdd', async (reaction, user) => {
   let message = reaction.message
   //Filter the reaction
