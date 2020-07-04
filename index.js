@@ -148,5 +148,23 @@ qVars.CLIENT.on('messageReactionAdd', async (reaction, user) => {
   }
 });
 
+qVars.CLIENT.on('messageReactionRemove', async (reaction, user) => {
+  let message = reaction.message;
+
+  if (message.channel.name == 'bot_testing') {
+      // Define the emoji user add
+      let he_him = message.guild.roles.cache.find(role => role.name === "He/Him");
+      let she_her = message.guild.roles.cache.find(role => role.name === "She/Her");
+      let they_them = message.guild.roles.cache.find(role => role.name === "They/Them");
+
+      if (reaction.emoji.name === "1️⃣")
+        reaction.message.guild.member(user.id).roles.remove(he_him)
+      if (reaction.emoji.name === "2️⃣")
+        reaction.message.guild.member(user.id).roles.remove(she_her);
+      if (reaction.emoji.name === "3️⃣")
+        reaction.message.guild.member(user.id).roles.remove(they_them);
+  }
+});
+
 
 qVars.CLIENT.login(config.token);
