@@ -131,22 +131,20 @@ qVars.CLIENT.on("message", async message => {
 
 
 qVars.CLIENT.on('messageReactionAdd', async (reaction, user) => {
-  let message = reaction.message
-  //Filter the reaction
+  let message = reaction.message;
+
   if (message.channel.name == 'bot_testing') {
-    // Define the emoji user add
-    let he_him = message.guild.roles.cache.find(role => role.id === '728759420372123678');
-    let she_her = message.guild.roles.cache.find(role => role.id === '728759474189369385');
-    let they_them = message.guild.roles.cache.find(role => role.id === '728759487762006167');
-    if (reaction.name === ":one:"){
-      message.member.addRole(he_him.id);
-    }
-    if (reaction.name === ":two:"){
-      message.member.addRole(she_her.id);
-    }
-    if (reaction.name === ":three:"){
-      message.member.addRole(they_them.id);
-    }
+      // Define the emoji user add
+      let he_him = message.guild.roles.cache.find(role => role.name === "He/Him");
+      let she_her = message.guild.roles.cache.find(role => role.name === "She/Her");
+      let they_them = message.guild.roles.cache.find(role => role.name === "They/Them");
+
+      if (reaction.emoji.name === "1️⃣")
+        reaction.message.guild.member(user.id).roles.add(he_him);
+      if (reaction.emoji.name === "2️⃣")
+        reaction.message.guild.member(user.id).roles.add(she_her);
+      if (reaction.emoji.name === "3️⃣")
+        reaction.message.guild.member(user.id).roles.add(they_them);
   }
 });
 

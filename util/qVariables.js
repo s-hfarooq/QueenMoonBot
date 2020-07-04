@@ -3,7 +3,7 @@ const Discord = require("discord.js");
 
 // Client
 const client = new Discord.Client({
-  partials: ['MESSAGE']
+  partials: ['MESSAGE', 'CHANNEL', 'REACTION']
 });
 
 // Responses for 8ball
