@@ -133,7 +133,7 @@ qVars.CLIENT.on("message", async message => {
 qVars.CLIENT.on('messageReactionAdd', async (reaction, user) => {
   let message = reaction.message;
 
-  if (message.channel.name == 'bot_testing') {
+  if (message.channel.name == 'set_roles_here') {
       // Define the emoji user add
       let he_him = message.guild.roles.cache.find(role => role.name === "He/Him");
       let she_her = message.guild.roles.cache.find(role => role.name === "She/Her");
@@ -151,7 +151,7 @@ qVars.CLIENT.on('messageReactionAdd', async (reaction, user) => {
 qVars.CLIENT.on('messageReactionRemove', async (reaction, user) => {
   let message = reaction.message;
 
-  if (message.channel.name == 'bot_testing') {
+  if (message.channel.name == 'set_roles_here') {
       // Define the emoji user add
       let he_him = message.guild.roles.cache.find(role => role.name === "He/Him");
       let she_her = message.guild.roles.cache.find(role => role.name === "She/Her");
