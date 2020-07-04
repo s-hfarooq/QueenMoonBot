@@ -42,8 +42,8 @@ qVars.CLIENT.on('messageDelete', message => {
   if (message.cleanContent) {
     var msg = message.cleanContent;
 
-    if (message.cleanContent.length > 1950)
-      msg = msg.substr(0, 1950) + "...";
+    if (message.cleanContent.length > 1020)
+      msg = msg.substr(0, 1020) + "...";
 
     qVars.lastDeletedMessage = new Discord.MessageEmbed()
           .setColor('#FF0000')
@@ -63,16 +63,23 @@ qVars.CLIENT.on('messageUpdate', (oldMessage, newMessage) => {
     return;
 
   // Ignore messages that are identical (ie. when links get a preview)
-  if(oldMessage.cleanContent == newMessage.cleanContent)
+  if (oldMessage.cleanContent == newMessage.cleanContent)
     return;
 
   // Ensure messages aren't blank
   if (oldMessage.cleanContent && newMessage.cleanContent) {
+    // Make sure text isn't too long
+    var oldMsg = oldMessage.cleanContent, newMsg = newMessage.cleanContent;
+    if (oldMsg.length > 1020)
+      oldMsg = oldMsg.substr(0, 1020) + "...";
+    if (newMsg.length > 1020)
+      newMsg = newMsg.substr(0, 1020) + "...";
+
     var logMsg = new Discord.MessageEmbed()
           .setColor('#F0E68C')
           .setAuthor('Message Edited')
-          .addField("Old message", oldMessage.cleanContent)
-          .addField("New message", newMessage.cleanContent)
+          .addField("Old message", oldMsg)
+          .addField("New message", newMsg)
           .addField("User", newMessage.member.user.tag)
           .addField("Channel", newMessage.channel.name)
           .addField("Time", new Date().toLocaleString());
@@ -129,42 +136,46 @@ qVars.CLIENT.on("message", async message => {
   }
 });
 
-
+// Runs on reaction added
 qVars.CLIENT.on('messageReactionAdd', async (reaction, user) => {
   let message = reaction.message;
 
+  // Set pronoun roles
   if (message.channel.name == 'set_roles_here') {
-      // Define the emoji user add
-      let he_him = message.guild.roles.cache.find(role => role.name === "He/Him");
-      let she_her = message.guild.roles.cache.find(role => role.name === "She/Her");
-      let they_them = message.guild.roles.cache.find(role => role.name === "They/Them");
-
-      if (reaction.emoji.name === "1️⃣")
+      if (reaction.emoji.name === "1️⃣") {
+        let he_him = message.guild.roles.cache.find(role => role.name === "He/Him");
         reaction.message.guild.member(user.id).roles.add(he_him);
-      if (reaction.emoji.name === "2️⃣")
+      }
+      if (reaction.emoji.name === "2️⃣") {
+        let she_her = message.guild.roles.cache.find(role => role.name === "She/Her");
         reaction.message.guild.member(user.id).roles.add(she_her);
-      if (reaction.emoji.name === "3️⃣")
+      }
+      if (reaction.emoji.name === "3️⃣") {
+        let they_them = message.guild.roles.cache.find(role => role.name === "They/Them");
         reaction.message.guild.member(user.id).roles.add(they_them);
+      }
   }
 });
 
+// Runs on reaction removed
 qVars.CLIENT.on('messageReactionRemove', async (reaction, user) => {
   let message = reaction.message;
 
+  // Remove pronoun roles
   if (message.channel.name == 'set_roles_here') {
-      // Define the emoji user add
-      let he_him = message.guild.roles.cache.find(role => role.name === "He/Him");
-      let she_her = message.guild.roles.cache.find(role => role.name === "She/Her");
-      let they_them = message.guild.roles.cache.find(role => role.name === "They/Them");
-
-      if (reaction.emoji.name === "1️⃣")
-        reaction.message.guild.member(user.id).roles.remove(he_him)
-      if (reaction.emoji.name === "2️⃣")
+      if (reaction.emoji.name === "1️⃣") {
+        let he_him = message.guild.roles.cache.find(role => role.name === "He/Him");
+        reaction.message.guild.member(user.id).roles.remove(he_him);
+      }
+      if (reaction.emoji.name === "2️⃣") {
+        let she_her = message.guild.roles.cache.find(role => role.name === "She/Her");
         reaction.message.guild.member(user.id).roles.remove(she_her);
-      if (reaction.emoji.name === "3️⃣")
+      }
+      if (reaction.emoji.name === "3️⃣") {
+        let they_them = message.guild.roles.cache.find(role => role.name === "They/Them");
         reaction.message.guild.member(user.id).roles.remove(they_them);
+      }
   }
 });
-
 
 qVars.CLIENT.login(config.token);
