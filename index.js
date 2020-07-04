@@ -129,7 +129,7 @@ qVars.CLIENT.on("message", async message => {
   }
 });
 
-qVars.on('messageReactionAdd', async (reaction, user) => {
+qVars.CLIENT.on('messageReactionAdd', async (reaction, user) => {
   //Filter the reaction
   if (message.channel.name == 'bot_testing') {
     // Define the emoji user add
