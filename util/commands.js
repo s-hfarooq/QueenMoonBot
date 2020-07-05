@@ -218,6 +218,11 @@ var cmds = function(message, keyword, command, buffName) {
       message.channel.send({ embed: qVars.lastDeletedMessage });
       break;
 
+    case "flip":
+      var options = ["Heads", "Tails"];
+      message.channel.send(options[Math.floor(Math.random() * options.length)]);
+      break;
+
     default:
       message.channel.send("That command doesn't exist. Run `queen help` to see the available commands");
   }
