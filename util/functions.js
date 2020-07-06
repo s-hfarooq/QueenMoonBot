@@ -114,7 +114,7 @@ var sendRandImage = function(message, command, messageArray, channelID) {
     message.channel.send("Images are still loading. Try again in a few seconds.");
   } else {
     var amnt = isNaN(parseInt(command)) ? 1 : parseInt(command);
-    if(amnt > 5 || amnt < 0)
+    if (amnt > 5 || amnt < 0)
       amnt = 1;
 
     for (let i = 0; i < amnt; i++) {
@@ -133,14 +133,14 @@ var massPingUser = function(message, command) {
   var end = command.indexOf(">");
 
   // Make sure someone was mentioned
-  if(start < 0 || end < 0) {
+  if (start < 0 || end < 0) {
     message.channel.send("You must mention someone!");
     return;
   }
 
   // Get number of @'s wanted
   var amnt = parseInt(command.substr(end + 1));
-  if(isNaN(amnt) || amnt < 1 || amnt > 100) {
+  if (isNaN(amnt) || amnt < 1 || amnt > 100) {
     console.log(amnt);
     message.channel.send("You must input a valid number! (must be between 0 and 100)");
     return;
@@ -154,7 +154,7 @@ var massPingUser = function(message, command) {
   qVars.CLIENT.channels.cache.get(qVars.LOGID).send("<@" + message.author + "> mentioned " + atUser + " " + amnt + " times in <#" + message.channel.id + ">");
 
   // Mass ping
-  for(let i = 0; i < amnt; i++) {
+  for (let i = 0; i < amnt; i++) {
     chnl.send(atUser).then(sentMessage => {
         sentMessage.delete();
     });
