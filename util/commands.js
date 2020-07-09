@@ -122,6 +122,12 @@ var cmds = function(message, keyword, command, buffName) {
       });
       break;
 
+    case "snitch":
+      message.channel.send({
+        files: ['https://cdn.discordapp.com/attachments/654838387160907777/730820541946265710/unknown.png']
+      });
+      break;
+
     case "horny":
       message.channel.send({
         files: [qVars.HLINKS[Math.floor(Math.random() * qVars.HLINKS.length)]]
