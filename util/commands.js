@@ -79,12 +79,6 @@ var cmds = function(message, keyword, command, buffName) {
       });
       break;
 
-    case "matt":
-      message.channel.send({
-        files: ['https://cdn.discordapp.com/attachments/669726484772159488/712182903966007296/IMG_9784.jpg']
-      });
-      break;
-
     case "illinois":
       message.channel.send({
         files: ['https://media.discordapp.net/attachments/654785556215103488/692035239366885416/tempFileForShare_20200302-175024.png?width=546&height=679']
