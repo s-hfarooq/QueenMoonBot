@@ -130,8 +130,8 @@ var cmds = function(message, keyword, command, buffName) {
             .addField('otter quote', 'Get a random image from #quotes', false)
             .addField('otter 8ball [message]', 'Get an 8ball reply (only works in #spam)', false)
             .addField('otter thirst', 'Get water messages', false)
-            .addField('otter contribute', 'Get [a link to the GitHub repo](https://github.com/s-hfarooq/QueenMoonBot)', false)
-            .addField('View all commands', '[View the README on GitHub](https://github.com/s-hfarooq/QueenMoonBot/blob/master/README.md)', false);
+            .addField('otter contribute', 'Get [a link to the GitHub repo](https://github.com/s-hfarooq/AlmaBotter)', false)
+            .addField('View all commands', '[View the README on GitHub](https://github.com/s-hfarooq/AlmaBotter/blob/master/README.md)', false);
       message.channel.send({ embed: helpCommand });
       break;
 
