@@ -20,7 +20,6 @@ A bot for the [UIUC 2024 Discord server](https://discord.gg/2pFv4Wq)
 * `otter waitwhen` or `otter ww` to get the when did I ask screenshot
 * `otter corn` to get a corn video
 * `otter illinois` to get a map of Illinois
-* `otter hummus` because David wanted it
 * `otter quote` to get a random image from #quotes
 * `otter brownout` to get a random attachment from #brownoutposting (only works in #brownoutposting)
 * `otter soup` to get soup
