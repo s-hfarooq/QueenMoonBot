@@ -202,7 +202,7 @@ var lockChannel = function(message) {
     },
   ], 'Channel locked');
 
-  message.channel.send("CHANNEL LOCKED");
+  message.channel.send("CHANNEL LOCKED PLEASE MOVE TO <#" + qVars.QUARANTINEID + ">.");
 
   var logMsg = new Discord.MessageEmbed()
         .setColor('#FF4500')
