@@ -43,12 +43,6 @@ var cmds = function(message, keyword, command, buffName) {
       });
       break;
 
-    case "hummus":
-      message.channel.send({
-        files: ['https://cdn.discordapp.com/attachments/697648147941294160/727645722354253965/hummus.PNG']
-      });
-      break;
-
     case "gc":
       message.channel.send({
         files: ['https://cdn.discordapp.com/attachments/669726484772159488/701247357001400370/unknown.png']
@@ -138,7 +132,7 @@ var cmds = function(message, keyword, command, buffName) {
     case "massping":
     case "sp":
       // Make sure user has ESC role
-      if(message.member.roles.cache.has(qVars.ESCID))
+      if (message.member.roles.cache.has(qVars.ESCID))
         qFuncs.massPingUser(message, command);
       else
         message.channel.send("You do not have permission to use this command!");
@@ -148,7 +142,7 @@ var cmds = function(message, keyword, command, buffName) {
       var degenRank = Math.floor(Math.random() * 100);
       message.channel.send("you are " + degenRank + "% degenerate");
       break;
-      
+
     case "owoify":
       if (message.channel.id !== qVars.GENERALID)
         qFuncs.changeMessage(message, command, 0);
@@ -179,18 +173,26 @@ var cmds = function(message, keyword, command, buffName) {
 
     case "lockdown":
       // Make sure user has ESC role
-      if(message.member.roles.cache.has(qVars.ESCID))
-        qFuncs.lockChannel(message);
-      else
+      if (message.member.roles.cache.has(qVars.ESCID)) {
+        if (message.channel.id !== qVars.GENERALID)
+          message.channel.send("This command can only be used in <#" + qVars.GENERALID + ">");
+        else
+          qFuncs.lockChannel(message);
+      } else {
         message.channel.send("You do not have permission to use this command!");
+      }
       break;
 
     case "unlock":
       // Make sure user has ESC role
-      if(message.member.roles.cache.has(qVars.ESCID))
-        qFuncs.unlockChannel(message);
-      else
+      if (message.member.roles.cache.has(qVars.ESCID)) {
+        if (message.channel.id !== qVars.GENERALID)
+          message.channel.send("This command can only be used in <#" + qVars.GENERALID + ">");
+        else
+          qFuncs.unlockChannel(message);
+      } else {
         message.channel.send("You do not have permission to use this command!");
+      }
       break;
 
     default:

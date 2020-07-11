@@ -216,11 +216,16 @@ var lockChannel = function(message) {
 
 var unlockChannel = function(message) {
   let everyoneRole = message.guild.roles.everyone.id;
+  let mutedRole = message.member.guild.roles.cache.find(role => role.name === "Muted");
 
   message.channel.overwritePermissions([
     {
       id: everyoneRole,
       allow: ['SEND_MESSAGES'],
+    },
+    {
+      id: mutedRole,
+      deny: ['SEND_MESSAGES'],
     },
   ], 'Channel unlocked');
 
