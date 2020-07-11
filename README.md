@@ -1,4 +1,4 @@
-# QueenMoonBot
+# Alma Botter
 
 A bot for the [UIUC 2024 Discord server](https://discord.gg/2pFv4Wq)
 
@@ -9,40 +9,38 @@ A bot for the [UIUC 2024 Discord server](https://discord.gg/2pFv4Wq)
 
 ## Commands
 * Makes sure the #counting_game channel is in check. If a user sends two messages in a row, it deletes the newest one. If a user sends a number that isn't the previous number + 1, it deletes the message and assigns the `Can't Count` role (assuming the newest message was sent > 1500ms after the previous one).
-* `queen usercount` to see how many users are currently in the server
-* `queen buff[name]` for buff [name]
-*  `queen flip` to flip a coin
-* `queen hackathon` to get the done with hackathons picture
-* `queen gc` to get the Facebook group screenshot
-* `queen head` to get the Mater screenshot
-* `queen rat` to post this rat
-* `queen noanime` to get the no anime picture
-* `queen bean` to get a human bean
-* `queen contribute` to get a like to the GitHub repo
-* `queen waitwhen` or `queen ww` to get the when did I ask screenshot
-* `queen brasil` to get the Ronaldinho Soccer 64 video
-* `queen corn` to get a corn video
-* `queen illinois` to get a map of Illinois
-* `queen catgirl` to see a catgirl
-* `queen sorry` to get the pogchamp video
-* `queen hummus` because David wanted it
-* `queen quote` to get a random image from #quotes
-* `queen brownout` to get a random attachment from #brownoutposting (only works in #brownoutposting)
-* `queen soup` to get soup
-* `queen 8ball [message]` to get an 8ball reply (only works in #spam)
-* `queen thirst` to get water messages
-* `queen cock` to see a chicken
-* `queen snipe` to get the last deleted message
-* `queen horny` to get bonk pictures
-* `queen sp @USER [amnt]` to mass ping a specific user where [amnt] is a number between 0 and 100 (must have ESC role to use this command)
-* `queen owoify [message]` to turn your message into an owo (leave [message] blank to owoify the previous sent message)
-* `queen spongebobify [message]` or `queen s [message]` to convert your message to spongebob mocking text (leave [message] blank to spongebobify the previous sent message)
-* `queen os [message]` to first owoify then spongebobify your message (leave [message] blank to owoify and spongebobify the previous sent message)
-* `queen rankdegen` to see how degen you are
-* `queen tvd` to see a dancing cockroach
-* ~~`queen class [SUBJECT-NUMBER]` to the name, credit hours, and recent avg. GPA of a UIUC course (NOTE: not case-sensitive)~~ now depreciated, use [class bot](https://github.com/timot3/uiuc-classes-bot) instead.
+* `otter usercount` to see how many users are currently in the server
+* `otter buff[name]` for buff [name]
+*  `otter flip` to flip a coin
+* `otter hackathon` to get the done with hackathons picture
+* `otter gc` to get the Facebook group screenshot
+* `otter rat` to post this rat
+* `otter noanime` to get the no anime picture
+* `otter bean` to get a human bean
+* `otter contribute` to get a like to the GitHub repo
+* `otter waitwhen` or `otter ww` to get the when did I ask screenshot
+* `otter brasil` to get the Ronaldinho Soccer 64 video
+* `otter corn` to get a corn video
+* `otter illinois` to get a map of Illinois
+* `otter catgirl` to see a catgirl
+* `otter sorry` to get the pogchamp video
+* `otter hummus` because David wanted it
+* `otter quote` to get a random image from #quotes
+* `otter brownout` to get a random attachment from #brownoutposting (only works in #brownoutposting)
+* `otter soup` to get soup
+* `otter 8ball [message]` to get an 8ball reply (only works in #spam)
+* `otter thirst` to get water messages
+* `otter snipe` to get the last deleted message
+* `otter horny` to get bonk pictures
+* `otter sp @USER [amnt]` to mass ping a specific user where [amnt] is a number between 0 and 100 (must have ESC role to use this command)
+* `otter owoify [message]` to turn your message into an owo (leave [message] blank to owoify the previous sent message)
+* `otter spongebobify [message]` or `otter s [message]` to convert your message to spongebob mocking text (leave [message] blank to spongebobify the previous sent message)
+* `otter os [message]` to first owoify then spongebobify your message (leave [message] blank to owoify and spongebobify the previous sent message)
+* `otter rankdegen` to see how degen you are
+* `otter tvd` to see a dancing cockroach
+* ~~`otter class [SUBJECT-NUMBER]` to the name, credit hours, and recent avg. GPA of a UIUC course (NOTE: not case-sensitive)~~ now depreciated, use [class bot](https://github.com/timot3/uiuc-classes-bot) instead.
 
-Note: For all commands, `queen` can be substituted with `q`
+Note: For all commands, `otter` can be substituted with `o`
 
 
 ## To run the bot yourself

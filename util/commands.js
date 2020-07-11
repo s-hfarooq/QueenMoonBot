@@ -55,12 +55,6 @@ var cmds = function(message, keyword, command, buffName) {
       });
       break;
 
-    case "head":
-      message.channel.send({
-        files: ['https://cdn.discordapp.com/attachments/669726484772159488/708103493918916709/unknown.png']
-      });
-      break;
-
     case "noanime":
       message.channel.send({
         files: ['https://cdn.discordapp.com/attachments/697639057592811650/708536846531035226/image0.jpg']
@@ -100,12 +94,6 @@ var cmds = function(message, keyword, command, buffName) {
     case "soup":
       message.channel.send({
         files: ['https://i.kym-cdn.com/entries/icons/original/000/026/699/soup.jpg']
-      });
-      break;
-
-    case "orgy":
-      message.channel.send({
-        files: ['https://cdn.discordapp.com/attachments/714931864413929512/716715109552095300/43hgta.gif']
       });
       break;
 
@@ -172,13 +160,6 @@ var cmds = function(message, keyword, command, buffName) {
         qFuncs.massPingUser(message, command);
       else
         message.channel.send("You do not have permission to use this command!");
-      break;
-
-    case "cock":
-      var output = "That command cannot be used in this channel!";
-      if (message.channel.id !== qVars.GENERALID)
-        output = { files: [qVars.CLINKS[Math.floor(Math.random() * qVars.CLINKS.length)]] };
-      message.channel.send(output);
       break;
 
     case "rankdegen":

@@ -8,7 +8,7 @@ const commands = require("./util/commands.js");
 // Runs on start
 qVars.CLIENT.on("ready", () => {
   console.log(`Bot has started`);
-  qVars.CLIENT.user.setActivity(`queen help`);
+  qVars.CLIENT.user.setActivity(`otter help`);
 
   qFuncs.getMessagesWithAttachments(qVars.CLIENT.channels.cache.get(qVars.BROWNOUTID)).then(output => {
     qVars.brownoutOut = output;
@@ -24,13 +24,13 @@ qVars.CLIENT.on("ready", () => {
 // Runs on join new server
 qVars.CLIENT.on("guildCreate", guild => {
   console.log(`New guild joined`);
-  qVars.CLIENT.user.setActivity(`queen help`);
+  qVars.CLIENT.user.setActivity(`otter help`);
 });
 
 // Runs on leave server
 qVars.CLIENT.on("guildDelete", guild => {
   console.log(`Bot has been removed from a guild`);
-  qVars.CLIENT.user.setActivity(`queen help`);
+  qVars.CLIENT.user.setActivity(`otter help`);
 });
 
 // Runs on message deletion
@@ -104,7 +104,7 @@ qVars.CLIENT.on("message", async message => {
   var override = false;
 
   // Make sure message starts with 'queen' or 'q'
-  if (command.toLowerCase().startsWith("queen ") || command.toLowerCase().startsWith("q ")) {
+  if (command.toLowerCase().startsWith("otter ") || command.toLowerCase().startsWith("o ")) {
     override = true;
     command = command.substr(command.indexOf(" ") + 1);
   }

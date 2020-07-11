@@ -43,20 +43,6 @@ const reminders = [
   { files: ['https://cdn.discordapp.com/attachments/669726484772159488/725548315479113778/iqggq6rypn651.png'] }
 ];
 
-// Links for cock command
-const cLinks = [
-    // nooble
-    'https://cdn.discordapp.com/attachments/714931864413929512/716093335185522688/image0.png',
-    // kitty
-    'https://cdn.discordapp.com/attachments/714931864413929512/716094595309633597/image0.jpg',
-    // rooster
-    'https://cdn.discordapp.com/attachments/714931864413929512/716103472444997673/image0.jpg',
-    // badminton
-    'https://cdn.discordapp.com/attachments/714931864413929512/716103629454442516/image0.jpg',
-    // anime
-    'https://cdn.discordapp.com/attachments/697639057592811650/716491275192500254/image0.jpg',
-];
-
 const hLinks = [
   'https://cdn.discordapp.com/attachments/669726484772159488/721440013895598178/Screen_Shot_2017-11-09_at_10.png',
   'https://cdn.discordapp.com/attachments/669726484772159488/721439726607007774/d77.png',
@@ -84,7 +70,6 @@ module.exports = {
   CLIENT: client,
   RESPONSES: responses,
   REMINDERS: reminders,
-  CLINKS: cLinks,
   HLINKS: hLinks,
   GENERALTIMEGAP: 5,
   UPDATEINTERVAL: (1000 * 60 * 60 * 24),
