@@ -16,13 +16,10 @@ A bot for the [UIUC 2024 Discord server](https://discord.gg/2pFv4Wq)
 * `otter gc` to get the Facebook group screenshot
 * `otter rat` to post this rat
 * `otter noanime` to get the no anime picture
-* `otter bean` to get a human bean
 * `otter contribute` to get a like to the GitHub repo
 * `otter waitwhen` or `otter ww` to get the when did I ask screenshot
-* `otter brasil` to get the Ronaldinho Soccer 64 video
 * `otter corn` to get a corn video
 * `otter illinois` to get a map of Illinois
-* `otter catgirl` to see a catgirl
 * `otter sorry` to get the pogchamp video
 * `otter hummus` because David wanted it
 * `otter quote` to get a random image from #quotes
