@@ -186,6 +186,22 @@ var cmds = function(message, keyword, command, buffName) {
       message.channel.send(options[Math.floor(Math.random() * options.length)]);
       break;
 
+    case "lockdown":
+      // Make sure user has ESC role
+      if(message.member.roles.cache.has(qVars.ESCID))
+        qFuncs.lockChannel(message);
+      else
+        message.channel.send("You do not have permission to use this command!");
+      break;
+
+    case "unlock":
+      // Make sure user has ESC role
+      if(message.member.roles.cache.has(qVars.ESCID))
+        qFuncs.unlockChannel(message);
+      else
+        message.channel.send("You do not have permission to use this command!");
+      break;
+
     default:
       message.channel.send("That command doesn't exist. Run `queen help` to see the available commands");
   }

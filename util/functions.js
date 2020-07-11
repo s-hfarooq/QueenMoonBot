@@ -192,7 +192,53 @@ async function getMessagesWithAttachments(channel, limit = 500) {
   return output;
 }
 
+var lockChannel = function(message) {
+  let everyoneRole = message.guild.roles.everyone.id;
+
+  message.channel.overwritePermissions([
+    {
+      id: everyoneRole,
+      deny: ['SEND_MESSAGES'],
+    },
+  ], 'Channel locked');
+
+  message.channel.send("CHANNEL LOCKED");
+
+  var logMsg = new Discord.MessageEmbed()
+        .setColor('#FF4500')
+        .setAuthor('Channel locked')
+        .addField("User", message.member.user.tag)
+        .addField("Channel", message.channel.name)
+        .addField("Time", new Date().toLocaleString());
+
+  qVars.CLIENT.channels.cache.get(qVars.LOGID).send({ embed: logMsg });
+}
+
+var unlockChannel = function(message) {
+  let everyoneRole = message.guild.roles.everyone.id;
+
+  message.channel.overwritePermissions([
+    {
+      id: everyoneRole,
+      allow: ['SEND_MESSAGES'],
+    },
+  ], 'Channel unlocked');
+
+  message.channel.send("CHANNEL UNLOCKED");
+
+  var logMsg = new Discord.MessageEmbed()
+        .setColor('#FF4500')
+        .setAuthor('Channel unlocked')
+        .addField("User", message.member.user.tag)
+        .addField("Channel", message.channel.name)
+        .addField("Time", new Date().toLocaleString());
+
+  qVars.CLIENT.channels.cache.get(qVars.LOGID).send({ embed: logMsg });
+}
+
 module.exports = {
+  lockChannel,
+  unlockChannel,
   countingGameModeration,
   changeMessage,
   sendRandImage,
