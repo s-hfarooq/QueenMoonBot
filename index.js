@@ -104,7 +104,8 @@ qVars.CLIENT.on("message", async message => {
   var override = false;
 
   // Make sure message starts with 'queen' or 'q'
-  if (command.toLowerCase().startsWith("otter ") || command.toLowerCase().startsWith("o ")) {
+  const cmdLr = command.toLowerCase();
+  if (cmdLr.startsWith("otter ") || cmdLr.startsWith("o ") || cmdLr.startsWith("queen ") || cmdLr.startsWith("q ")) {
     override = true;
     command = command.substr(command.indexOf(" ") + 1);
   }

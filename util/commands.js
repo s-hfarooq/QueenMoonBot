@@ -67,27 +67,9 @@ var cmds = function(message, keyword, command, buffName) {
       });
       break;
 
-    case "brasil":
-      message.channel.send({
-        files: ['https://cdn.discordapp.com/attachments/654838387160907777/713538844582084691/Mundial_Ronaldinho_Soccer_64_Full_HD_Intro.mp4']
-      });
-      break;
-
     case "illinois":
       message.channel.send({
         files: ['https://media.discordapp.net/attachments/654785556215103488/692035239366885416/tempFileForShare_20200302-175024.png?width=546&height=679']
-      });
-      break;
-
-    case "catgirl":
-      message.channel.send({
-        files: ['https://img1.ak.crunchyroll.com/i/spire1/1b0597832b4aa93293041240680d6b471416589032_full.jpg']
-      });
-      break;
-
-    case "bean":
-      message.channel.send({
-        files: ['https://cdn.discordapp.com/attachments/654784352269369356/720517854616879174/hC2pFDm.png']
       });
       break;
 
@@ -141,14 +123,14 @@ var cmds = function(message, keyword, command, buffName) {
       const helpCommand = new Discord.MessageEmbed()
             .setColor('#d60076')
             .setAuthor('Help')
-            .addField('queen usercount', 'See how many users are currently in the server', false)
-            .addField('queen buff[name]', 'Buff [name]', false)
-            .addField('queen waitwhen', 'Get the when did I ask screenshot', false)
-            .addField('queen illinois', 'Get a map of Illinois',false)
-            .addField('queen quote', 'Get a random image from #quotes', false)
-            .addField('queen 8ball [message]', 'Get an 8ball reply (only works in #spam)', false)
-            .addField('queen thirst', 'Get water messages', false)
-            .addField('queen contribute', 'Get [a link to the GitHub repo](https://github.com/s-hfarooq/QueenMoonBot)', false)
+            .addField('otter usercount', 'See how many users are currently in the server', false)
+            .addField('otter buff[name]', 'Buff [name]', false)
+            .addField('otter waitwhen', 'Get the when did I ask screenshot', false)
+            .addField('otter illinois', 'Get a map of Illinois',false)
+            .addField('otter quote', 'Get a random image from #quotes', false)
+            .addField('otter 8ball [message]', 'Get an 8ball reply (only works in #spam)', false)
+            .addField('otter thirst', 'Get water messages', false)
+            .addField('otter contribute', 'Get [a link to the GitHub repo](https://github.com/s-hfarooq/QueenMoonBot)', false)
             .addField('View all commands', '[View the README on GitHub](https://github.com/s-hfarooq/QueenMoonBot/blob/master/README.md)', false);
       message.channel.send({ embed: helpCommand });
       break;
