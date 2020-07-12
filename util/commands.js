@@ -196,7 +196,7 @@ var cmds = function(message, keyword, command, buffName) {
       break;
 
     default:
-      message.channel.send("That command doesn't exist. Run `queen help` to see the available commands");
+      message.channel.send("That command doesn't exist. Run `otter help` to see the available commands");
   }
 }
 
