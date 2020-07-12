@@ -194,9 +194,6 @@ var cmds = function(message, keyword, command, buffName) {
         message.channel.send("You do not have permission to use this command!");
       }
       break;
-
-    default:
-      message.channel.send("That command doesn't exist. Run `otter help` to see the available commands");
   }
 }
 
