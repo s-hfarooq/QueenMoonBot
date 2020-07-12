@@ -129,6 +129,23 @@ var cmds = function(message, keyword, command, buffName) {
       message.channel.send({ embed: helpCommand });
       break;
 
+    case "rules":
+      const rulesEmbed = new Discord.MessageEmbed()
+            .setColor('#7CFC00')
+            .setAuthor('Rules')
+            .addField('Rule 1', 'Don\'t harass the mods or each other', false)
+            .addField('Rule 2', 'No comments aimed to offend or hurt anyone else', false)
+            .addField('Rule 3', 'Don\'t ask for mod or moderation privileges', false)
+            .addField('Rule 4', ' Don\'t grind @MEE6 XP points',false)
+            .addField('Rule 5', 'Don\'t spam (if you must, limit it to #spam)', false)
+            .addField('Note', 'Failure to follow these rules may result in a warning, mute, or ban', false)
+      message.channel.send({ embed: rulesEmbed });
+      break;
+
+    case "respect":
+      message.channel.send("Please take a look at the respect document - https://docs.google.com/document/d/1ljZq_StH3MLDxMxmPjsbuyAKwDGXTCvfxIFP8AXsHjM/edit");
+      break;
+
     case "massping":
     case "sp":
       // Make sure user has ESC role

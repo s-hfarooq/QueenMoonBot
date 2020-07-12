@@ -9,9 +9,11 @@ A bot for the [UIUC 2024 Discord server](https://discord.gg/2pFv4Wq)
 
 ## Commands
 * Makes sure the #counting_game channel is in check. If a user sends two messages in a row, it deletes the newest one. If a user sends a number that isn't the previous number + 1, it deletes the message and assigns the `Can't Count` role (assuming the newest message was sent > 1500ms after the previous one).
+* `otter rules` to send the server rules
+* `otter respect` to send a link to the respect document
 * `otter usercount` to see how many users are currently in the server
 * `otter buff[name]` for buff [name]
-*  `otter flip` to flip a coin
+* `otter flip` to flip a coin
 * `otter hackathon` to get the done with hackathons picture
 * `otter gc` to get the Facebook group screenshot
 * `otter rat` to post this rat
