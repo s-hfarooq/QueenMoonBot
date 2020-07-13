@@ -94,13 +94,13 @@ var cmds = function(message, keyword, command, buffName) {
 
     case "rat":
       var output = "That command cannot be used in this channel!";
-      if (message.channel.id !== qVars.GENERALID)
+      if (message.channel.id !== qVars.ACADEMICGENERALID)
         output = { files: ['https://cdn.discordapp.com/attachments/697639057592811650/713237658020872192/image0.jpg'] };
       message.channel.send(output);
       break;
 
     case "quote":
-      if (message.channel.id !== qVars.GENERALID)
+      if (message.channel.id !== qVars.ACADEMICGENERALID)
         qFuncs.sendRandImage(message, command, qVars.quotesOut, qVars.QUOTEID);
       else
         message.channel.send("That command cannot be used in this channel!");
@@ -161,7 +161,7 @@ var cmds = function(message, keyword, command, buffName) {
       break;
 
     case "owoify":
-      if (message.channel.id !== qVars.GENERALID)
+      if (message.channel.id !== qVars.ACADEMICGENERALID)
         qFuncs.changeMessage(message, command, 0);
       else
         message.channel.send("That command cannot be used in this channel!");
@@ -169,7 +169,7 @@ var cmds = function(message, keyword, command, buffName) {
 
     case "s":
     case "spongebobify":
-      if (message.channel.id !== qVars.GENERALID)
+      if (message.channel.id !== qVars.ACADEMICGENERALID)
         qFuncs.changeMessage(message, command, 1);
       else
         message.channel.send("That command cannot be used in this channel!");
@@ -191,8 +191,8 @@ var cmds = function(message, keyword, command, buffName) {
     case "lockdown":
       // Make sure user has ESC role
       if (message.member.roles.cache.has(qVars.ESCID)) {
-        if (message.channel.id !== qVars.GENERALID)
-          message.channel.send("This command can only be used in <#" + qVars.GENERALID + ">");
+        if (message.channel.id !== qVars.ACADEMICGENERALID)
+          message.channel.send("This command can only be used in <#" + qVars.ACADEMICGENERALID + ">");
         else
           qFuncs.lockChannel(message);
       } else {
@@ -203,8 +203,8 @@ var cmds = function(message, keyword, command, buffName) {
     case "unlock":
       // Make sure user has ESC role
       if (message.member.roles.cache.has(qVars.ESCID)) {
-        if (message.channel.id !== qVars.GENERALID)
-          message.channel.send("This command can only be used in <#" + qVars.GENERALID + ">");
+        if (message.channel.id !== qVars.ACADEMICGENERALID)
+          message.channel.send("This command can only be used in <#" + qVars.ACADEMICGENERALID + ">");
         else
           qFuncs.unlockChannel(message);
       } else {

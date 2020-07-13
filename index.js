@@ -114,7 +114,7 @@ qVars.CLIENT.on("message", async message => {
   var currentTime = Math.round((new Date().getTime() / 1000));
   var timeDiff = currentTime - qVars.generalLastCommandTime;
   if (override) {
-    if (message.channel.id !== qVars.GENERALID || timeDiff >= qVars.GENERALTIMEGAP) {
+    if (message.channel.id !== qVars.ACADEMICGENERALID || timeDiff >= qVars.GENERALTIMEGAP) {
       // Get command keyword
       var keyword = command.replace(/\s.*/,'').toLowerCase();
 
@@ -129,7 +129,7 @@ qVars.CLIENT.on("message", async message => {
       var command = command.substr(keyword.length + 1);
       commands.cmds(message, keyword, command, buffName);
 
-      if (message.channel.id === qVars.GENERALID)
+      if (message.channel.id === qVars.ACADEMICGENERALID)
         qVars.generalLastCommandTime = Math.round((new Date().getTime() / 1000));
     } else if (timeDiff < qVars.GENERALTIMEGAP) {
       message.channel.send("Slow down!");
