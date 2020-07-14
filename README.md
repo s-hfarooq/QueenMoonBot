@@ -14,6 +14,7 @@ A bot for the [UIUC 2024 Discord server](https://discord.gg/2pFv4Wq)
 * `otter usercount` to see how many users are currently in the server
 * `otter buff[name]` for buff [name]
 * `otter flip` to flip a coin
+* `otter tip` to get a tip
 * `otter hackathon` to get the done with hackathons picture
 * `otter gc` to get the Facebook group screenshot
 * `otter rat` to post this rat

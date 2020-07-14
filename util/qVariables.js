@@ -53,6 +53,41 @@ const hLinks = [
   'https://cdn.discordapp.com/attachments/714931864413929512/721844496614162561/FB_IMG_15904852374509040.jpg',
 ];
 
+const tipsArray = [
+  'If you want consent, just send a polite DM! If they say no, chances are they are not being sarcastic. If they say yes, well that\'s not my business.',
+  'Sexualizing people and harassing people can start #metoo 2 electric boogalo',
+  'If they didn\'t say they were comfortable with being sexualized, sexualizing them is a Russian roulette with 5 bullets in a 6 bullet chamber!',
+  'Pressuring people for personal information puts you one step closer to the FBI',
+  'Personal information is sexy, but asking people for it is often not so sexy.',
+  'I found out yesterday that personal information is personal and not public. Lesson: if you doxx people u end up like me, trapped inside a bot.',
+  'piT: is a hole',
+  'The best way to piss off a guy is to say that men are trash. The best way to piss off a woman is to only comment on her appearance and her competency. In fact, if you want to piss off everyone, insult them, doxx them, or make non-consensual jokes about them!',
+  'Post-tip: Pissing people off in these ways has a high probability of you getting muted, kicked, or/and banned. If you are too afraid to say something, say it in #controversial!',
+  'Excluding people from a conversation is a good way to ruin their day!',
+  'Apparently, slurs will raise the pitchforks against you. The pitchforks aren\'t that bad, but the torches, they burn.',
+  'Stereotyping isn\'t terribly useful. I certainly don\'t use it for my job, or at school.',
+  'When people tell you to stop, get down on the floor, do 5 push ups, bop it, twist it, and pull it! Oh, then stop.',
+  'When someone starts talking about something out of the blue, joining them in conversation is the best thing you can do!',
+  'Sleep is pretty fucking useful.',
+  'You can add suggestions for text in this bot through #server-suggestions',
+  'flossing and brushing your teeth is one step closer to being a fucking god',
+  '(noun)the pointed or rounded end or extremity of something slender or tapering',
+  'Watch out for the ~~nazi mods~~!',
+  'Please, for my all seeing eye’s sake, no role-playing in #general',
+  'Common sense is common sense',
+  'Villainizing people is a good start to being a pro villain. Just ask Hitler!',
+  'Woah there bud, watch your language. I can’t read english.',
+  'Corb should be legalized.',
+  'Fun fact: You can have controversial and dramatic discussions without bigotry, racism, or even making fun of any demographic at all! *This post was funded by the server propaganda team.*',
+  'Take nsfw topics to #quarantine for maximum explosions',
+];
+
+const embedColors = [
+  'E84A27',
+  '13294B',
+  '5E6669',
+];
+
 var quotesOut = [];
 var brownoutOut = [];
 var lastDeletedMessage = new Discord.MessageEmbed()
@@ -67,6 +102,8 @@ module.exports = {
   lastUpdate,
   generalLastCommandTime,
   lastDeletedMessage,
+  TIPSARR: tipsArray,
+  EMBEDCOL: embedColors,
   CLIENT: client,
   RESPONSES: responses,
   REMINDERS: reminders,

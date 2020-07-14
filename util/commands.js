@@ -146,6 +146,14 @@ var cmds = function(message, keyword, command, buffName) {
       message.channel.send("Please take a look at the respect document - https://docs.google.com/document/d/1ljZq_StH3MLDxMxmPjsbuyAKwDGXTCvfxIFP8AXsHjM/edit");
       break;
 
+    case "tip":
+      const tipEmbed = new Discord.MessageEmbed()
+            .setColor(qVars.EMBEDCOL[Math.floor(Math.random() * qVars.EMBEDCOL.length)])
+            .addField('Tip', qVars.TIPSARR[Math.floor(Math.random() * qVars.TIPSARR.length)], false)
+      //message.channel.send(qVars.TIPSARR[Math.floor(Math.random() * qVars.TIPSARR.length)]);
+      message.channel.send({ embed: tipEmbed });
+      break;
+
     case "massping":
     case "sp":
       // Make sure user has ESC role
