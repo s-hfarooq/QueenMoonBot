@@ -147,11 +147,16 @@ var cmds = function(message, keyword, command, buffName) {
       break;
 
     case "tip":
-      const tipEmbed = new Discord.MessageEmbed()
-            .setColor(qVars.EMBEDCOL[Math.floor(Math.random() * qVars.EMBEDCOL.length)])
-            .addField('Tip', qVars.TIPSARR[Math.floor(Math.random() * qVars.TIPSARR.length)], false)
-      //message.channel.send(qVars.TIPSARR[Math.floor(Math.random() * qVars.TIPSARR.length)]);
-      message.channel.send({ embed: tipEmbed });
+      var rand = Math.floor(Math.random() * qVars.TIPSARR.length);
+      if (rand == 0) {
+        message.channel.send(qVars.TIPSARR[rand]);
+      } else {
+        const tipEmbed = new Discord.MessageEmbed()
+              .setColor(qVars.EMBEDCOL[Math.floor(Math.random() * qVars.EMBEDCOL.length)])
+              .addField('Tip', qVars.TIPSARR[rand], false)
+        message.channel.send({ embed: tipEmbed });
+      }
+
       break;
 
     case "massping":

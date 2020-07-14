@@ -54,6 +54,7 @@ const hLinks = [
 ];
 
 const tipsArray = [
+  { files: ['https://cdn.discordapp.com/attachments/697648147941294160/732469969949818890/q-tip-1518552383.jpg'] },
   'If you want consent, just send a polite DM! If they say no, chances are they are not being sarcastic. If they say yes, well that\'s not my business.',
   'Sexualizing people and harassing people can start #metoo 2 electric boogalo',
   'If they didn\'t say they were comfortable with being sexualized, sexualizing them is a Russian roulette with 5 bullets in a 6 bullet chamber!',
@@ -80,7 +81,6 @@ const tipsArray = [
   'Corb should be legalized.',
   'Fun fact: You can have controversial and dramatic discussions without bigotry, racism, or even making fun of any demographic at all! *This post was funded by the server propaganda team.*',
   'Take nsfw topics to #quarantine for maximum explosions',
-  { files: ['https://cdn.discordapp.com/attachments/697648147941294160/732469969949818890/q-tip-1518552383.jpg'] },
 ];
 
 const embedColors = [
