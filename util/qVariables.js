@@ -80,6 +80,7 @@ const tipsArray = [
   'Corb should be legalized.',
   'Fun fact: You can have controversial and dramatic discussions without bigotry, racism, or even making fun of any demographic at all! *This post was funded by the server propaganda team.*',
   'Take nsfw topics to #quarantine for maximum explosions',
+  { files: ['https://cdn.discordapp.com/attachments/697648147941294160/732469969949818890/q-tip-1518552383.jpg'] },
 ];
 
 const embedColors = [
