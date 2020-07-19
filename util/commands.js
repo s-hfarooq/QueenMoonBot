@@ -100,7 +100,7 @@ var cmds = function(message, keyword, command, buffName) {
       break;
 
     case "quote":
-      if (message.channel.id !== qVars.ACADEMICGENERALID && !message.channel.nsfw)
+      if (!message.channel.nsfw)
         qFuncs.sendRandImage(message, command, qVars.quotesOut, qVars.QUOTEID);
       else
         message.channel.send("That command cannot be used in this channel!");
