@@ -94,13 +94,13 @@ var cmds = function(message, keyword, command, buffName) {
 
     case "rat":
       var output = "That command cannot be used in this channel!";
-      if (message.channel.id !== qVars.GENERALID)
+      if (message.channel.id !== qVars.ACADEMICGENERALID)
         output = { files: ['https://cdn.discordapp.com/attachments/697639057592811650/713237658020872192/image0.jpg'] };
       message.channel.send(output);
       break;
 
     case "quote":
-      if (message.channel.id !== qVars.GENERALID)
+      if (message.channel.id !== qVars.ACADEMICGENERALID && !message.channel.nsfw)
         qFuncs.sendRandImage(message, command, qVars.quotesOut, qVars.QUOTEID);
       else
         message.channel.send("That command cannot be used in this channel!");
@@ -129,6 +129,36 @@ var cmds = function(message, keyword, command, buffName) {
       message.channel.send({ embed: helpCommand });
       break;
 
+    case "rules":
+      const rulesEmbed = new Discord.MessageEmbed()
+            .setColor('#7CFC00')
+            .setAuthor('Rules')
+            .addField('Rule 1', 'Don\'t harass the mods or each other', false)
+            .addField('Rule 2', 'No comments aimed to offend or hurt anyone else', false)
+            .addField('Rule 3', 'Don\'t ask for mod or moderation privileges', false)
+            .addField('Rule 4', ' Don\'t grind @MEE6 XP points',false)
+            .addField('Rule 5', 'Don\'t spam (if you must, limit it to #spam)', false)
+            .addField('Note', 'Failure to follow these rules may result in a warning, mute, or ban', false)
+      message.channel.send({ embed: rulesEmbed });
+      break;
+
+    case "respect":
+      message.channel.send("Please take a look at the respect document - https://docs.google.com/document/d/1ljZq_StH3MLDxMxmPjsbuyAKwDGXTCvfxIFP8AXsHjM/edit");
+      break;
+
+    case "tip":
+      var rand = Math.floor(Math.random() * qVars.TIPSARR.length);
+      if (rand == 0) {
+        message.channel.send(qVars.TIPSARR[rand]);
+      } else {
+        const tipEmbed = new Discord.MessageEmbed()
+              .setColor(qVars.EMBEDCOL[Math.floor(Math.random() * qVars.EMBEDCOL.length)])
+              .addField('Tip', qVars.TIPSARR[rand], false)
+        message.channel.send({ embed: tipEmbed });
+      }
+
+      break;
+
     case "massping":
     case "sp":
       // Make sure user has ESC role
@@ -144,7 +174,7 @@ var cmds = function(message, keyword, command, buffName) {
       break;
 
     case "owoify":
-      if (message.channel.id !== qVars.GENERALID)
+      if (message.channel.id !== qVars.ACADEMICGENERALID)
         qFuncs.changeMessage(message, command, 0);
       else
         message.channel.send("That command cannot be used in this channel!");
@@ -152,7 +182,7 @@ var cmds = function(message, keyword, command, buffName) {
 
     case "s":
     case "spongebobify":
-      if (message.channel.id !== qVars.GENERALID)
+      if (message.channel.id !== qVars.ACADEMICGENERALID)
         qFuncs.changeMessage(message, command, 1);
       else
         message.channel.send("That command cannot be used in this channel!");
@@ -174,8 +204,8 @@ var cmds = function(message, keyword, command, buffName) {
     case "lockdown":
       // Make sure user has ESC role
       if (message.member.roles.cache.has(qVars.ESCID)) {
-        if (message.channel.id !== qVars.GENERALID)
-          message.channel.send("This command can only be used in <#" + qVars.GENERALID + ">");
+        if (message.channel.id !== qVars.ACADEMICGENERALID)
+          message.channel.send("This command can only be used in <#" + qVars.ACADEMICGENERALID + ">");
         else
           qFuncs.lockChannel(message);
       } else {
@@ -186,18 +216,14 @@ var cmds = function(message, keyword, command, buffName) {
     case "unlock":
       // Make sure user has ESC role
       if (message.member.roles.cache.has(qVars.ESCID)) {
-        if (message.channel.id !== qVars.GENERALID)
-          message.channel.send("This command can only be used in <#" + qVars.GENERALID + ">");
+        if (message.channel.id !== qVars.ACADEMICGENERALID)
+          message.channel.send("This command can only be used in <#" + qVars.ACADEMICGENERALID + ">");
         else
           qFuncs.unlockChannel(message);
       } else {
         message.channel.send("You do not have permission to use this command!");
       }
       break;
-
-    default:
-      break;
-      // message.channel.send("That command doesn't exist. Run `otter help` to see the available commands");
   }
 }
 
