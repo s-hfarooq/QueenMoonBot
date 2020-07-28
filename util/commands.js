@@ -3,7 +3,7 @@ const qVars = require("./qVariables.js");
 const qFuncs = require("./functions.js");
 
 // All commands for the bot
-var cmds = function(message, keyword, command, buffName) {
+var cmds = function(message, keyword, command, buffName, catBody) {
   switch (keyword) {
     case "contribute":
       message.channel.send("https://github.com/s-hfarooq/QueenMoonBot");
@@ -198,6 +198,21 @@ var cmds = function(message, keyword, command, buffName) {
     case "flip":
       var options = ["Heads", "Tails"];
       message.channel.send(options[Math.floor(Math.random() * options.length)]);
+      break;
+
+    case "cat":
+      catBodyText = "";	  
+      // try/catch statement, in case a string is used vs. a number for catBody
+      // this would produce NaN, which would mess up the cmd
+      try {
+        for (i = 0; i < catBody; i++) {
+          catBodyText = catBodyText + ":catbod:";
+        }}
+      catch(err) {catBody = 0;}
+      var output = ":catfeet:" + catBodyText + ":cathead:";
+      if(catBody > 30)
+        output = "too looong";
+      message.channel.send(output);
       break;
   }
 }
