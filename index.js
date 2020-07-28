@@ -74,7 +74,7 @@ qVars.CLIENT.on('messageDelete', message => {
 // Runs on message edit
 qVars.CLIENT.on('messageUpdate', (oldMessage, newMessage) => {
   // Ignore bot messages, identical messages (ie. when links get a preview), and only log UIUC24 messages
-  if (newMessage.author.bot || oldMessage.cleanContent == newMessage.cleanContent || message.guild.id != qVars.UIUCGUILDID)
+  if (newMessage.author.bot || oldMessage.cleanContent == newMessage.cleanContent || newMessage.guild.id != qVars.UIUCGUILDID)
     return;
 
   // Ensure messages aren't blank
@@ -137,7 +137,7 @@ qVars.CLIENT.on("message", async message => {
     // If command is not run in general channel or if the gap between last command is greater than generalTimeGap, command will be run
     var currentTime = Math.round((new Date().getTime() / 1000));
     var timeDiff = currentTime - qVars.generalLastCommandTime;
-    
+
     if (message.channel.id !== qVars.ACADEMICGENERALID || timeDiff >= qVars.GENERALTIMEGAP) {
       // Get command keyword
       var keyword = command.replace(/\s.*/,'').toLowerCase();
