@@ -201,16 +201,18 @@ var cmds = function(message, keyword, command, buffName) {
       break;
 
     case "cat":
-      var catBodyText = "";
+      var output = "";
       var amnt = isNaN(parseInt(command)) ? 1 : parseInt(command);
-      var catFeet = message.guild.emojis.cache.find(emoji => emoji.name == 'catfeet');
-      var catBod = message.guild.emojis.cache.find(emoji => emoji.name == 'catbod');
-      var catHead = message.guild.emojis.cache.find(emoji => emoji.name == 'cathead');
+      var catParts = [
+        message.guild.emojis.cache.find(emoji => emoji.name == 'catfeet'),
+        message.guild.emojis.cache.find(emoji => emoji.name == 'catbod'),
+        message.guild.emojis.cache.find(emoji => emoji.name == 'cathead'),
+      ];
 
       for(let i = 0; i < amnt; i++)
-        catBodyText += `${catBod}`;
+        output += `${catParts[1]}`;
 
-      var output = `${catFeet}${catBodyText}${catHead}`;
+      output = `${catParts[0]}${output}${catParts[2]}`;
       if (output.length > 2000)
         output = "too looong";
       message.channel.send(output);
