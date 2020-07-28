@@ -201,16 +201,20 @@ var cmds = function(message, keyword, command, buffName, catBody) {
       break;
 
     case "cat":
-      catBodyText = "";	  
+      catBodyText = "";
+      var catFeet = message.guild.emojis.cache.find(emoji => emoji.name == 'catfeet');
+      var catBod = message.guild.emojis.cache.find(emoji => emoji.name == 'catbod');
+      var catHead = message.guild.emojis.cache.find(emoji => emoji.name == 'cathead');
+
       // try/catch statement, in case a string is used vs. a number for catBody
       // this would produce NaN, which would mess up the cmd
       try {
         for (i = 0; i < catBody; i++) {
-          catBodyText = catBodyText + ":catbod:";
-        }}
-      catch(err) {catBody = 0;}
-      var output = ":catfeet:" + catBodyText + ":cathead:";
-      if(catBody > 30)
+          catBodyText = catBodyText + `${catBod}`;
+      }} catch (err) { catBody = 0; }
+
+      var output = `${catFeet}${catBodyText}${catHead}`;
+      if (catBody > 30)
         output = "too looong";
       message.channel.send(output);
       break;
