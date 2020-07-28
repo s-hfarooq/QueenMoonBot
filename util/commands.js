@@ -224,6 +224,17 @@ var cmds = function(message, keyword, command, buffName) {
         message.channel.send("You do not have permission to use this command!");
       }
       break;
+      
+    case "cat":
+      var catBody = ""
+      for (i = 0; i < catLength; i++) {
+        catBody = catBody + ":catbod:"
+      }
+      var output = ":catfeet:" + catBody + ":cathead:";
+      if(catLength > 30)
+        output = "too looong";
+      message.channel.send(output);
+      break;
   }
 }
 
