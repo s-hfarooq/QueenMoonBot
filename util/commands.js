@@ -22,8 +22,8 @@ var cmds = function(message, keyword, command, buffName, catBody) {
       break;
 
     case "8ball":
-      var output = "That command can only be used in <#654838387160907777>";
-      if (message.channel.id === '654838387160907777')
+      var output = "That command can only be used in <#" + qVars.SPAMID + ">";
+      if (message.channel.id === qVars.SPAMID)
         output = "Question: " + command + "\nAnswer: " + qVars.RESPONSES[Math.floor(Math.random() * qVars.RESPONSES.length)];
       message.channel.send(output);
       break;
@@ -156,7 +156,6 @@ var cmds = function(message, keyword, command, buffName, catBody) {
               .addField('Tip', qVars.TIPSARR[rand], false)
         message.channel.send({ embed: tipEmbed });
       }
-
       break;
 
     case "massping":
@@ -201,30 +200,6 @@ var cmds = function(message, keyword, command, buffName, catBody) {
       message.channel.send(options[Math.floor(Math.random() * options.length)]);
       break;
 
-    case "lockdown":
-      // Make sure user has ESC role
-      if (message.member.roles.cache.has(qVars.ESCID)) {
-        if (message.channel.id !== qVars.ACADEMICGENERALID)
-          message.channel.send("This command can only be used in <#" + qVars.ACADEMICGENERALID + ">");
-        else
-          qFuncs.lockChannel(message);
-      } else {
-        message.channel.send("You do not have permission to use this command!");
-      }
-      break;
-
-    case "unlock":
-      // Make sure user has ESC role
-      if (message.member.roles.cache.has(qVars.ESCID)) {
-        if (message.channel.id !== qVars.ACADEMICGENERALID)
-          message.channel.send("This command can only be used in <#" + qVars.ACADEMICGENERALID + ">");
-        else
-          qFuncs.unlockChannel(message);
-      } else {
-        message.channel.send("You do not have permission to use this command!");
-      }
-      break;
-      
     case "cat":
       catBodyText = "";	  
       // try/catch statement, in case a string is used vs. a number for catBody

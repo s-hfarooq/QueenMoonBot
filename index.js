@@ -1,5 +1,6 @@
 // Load requirements
 const Discord = require("discord.js");
+const https = require("https");
 const config = require("./util/config.json");
 const qVars = require("./util/qVariables.js");
 const qFuncs = require("./util/functions.js");
@@ -10,6 +11,7 @@ qVars.CLIENT.on("ready", () => {
   console.log(`Bot has started`);
   qVars.CLIENT.user.setActivity(`otter help`);
 
+  // Save brownout/quote image links in array
   qFuncs.getMessagesWithAttachments(qVars.CLIENT.channels.cache.get(qVars.BROWNOUTID)).then(output => {
     qVars.brownoutOut = output;
   });
@@ -36,84 +38,33 @@ qVars.CLIENT.on("guildDelete", guild => {
 // Runs on message deletion
 qVars.CLIENT.on('messageDelete', message => {
   // Don't crash, ignore bot messages, and only log UIUC24 messages
-  if (message === null || message.author.bot || message.guild.id != qVars.UIUCGUILDID)
+  if (message === null || message.author === null || message.author.bot || message.guild.id != qVars.UIUCGUILDID)
     return;
-
-  // Check if message has attachment
-  var hadAttachment = false;
-  if (message.attachments.size > 0)
-    hadAttachment = true;
 
   var msg = message.cleanContent;
 
   if (message.cleanContent.length > 1020)
     msg = msg.substr(0, 1020) + "...";
+  if (!msg)
+    msg = "No Message - Only Attachment";
 
-  if (hadAttachment) {
-    // Check if attachment is an image
+  // Create embed
+  qVars.lastDeletedMessage = new Discord.MessageEmbed()
+        .setColor('#FF0000')
+        .setAuthor('Message Deleted')
+        .addField(message.member.user.tag, msg)
+        .addField("Channel", message.channel.name)
+        .addField("Time", new Date().toLocaleString('en-US', { timeZone: 'America/Chicago', timeZoneName: 'short' }));
+
+  // Add attachment to embed
+  if (message.attachments.size > 0) {
     let url = message.attachments.first().url;
-    let isImg = url.match(/\.(jpeg|jpg|gif|png)$/) != null;
 
-    // Log messages with image (cases with and without text)
-    if (isImg) {
-      if (message.cleanContent) {
-        qVars.lastDeletedMessage = new Discord.MessageEmbed()
-              .setColor('#FF0000')
-              .setAuthor('Message Deleted')
-              .setThumbnail(url)
-              .addField(message.member.user.tag, msg)
-              .addField("Channel", message.channel.name)
-              .addField("Time", new Date().toLocaleString());
-      } else {
-        qVars.lastDeletedMessage = new Discord.MessageEmbed()
-              .setColor('#FF0000')
-              .setAuthor('Message Deleted')
-              .setThumbnail(url)
-              .addField(message.member.user.tag, "No Message - Only Attachment")
-              .addField("Channel", message.channel.name)
-              .addField("Time", new Date().toLocaleString());
-      }
-    } else {
-      // Log messages with attachments other than images
-      if (message.cleanContent) {
-        // qVars.lastDeletedMessage = new Discord.MessageEmbed()
-        //       .setColor('#FF0000')
-        //       .setAuthor('Message Deleted')
-        //       .attachFiles([url])
-        //       .addField(message.member.user.tag, msg)
-        //       .addField("Channel", message.channel.name)
-        //       .addField("Time", new Date().toLocaleString());
-        qVars.lastDeletedMessage = new Discord.MessageEmbed()
-              .setColor('#FF0000')
-              .setAuthor('Message Deleted')
-              .attachFiles([url])
-              .addField(message.member.user.tag, msg + " - also had attachement but attachemnt deletion logging not currently working")
-              .addField("Channel", message.channel.name)
-              .addField("Time", new Date().toLocaleString());
-      } else {
-        // qVars.lastDeletedMessage = new Discord.MessageEmbed()
-        //       .setColor('#FF0000')
-        //       .setAuthor('Message Deleted')
-        //       .attachFiles([url])
-        //       .addField(message.member.user.tag, "No Message - Only Attachment")
-        //       .addField("Channel", message.channel.name)
-        //       .addField("Time", new Date().toLocaleString());
-        qVars.lastDeletedMessage = new Discord.MessageEmbed()
-              .setColor('#FF0000')
-              .setAuthor('Message Deleted')
-              .addField(message.member.user.tag, "No Message - Only Attachment - Attachment deletion logging not currently working")
-              .addField("Channel", message.channel.name)
-              .addField("Time", new Date().toLocaleString());
-      }
-    }
-  } else {
-    // Log text only messages
-    qVars.lastDeletedMessage = new Discord.MessageEmbed()
-          .setColor('#FF0000')
-          .setAuthor('Message Deleted')
-          .addField(message.member.user.tag, msg)
-          .addField("Channel", message.channel.name)
-          .addField("Time", new Date().toLocaleString());
+    // Add image/file to embed
+    if (url.match(/\.(jpeg|jpg|gif|png)$/) != null)
+      qVars.lastDeletedMessage.setThumbnail(url);
+    else
+      qVars.lastDeletedMessage.attachFiles([url]);
   }
 
   // Send log message
@@ -122,12 +73,8 @@ qVars.CLIENT.on('messageDelete', message => {
 
 // Runs on message edit
 qVars.CLIENT.on('messageUpdate', (oldMessage, newMessage) => {
-  // Ignore bot messages
-  if (newMessage.author.bot)
-    return;
-
-  // Ignore messages that are identical (ie. when links get a preview)
-  if (oldMessage.cleanContent == newMessage.cleanContent)
+  // Ignore bot messages, identical messages (ie. when links get a preview), and only log UIUC24 messages
+  if (newMessage.author.bot || oldMessage.cleanContent == newMessage.cleanContent || newMessage.guild.id != qVars.UIUCGUILDID)
     return;
 
   // Ensure messages aren't blank
@@ -146,7 +93,7 @@ qVars.CLIENT.on('messageUpdate', (oldMessage, newMessage) => {
           .addField("New message", newMsg)
           .addField("User", newMessage.member.user.tag)
           .addField("Channel", newMessage.channel.name)
-          .addField("Time", new Date().toLocaleString());
+          .addField("Time", new Date().toLocaleString('en-US', { timeZone: 'America/Chicago', timeZoneName: 'short' }));
 
     qVars.CLIENT.channels.cache.get(qVars.LOGID).send({ embed: logMsg });
   }
@@ -164,9 +111,17 @@ qVars.CLIENT.on("message", async message => {
   if (message.author.bot)
     return;
 
-  // Save attachments in other server for logging purposes if deleted
-  if (message.attachments.size > 0)
-    qVars.CLIENT.channels.cache.get("737557883599847445").send(message.attachments.first().url);
+  // Save attachments for logging purposes if deleted
+  if (message.attachments.size > 0) {
+    let url = message.attachments.first().url;
+
+    // Open attachment (and save in other channel if image) so Discord doesn't remove access
+    https.get(url, function(response) {
+      // Check if attachment is an image
+      if (url.match(/\.(jpeg|jpg|gif|png)$/) != null)
+        qVars.CLIENT.channels.cache.get(qVars.IMGSAVEID).send(url);
+    });
+  }
 
   var command = message.content;
   var override = false;
@@ -178,10 +133,11 @@ qVars.CLIENT.on("message", async message => {
     command = command.substr(command.indexOf(" ") + 1);
   }
 
-  // If command is not run in general channel or if the gap between last command is greater than generalTimeGap, command will be run
-  var currentTime = Math.round((new Date().getTime() / 1000));
-  var timeDiff = currentTime - qVars.generalLastCommandTime;
   if (override) {
+    // If command is not run in general channel or if the gap between last command is greater than generalTimeGap, command will be run
+    var currentTime = Math.round((new Date().getTime() / 1000));
+    var timeDiff = currentTime - qVars.generalLastCommandTime;
+
     if (message.channel.id !== qVars.ACADEMICGENERALID || timeDiff >= qVars.GENERALTIMEGAP) {
       // Get command keyword
       var keyword = command.replace(/\s.*/,'').toLowerCase();
