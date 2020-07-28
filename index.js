@@ -37,7 +37,7 @@ qVars.CLIENT.on("guildDelete", guild => {
 // Runs on message deletion
 qVars.CLIENT.on('messageDelete', message => {
   // Don't crash, ignore bot messages, and only log UIUC24 messages
-  if (message === null || message.author.bot || message.guild.id != qVars.UIUCGUILDID)
+  if (message === null || message.author === null || message.author.bot || message.guild.id != qVars.UIUCGUILDID)
     return;
 
   // Check if message has attachment
@@ -58,7 +58,7 @@ qVars.CLIENT.on('messageDelete', message => {
         .setAuthor('Message Deleted')
         .addField(message.member.user.tag, msg)
         .addField("Channel", message.channel.name)
-        .addField("Time", new Date().toLocaleString());
+        .addField("Time", new Date().toLocaleString('en-US', { timeZone: 'America/Chicago', timeZoneName: 'short' }));
 
   // Add attachment to embed
   if (hadAttachment) {
@@ -103,7 +103,7 @@ qVars.CLIENT.on('messageUpdate', (oldMessage, newMessage) => {
           .addField("New message", newMsg)
           .addField("User", newMessage.member.user.tag)
           .addField("Channel", newMessage.channel.name)
-          .addField("Time", new Date().toLocaleString());
+          .addField("Time", new Date().toLocaleString('en-US', { timeZone: 'America/Chicago', timeZoneName: 'short' }));
 
     qVars.CLIENT.channels.cache.get(qVars.LOGID).send({ embed: logMsg });
   }
