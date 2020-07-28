@@ -3,7 +3,7 @@ const qVars = require("./qVariables.js");
 const qFuncs = require("./functions.js");
 
 // All commands for the bot
-var cmds = function(message, keyword, command, buffName, catBody) {
+var cmds = function(message, keyword, command, buffName) {
   switch (keyword) {
     case "contribute":
       message.channel.send("https://github.com/s-hfarooq/QueenMoonBot");
@@ -201,20 +201,17 @@ var cmds = function(message, keyword, command, buffName, catBody) {
       break;
 
     case "cat":
-      catBodyText = "";
+      var catBodyText = "";
+      var amnt = isNaN(parseInt(command)) ? 1 : parseInt(command);
       var catFeet = message.guild.emojis.cache.find(emoji => emoji.name == 'catfeet');
       var catBod = message.guild.emojis.cache.find(emoji => emoji.name == 'catbod');
       var catHead = message.guild.emojis.cache.find(emoji => emoji.name == 'cathead');
 
-      // try/catch statement, in case a string is used vs. a number for catBody
-      // this would produce NaN, which would mess up the cmd
-      try {
-        for (i = 0; i < catBody; i++) {
-          catBodyText = catBodyText + `${catBod}`;
-      }} catch (err) { catBody = 0; }
+      for(let i = 0; i < amnt; i++)
+        catBodyText += `${catBod}`;
 
       var output = `${catFeet}${catBodyText}${catHead}`;
-      if (catBody > 30)
+      if (output.length > 2000)
         output = "too looong";
       message.channel.send(output);
       break;

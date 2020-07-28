@@ -148,17 +148,10 @@ qVars.CLIENT.on("message", async message => {
         keyword = "buff";
         buffName = command.substr(4).trim();
       }
-      
-      // If trying to use cat command, get the body length desired
-      var catBody = 0;
-      if (keyword.startsWith("cat")) {
-        keyword = "cat";
-        catBody = Number(command.substr(4).trim());
-      }
 
       // Find command and send message
       var command = command.substr(keyword.length + 1);
-      commands.cmds(message, keyword, command, buffName, catBody);
+      commands.cmds(message, keyword, command, buffName);
 
       if (message.channel.id === qVars.ACADEMICGENERALID)
         qVars.generalLastCommandTime = Math.round((new Date().getTime() / 1000));
