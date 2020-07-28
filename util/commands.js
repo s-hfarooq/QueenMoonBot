@@ -226,16 +226,16 @@ var cmds = function(message, keyword, command, buffName, catBody) {
       break;
       
     case "cat":
-      var catBody = ""
+	    catBodyText = ""
       // try/catch statement, in case a string is used vs. a number for catBody
       // this would produce NaN, which would mess up the cmd
       try {
-        for (i = 0; i < catLength; i++) {
-          catBody = catBody + ":catbod:"
+        for (i = 0; i < catBody; i++) {
+          catBodyText = catBodyText + ":catbod:"
         }}
-      catch(err) {catLength = 0;}
-      var output = ":catfeet:" + catBody + ":cathead:";
-      if(catLength > 30)
+      catch(err) {catBody = 0;}
+      var output = ":catfeet:" + catBodyText + ":cathead:";
+      if(catBody > 30)
         output = "too looong";
       message.channel.send(output);
       break;
