@@ -2,11 +2,6 @@
 
 A bot for the [UIUC 2024 Discord server](https://discord.gg/2pFv4Wq)
 
-## Add it to your server
-  - NOTE: some things won't work due to hard coded channel id's
-
-  [Add it to your server by clicking here](https://discordapp.com/oauth2/authorize?&client_id=684867671552294994&scope=bot&permissions=8)
-
 ## Commands
 * `otter rules` to send the server rules
 * `otter respect` to send a link to the respect document
@@ -52,7 +47,12 @@ Make a file named `config.json` in the util folder. Head over to the [Discord De
 }
 ```
 
-Then run the bot by running `node index.js` in a terminal. To run even after closing the terminal window (ie. on an AWS EC2 instance) use the command `forever start index.js`.
+Then run the bot by running `node index.js`. To run even after closing the terminal window (ie. on an AWS EC2 instance) use the command `forever start index.js`.
+
+## Add it to your server
+  [Add it to your server by clicking here](https://discordapp.com/oauth2/authorize?&client_id=684867671552294994&scope=bot&permissions=8)
+
+\- Note that some things won't work due to hard coded channel id's
 
 ## Contribute
 Make some contributions, it's open source. Just make a pull request, I'll probably accept it as long as there aren't any bugs. You'll probably only want to touch the switch statement in [util/commands.js](util/commands.js).
