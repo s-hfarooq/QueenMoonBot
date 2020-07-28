@@ -8,7 +8,6 @@ A bot for the [UIUC 2024 Discord server](https://discord.gg/2pFv4Wq)
   [Add it to your server by clicking here](https://discordapp.com/oauth2/authorize?&client_id=684867671552294994&scope=bot&permissions=8)
 
 ## Commands
-* Makes sure the #counting_game channel is in check. If a user sends two messages in a row, it deletes the newest one. If a user sends a number that isn't the previous number + 1, it deletes the message and assigns the `Can't Count` role (assuming the newest message was sent > 1500ms after the previous one).
 * `otter rules` to send the server rules
 * `otter respect` to send a link to the respect document
 * `otter usercount` to see how many users are currently in the server
@@ -39,6 +38,10 @@ A bot for the [UIUC 2024 Discord server](https://discord.gg/2pFv4Wq)
 
 Note: For all commands, `otter` can be substituted with `o`
 
+## Other functionality
+* Makes sure the #counting_game channel is in check. If a user sends two messages in a row, it deletes the newest one. If a user sends a number that isn't the previous number + 1, it deletes the message and assigns the `Can't Count` role (assuming the newest message was sent > 1500ms after the previous one).
+* Logs deleted messages, images, and other attachments in #mod_log. Also logs edited messages.
+* Adds/removes pronoun roles based on reactions in #set_roles_here
 
 ## To run the bot yourself
 Make a file named `config.json` in the util folder. Head over to the [Discord Developer Portal](https://discordapp.com/developers/applications/me) and get a token for a new bot. Place that token in `config.json` in the following format:
