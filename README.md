@@ -38,6 +38,7 @@ A bot for the [UIUC 2024 Discord server](https://discord.gg/2pFv4Wq)
 * `otter os [message]` to first owoify then spongebobify your message (leave [message] blank to owoify and spongebobify the previous sent message)
 * `otter rankdegen` to see how degen you are
 * `otter tvd` to see a dancing cockroach
+* `otter cat [length]` to create a long cat
 
 Note: For all commands, `otter` can be substituted with `o`
 
