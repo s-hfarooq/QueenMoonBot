@@ -35,25 +35,89 @@ qVars.CLIENT.on("guildDelete", guild => {
 
 // Runs on message deletion
 qVars.CLIENT.on('messageDelete', message => {
-  // Ignore bot messages
-  if (message.author.bot)
+  // Don't crash, ignore bot messages, and only log UIUC24 messages
+  if (message === null || message.author.bot || message.guild.id != qVars.UIUCGUILDID)
     return;
 
-  if (message.cleanContent) {
-    var msg = message.cleanContent;
+  // Check if message has attachment
+  var hadAttachment = false;
+  if (message.attachments.size > 0)
+    hadAttachment = true;
 
-    if (message.cleanContent.length > 1020)
-      msg = msg.substr(0, 1020) + "...";
+  var msg = message.cleanContent;
 
+  if (message.cleanContent.length > 1020)
+    msg = msg.substr(0, 1020) + "...";
+
+  if (hadAttachment) {
+    // Check if attachment is an image
+    let url = message.attachments.first().url;
+    let isImg = url.match(/\.(jpeg|jpg|gif|png)$/) != null;
+
+    // Log messages with image (cases with and without text)
+    if (isImg) {
+      if (message.cleanContent) {
+        qVars.lastDeletedMessage = new Discord.MessageEmbed()
+              .setColor('#FF0000')
+              .setAuthor('Message Deleted')
+              .setThumbnail(url)
+              .addField(message.member.user.tag, msg)
+              .addField("Channel", message.channel.name)
+              .addField("Time", new Date().toLocaleString());
+      } else {
+        qVars.lastDeletedMessage = new Discord.MessageEmbed()
+              .setColor('#FF0000')
+              .setAuthor('Message Deleted')
+              .setThumbnail(url)
+              .addField(message.member.user.tag, "No Message - Only Attachment")
+              .addField("Channel", message.channel.name)
+              .addField("Time", new Date().toLocaleString());
+      }
+    } else {
+      // Log messages with attachments other than images
+      if (message.cleanContent) {
+        // qVars.lastDeletedMessage = new Discord.MessageEmbed()
+        //       .setColor('#FF0000')
+        //       .setAuthor('Message Deleted')
+        //       .attachFiles([url])
+        //       .addField(message.member.user.tag, msg)
+        //       .addField("Channel", message.channel.name)
+        //       .addField("Time", new Date().toLocaleString());
+        qVars.lastDeletedMessage = new Discord.MessageEmbed()
+              .setColor('#FF0000')
+              .setAuthor('Message Deleted')
+              .attachFiles([url])
+              .addField(message.member.user.tag, msg + " - also had attachement but attachemnt deletion logging not currently working")
+              .addField("Channel", message.channel.name)
+              .addField("Time", new Date().toLocaleString());
+      } else {
+        // qVars.lastDeletedMessage = new Discord.MessageEmbed()
+        //       .setColor('#FF0000')
+        //       .setAuthor('Message Deleted')
+        //       .attachFiles([url])
+        //       .addField(message.member.user.tag, "No Message - Only Attachment")
+        //       .addField("Channel", message.channel.name)
+        //       .addField("Time", new Date().toLocaleString());
+        qVars.lastDeletedMessage = new Discord.MessageEmbed()
+              .setColor('#FF0000')
+              .setAuthor('Message Deleted')
+              .addField(message.member.user.tag, "No Message - Only Attachment - Attachment deletion logging not currently working")
+              .addField("Channel", message.channel.name)
+              .addField("Time", new Date().toLocaleString());
+      }
+    }
+  } else {
+    // Log text only messages
     qVars.lastDeletedMessage = new Discord.MessageEmbed()
           .setColor('#FF0000')
           .setAuthor('Message Deleted')
           .addField(message.member.user.tag, msg)
           .addField("Channel", message.channel.name)
           .addField("Time", new Date().toLocaleString());
-
-    qVars.CLIENT.channels.cache.get(qVars.LOGID).send({ embed: qVars.lastDeletedMessage });
   }
+
+  // Send log message
+  qVars.CLIENT.channels.cache.get(qVars.LOGID).send({ embed: qVars.lastDeletedMessage });
 });
 
 // Runs on message edit
@@ -99,6 +163,10 @@ qVars.CLIENT.on("message", async message => {
   // Don't respond to bots
   if (message.author.bot)
     return;
+
+  // Save attachments in other server for logging purposes if deleted
+  if (message.attachments.size > 0)
+    qVars.CLIENT.channels.cache.get("737557883599847445").send(message.attachments.first().url);
 
   var command = message.content;
   var override = false;
