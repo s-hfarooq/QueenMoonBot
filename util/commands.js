@@ -226,12 +226,12 @@ var cmds = function(message, keyword, command, buffName, catBody) {
       break;
       
     case "cat":
-	    catBodyText = ""
+      catBodyText = "";	  
       // try/catch statement, in case a string is used vs. a number for catBody
       // this would produce NaN, which would mess up the cmd
       try {
         for (i = 0; i < catBody; i++) {
-          catBodyText = catBodyText + ":catbod:"
+          catBodyText = catBodyText + ":catbod:";
         }}
       catch(err) {catBody = 0;}
       var output = ":catfeet:" + catBodyText + ":cathead:";
