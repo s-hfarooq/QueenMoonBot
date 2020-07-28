@@ -43,6 +43,7 @@ const reminders = [
   { files: ['https://cdn.discordapp.com/attachments/669726484772159488/725548315479113778/iqggq6rypn651.png'] }
 ];
 
+// Responses for horny command
 const hLinks = [
   'https://cdn.discordapp.com/attachments/669726484772159488/721440013895598178/Screen_Shot_2017-11-09_at_10.png',
   'https://cdn.discordapp.com/attachments/669726484772159488/721439726607007774/d77.png',
@@ -53,6 +54,7 @@ const hLinks = [
   'https://cdn.discordapp.com/attachments/714931864413929512/721844496614162561/FB_IMG_15904852374509040.jpg',
 ];
 
+// Responses for tips command
 const tipsArray = [
   { files: ['https://cdn.discordapp.com/attachments/697648147941294160/732469969949818890/q-tip-1518552383.jpg'] },
   'If you want consent, just send a polite DM! If they say no, chances are they are not being sarcastic. If they say yes, well that\'s not my business.',
@@ -83,6 +85,7 @@ const tipsArray = [
   'Take nsfw topics to #quarantine for maximum explosions.',
 ];
 
+// Colors for tips command embed
 const embedColors = [
   'E84A27',
   '13294B',
@@ -117,6 +120,7 @@ module.exports = {
   BROWNOUTID: '697639057592811650',
   COUNTINGGAMEID: '698313651186040923',
   LOGID: '695113129947824179',
+  SPAMID: '654838387160907777',
   QUOTEID: '697329980044083220',
   MEMEID: '654784388197908500',
   WHOLESOMEID: '700590295493902347',

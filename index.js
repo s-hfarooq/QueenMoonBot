@@ -11,6 +11,7 @@ qVars.CLIENT.on("ready", () => {
   console.log(`Bot has started`);
   qVars.CLIENT.user.setActivity(`otter help`);
 
+  // Save brownout/quote image links in array
   qFuncs.getMessagesWithAttachments(qVars.CLIENT.channels.cache.get(qVars.BROWNOUTID)).then(output => {
     qVars.brownoutOut = output;
   });
@@ -40,11 +41,6 @@ qVars.CLIENT.on('messageDelete', message => {
   if (message === null || message.author === null || message.author.bot || message.guild.id != qVars.UIUCGUILDID)
     return;
 
-  // Check if message has attachment
-  var hadAttachment = false;
-  if (message.attachments.size > 0)
-    hadAttachment = true;
-
   var msg = message.cleanContent;
 
   if (message.cleanContent.length > 1020)
@@ -61,13 +57,11 @@ qVars.CLIENT.on('messageDelete', message => {
         .addField("Time", new Date().toLocaleString('en-US', { timeZone: 'America/Chicago', timeZoneName: 'short' }));
 
   // Add attachment to embed
-  if (hadAttachment) {
-    // Check if attachment is an image
+  if (message.attachments.size > 0) {
     let url = message.attachments.first().url;
-    let isImg = url.match(/\.(jpeg|jpg|gif|png)$/) != null;
 
     // Add image/file to embed
-    if (isImg)
+    if (url.match(/\.(jpeg|jpg|gif|png)$/) != null)
       qVars.lastDeletedMessage.setThumbnail(url);
     else
       qVars.lastDeletedMessage.attachFiles([url]);
@@ -79,12 +73,8 @@ qVars.CLIENT.on('messageDelete', message => {
 
 // Runs on message edit
 qVars.CLIENT.on('messageUpdate', (oldMessage, newMessage) => {
-  // Ignore bot messages
-  if (newMessage.author.bot)
-    return;
-
-  // Ignore messages that are identical (ie. when links get a preview)
-  if (oldMessage.cleanContent == newMessage.cleanContent)
+  // Ignore bot messages, identical messages (ie. when links get a preview), and only log UIUC24 messages
+  if (newMessage.author.bot || oldMessage.cleanContent == newMessage.cleanContent || message.guild.id != qVars.UIUCGUILDID)
     return;
 
   // Ensure messages aren't blank
@@ -123,13 +113,12 @@ qVars.CLIENT.on("message", async message => {
 
   // Save attachments for logging purposes if deleted
   if (message.attachments.size > 0) {
-    // Check if attachment is an image
     let url = message.attachments.first().url;
-    let isImg = url.match(/\.(jpeg|jpg|gif|png)$/) != null;
 
     // Open attachment (and save in other channel if image) so Discord doesn't remove access
     https.get(url, function(response) {
-      if (isImg)
+      // Check if attachment is an image
+      if (url.match(/\.(jpeg|jpg|gif|png)$/) != null)
         qVars.CLIENT.channels.cache.get(qVars.IMGSAVEID).send(url);
     });
   }
@@ -144,10 +133,11 @@ qVars.CLIENT.on("message", async message => {
     command = command.substr(command.indexOf(" ") + 1);
   }
 
-  // If command is not run in general channel or if the gap between last command is greater than generalTimeGap, command will be run
-  var currentTime = Math.round((new Date().getTime() / 1000));
-  var timeDiff = currentTime - qVars.generalLastCommandTime;
   if (override) {
+    // If command is not run in general channel or if the gap between last command is greater than generalTimeGap, command will be run
+    var currentTime = Math.round((new Date().getTime() / 1000));
+    var timeDiff = currentTime - qVars.generalLastCommandTime;
+    
     if (message.channel.id !== qVars.ACADEMICGENERALID || timeDiff >= qVars.GENERALTIMEGAP) {
       // Get command keyword
       var keyword = command.replace(/\s.*/,'').toLowerCase();

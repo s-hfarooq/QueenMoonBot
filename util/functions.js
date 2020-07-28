@@ -19,7 +19,7 @@ var countingGameModeration = function(message) {
       return;
     }
 
-    // If next number not old number + 1
+    // If the next number is not 'old number + 1'
     if (Number(lastMessage[0].content).toString() !== lastMessage[0].content || Number(lastMessage[0].content) - 1 != Number(lastMessage[1].content)) {
       // Add Can't Count role if number isn't next in counting game and > 1500 ms between the two messages
       if (Math.abs(lastMessage[0].createdTimestamp - lastMessage[1].createdTimestamp) > 1500) {
@@ -29,11 +29,9 @@ var countingGameModeration = function(message) {
 
       // Delete incorrect number
       message.delete(lastMessage[0]);
-      return;
     }
   }).catch(err => {
     console.error(err);
-    return;
   });
 
   return;
@@ -43,49 +41,49 @@ var countingGameModeration = function(message) {
 var changeMessage = function(message, command, type) {
   message.channel.messages.fetch({ limit: 2 }).then(messages => {
     const lastMessage = messages.array();
+    var usingLast = true;
+    var itemToChange = lastMessage[1].content;
+    var out;
+    var changeType = [
+      '\n - owoified',
+      '\n - spongebobified',
+      '\n - owoified and spongebobified',
+    ];
+
+    // Determine if previous message or current message is being changed
     if (command) {
-      var out;
-
-      switch (type) {
-        case 0:
-          out = owoify(command);
-          break;
-        case 1:
-          out = spongebobify(command);
-          break;
-        case 2:
-          out = spongebobify(owoify(command));
-          break;
-        default:
-          out = "invalid case";
-      }
-
-      message.channel.send(out + "\n - <@" + message.author.id + ">");
-      message.delete(message);
-    } else {
-      if (lastMessage[1].content) {
-        var out;
-
-        switch (type) {
-          case 0:
-            out = owoify(lastMessage[1].content) + "\n - owoified";
-            break;
-          case 1:
-            out = spongebobify(lastMessage[1].content) + "\n - spongebobified";
-            break;
-          case 2:
-            out = spongebobify(owoify(lastMessage[1].content)) + "\n - owoified and spongebobified";
-            break;
-          default:
-            out = "invalid case";
-        }
-
-        message.channel.send(out + " by <@" + message.author.id + ">");
-        message.delete(message);
-      } else {
-        message.channel.send("Previous message had no text");
-      }
+      itemToChange = command;
+      usingLast = false;
     }
+
+    // Make sure message has text before proceeding
+    if (!itemToChange) {
+      message.channel.send("Error - message to change had no text");
+      return;
+    }
+
+    // Change message based on function inputs
+    switch (type) {
+      case 0:
+        out = owoify(itemToChange);
+        break;
+      case 1:
+        out = spongebobify(itemToChange);
+        break;
+      case 2:
+        out = spongebobify(owoify(itemToChange));
+        break;
+      default:
+        out = "invalid case";
+    }
+
+    // Send message - different based on if previous message is being changed or not
+    if (usingLast)
+      message.channel.send(out + changeType[type] + " by <@" + message.author.id + ">");
+    else
+      message.channel.send(out + "\n - <@" + message.author.id + ">");
+
+    message.delete(message);
   }).catch(err => {
     console.error(err);
   });
@@ -146,7 +144,6 @@ var massPingUser = function(message, command) {
     return;
   }
 
-  var chnl = message.channel;
   var atUser = command.substr(command.indexOf("<"), command.indexOf(">") + 1);
   message.delete();
 
@@ -155,7 +152,7 @@ var massPingUser = function(message, command) {
 
   // Mass ping
   for (let i = 0; i < amnt; i++) {
-    chnl.send(atUser).then(sentMessage => {
+    message.channel.send(atUser).then(sentMessage => {
         sentMessage.delete();
     });
   }
@@ -192,58 +189,7 @@ async function getMessagesWithAttachments(channel, limit = 500) {
   return output;
 }
 
-var lockChannel = function(message) {
-  let everyoneRole = message.guild.roles.everyone.id;
-
-  message.channel.overwritePermissions([
-    {
-      id: everyoneRole,
-      deny: ['SEND_MESSAGES'],
-    },
-  ], 'Channel locked');
-
-  message.channel.send("CHANNEL LOCKED PLEASE MOVE TO <#" + qVars.QUARANTINEID + ">.");
-
-  var logMsg = new Discord.MessageEmbed()
-        .setColor('#FF4500')
-        .setAuthor('Channel locked')
-        .addField("User", message.member.user.tag)
-        .addField("Channel", message.channel.name)
-        .addField("Time", new Date().toLocaleString());
-
-  qVars.CLIENT.channels.cache.get(qVars.LOGID).send({ embed: logMsg });
-}
-
-var unlockChannel = function(message) {
-  let everyoneRole = message.guild.roles.everyone.id;
-  let mutedRole = message.member.guild.roles.cache.find(role => role.name === "Muted");
-
-  message.channel.overwritePermissions([
-    {
-      id: everyoneRole,
-      allow: ['SEND_MESSAGES'],
-    },
-    {
-      id: mutedRole,
-      deny: ['SEND_MESSAGES'],
-    },
-  ], 'Channel unlocked');
-
-  message.channel.send("CHANNEL UNLOCKED");
-
-  var logMsg = new Discord.MessageEmbed()
-        .setColor('#FF4500')
-        .setAuthor('Channel unlocked')
-        .addField("User", message.member.user.tag)
-        .addField("Channel", message.channel.name)
-        .addField("Time", new Date().toLocaleString());
-
-  qVars.CLIENT.channels.cache.get(qVars.LOGID).send({ embed: logMsg });
-}
-
 module.exports = {
-  lockChannel,
-  unlockChannel,
   countingGameModeration,
   changeMessage,
   sendRandImage,

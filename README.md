@@ -30,8 +30,6 @@ A bot for the [UIUC 2024 Discord server](https://discord.gg/2pFv4Wq)
 * `otter thirst` to get water messages
 * `otter snipe` to get the last deleted message
 * `otter horny` to get bonk pictures
-* `otter lockdown` to make a channel read-only (must have ESC role to use this command)
-* `otter unlock` to unlock a channel (must have ESC role to use this command)
 * `otter sp @USER [amnt]` to mass ping a specific user where [amnt] is a number between 0 and 100 (must have ESC role to use this command)
 * `otter owoify [message]` to turn your message into an owo (leave [message] blank to owoify the previous sent message)
 * `otter spongebobify [message]` or `otter s [message]` to convert your message to spongebob mocking text (leave [message] blank to spongebobify the previous sent message)
