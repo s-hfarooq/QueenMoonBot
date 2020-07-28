@@ -1,5 +1,6 @@
 // Load requirements
 const Discord = require("discord.js");
+const https = require("https");
 const config = require("./util/config.json");
 const qVars = require("./util/qVariables.js");
 const qFuncs = require("./util/functions.js");
@@ -48,72 +49,28 @@ qVars.CLIENT.on('messageDelete', message => {
 
   if (message.cleanContent.length > 1020)
     msg = msg.substr(0, 1020) + "...";
+  if (!msg)
+    msg = "No Message - Only Attachment";
 
+  // Create embed
+  qVars.lastDeletedMessage = new Discord.MessageEmbed()
+        .setColor('#FF0000')
+        .setAuthor('Message Deleted')
+        .addField(message.member.user.tag, msg)
+        .addField("Channel", message.channel.name)
+        .addField("Time", new Date().toLocaleString());
+
+  // Add attachment to embed
   if (hadAttachment) {
     // Check if attachment is an image
     let url = message.attachments.first().url;
     let isImg = url.match(/\.(jpeg|jpg|gif|png)$/) != null;
 
-    // Log messages with image (cases with and without text)
-    if (isImg) {
-      if (message.cleanContent) {
-        qVars.lastDeletedMessage = new Discord.MessageEmbed()
-              .setColor('#FF0000')
-              .setAuthor('Message Deleted')
-              .setThumbnail(url)
-              .addField(message.member.user.tag, msg)
-              .addField("Channel", message.channel.name)
-              .addField("Time", new Date().toLocaleString());
-      } else {
-        qVars.lastDeletedMessage = new Discord.MessageEmbed()
-              .setColor('#FF0000')
-              .setAuthor('Message Deleted')
-              .setThumbnail(url)
-              .addField(message.member.user.tag, "No Message - Only Attachment")
-              .addField("Channel", message.channel.name)
-              .addField("Time", new Date().toLocaleString());
-      }
-    } else {
-      // Log messages with attachments other than images
-      if (message.cleanContent) {
-        // qVars.lastDeletedMessage = new Discord.MessageEmbed()
-        //       .setColor('#FF0000')
-        //       .setAuthor('Message Deleted')
-        //       .attachFiles([url])
-        //       .addField(message.member.user.tag, msg)
-        //       .addField("Channel", message.channel.name)
-        //       .addField("Time", new Date().toLocaleString());
-        qVars.lastDeletedMessage = new Discord.MessageEmbed()
-              .setColor('#FF0000')
-              .setAuthor('Message Deleted')
-              .attachFiles([url])
-              .addField(message.member.user.tag, msg + " - also had attachement but attachemnt deletion logging not currently working")
-              .addField("Channel", message.channel.name)
-              .addField("Time", new Date().toLocaleString());
-      } else {
-        // qVars.lastDeletedMessage = new Discord.MessageEmbed()
-        //       .setColor('#FF0000')
-        //       .setAuthor('Message Deleted')
-        //       .attachFiles([url])
-        //       .addField(message.member.user.tag, "No Message - Only Attachment")
-        //       .addField("Channel", message.channel.name)
-        //       .addField("Time", new Date().toLocaleString());
-        qVars.lastDeletedMessage = new Discord.MessageEmbed()
-              .setColor('#FF0000')
-              .setAuthor('Message Deleted')
-              .addField(message.member.user.tag, "No Message - Only Attachment - Attachment deletion logging not currently working")
-              .addField("Channel", message.channel.name)
-              .addField("Time", new Date().toLocaleString());
-      }
-    }
-  } else {
-    // Log text only messages
-    qVars.lastDeletedMessage = new Discord.MessageEmbed()
-          .setColor('#FF0000')
-          .setAuthor('Message Deleted')
-          .addField(message.member.user.tag, msg)
-          .addField("Channel", message.channel.name)
-          .addField("Time", new Date().toLocaleString());
+    // Add image/file to embed
+    if (isImg)
+      qVars.lastDeletedMessage.setThumbnail(url);
+    else
+      qVars.lastDeletedMessage.attachFiles([url]);
   }
 
   // Send log message
@@ -164,9 +121,18 @@ qVars.CLIENT.on("message", async message => {
   if (message.author.bot)
     return;
 
-  // Save attachments in other server for logging purposes if deleted
-  if (message.attachments.size > 0)
-    qVars.CLIENT.channels.cache.get("737557883599847445").send(message.attachments.first().url);
+  // Save attachments for logging purposes if deleted
+  if (message.attachments.size > 0) {
+    // Check if attachment is an image
+    let url = message.attachments.first().url;
+    let isImg = url.match(/\.(jpeg|jpg|gif|png)$/) != null;
+
+    // Open attachment (and save in other channel if image) so Discord doesn't remove access
+    https.get(url, function(response) {
+      if (isImg)
+        qVars.CLIENT.channels.cache.get(qVars.IMGSAVEID).send(url);
+    });
+  }
 
   var command = message.content;
   var override = false;
