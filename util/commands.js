@@ -204,9 +204,9 @@ var cmds = function(message, keyword, command, buffName) {
       var output = "";
       var amnt = isNaN(parseInt(command)) ? 1 : parseInt(command);
       var catParts = [
-        message.guild.emojis.cache.find(emoji => emoji.name == 'catfeet'),
-        message.guild.emojis.cache.find(emoji => emoji.name == 'catbod'),
-        message.guild.emojis.cache.find(emoji => emoji.name == 'cathead'),
+        message.guild.emojis.cache.find(emoji => emoji.name == 'c_'),
+        message.guild.emojis.cache.find(emoji => emoji.name == 'a_'),
+        message.guild.emojis.cache.find(emoji => emoji.name == 't_'),
       ];
 
       for(let i = 0; i < amnt; i++)
