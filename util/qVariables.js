@@ -94,18 +94,32 @@ const embedColors = [
 
 var quotesOut = [];
 var brownoutOut = [];
-var lastDeletedMessage = new Discord.MessageEmbed()
-    .setColor('#FF0000')
-    .setAuthor('No deleted messages yet');
 var lastUpdate;
 var generalLastCommandTime = 0;
+var deletedMessages = [
+  new Discord.MessageEmbed()
+      .setColor('#FF0000')
+      .setAuthor('No deleted messages yet'),
+  new Discord.MessageEmbed()
+      .setColor('#FF0000')
+      .setAuthor('No deleted messages yet'),
+  new Discord.MessageEmbed()
+      .setColor('#FF0000')
+      .setAuthor('No deleted messages yet'),
+  new Discord.MessageEmbed()
+      .setColor('#FF0000')
+      .setAuthor('No deleted messages yet'),
+  new Discord.MessageEmbed()
+      .setColor('#FF0000')
+      .setAuthor('No deleted messages yet'),
+];
 
 module.exports = {
   quotesOut,
   brownoutOut,
   lastUpdate,
   generalLastCommandTime,
-  lastDeletedMessage,
+  deletedMessages,
   TIPSARR: tipsArray,
   EMBEDCOL: embedColors,
   CLIENT: client,

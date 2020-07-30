@@ -42,6 +42,7 @@ qVars.CLIENT.on('messageDelete', message => {
     return;
 
   var msg = message.cleanContent;
+  var currDeleted;
 
   if (message.cleanContent.length > 1020)
     msg = msg.substr(0, 1020) + "...";
@@ -49,7 +50,7 @@ qVars.CLIENT.on('messageDelete', message => {
     msg = "No Message - Only Attachment";
 
   // Create embed
-  qVars.lastDeletedMessage = new Discord.MessageEmbed()
+  currDeleted = new Discord.MessageEmbed()
         .setColor('#FF0000')
         .setAuthor('Message Deleted')
         .addField(message.member.user.tag, msg)
@@ -62,13 +63,17 @@ qVars.CLIENT.on('messageDelete', message => {
 
     // Add image/file to embed
     if (url.match(/\.(jpeg|jpg|gif|png)$/) != null)
-      qVars.lastDeletedMessage.setThumbnail(url);
+      currDeleted.setThumbnail(url);
     else
-      qVars.lastDeletedMessage.attachFiles([url]);
+      currDeleted.attachFiles([url]);
   }
 
+  // Update deleted messages array
+  qVars.deletedMessages.pop();
+  qVars.deletedMessages.unshift(currDeleted);
+
   // Send log message
-  qVars.CLIENT.channels.cache.get(qVars.LOGID).send({ embed: qVars.lastDeletedMessage });
+  qVars.CLIENT.channels.cache.get(qVars.LOGID).send({ embed: currDeleted });
 });
 
 // Runs on message edit

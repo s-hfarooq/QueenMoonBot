@@ -22,7 +22,7 @@ A bot for the [UIUC 2024 Discord server](https://discord.gg/2pFv4Wq)
 * `otter soup` to get soup
 * `otter 8ball [message]` to get an 8ball reply (only works in #spam)
 * `otter thirst` to get water messages
-* `otter snipe` to get the last deleted message
+* `otter snipe [number]` to get the nth deleted message (leave [number] blank to get the last deleted message)
 * `otter horny` to get bonk pictures
 * `otter sp @USER [amnt]` to mass ping a specific user where [amnt] is a number between 0 and 100 (must have ESC role to use this command)
 * `otter owoify [message]` to turn your message into an owo (leave [message] blank to owoify the previous sent message)

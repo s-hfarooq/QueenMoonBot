@@ -192,7 +192,10 @@ var cmds = function(message, keyword, command, buffName) {
       break;
 
     case "snipe":
-      message.channel.send({ embed: qVars.lastDeletedMessage });
+      var val = isNaN(parseInt(command)) ? 0 : parseInt(command);
+      if (val < 0 || val > 5)
+        val = 0;
+      message.channel.send({ embed: qVars.deletedMessages[val] });
       break;
 
     case "flip":
