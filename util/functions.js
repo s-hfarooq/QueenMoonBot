@@ -112,8 +112,7 @@ var sendRandImage = function(message, command, messageArray, channelID) {
     message.channel.send("Images are still loading. Try again in a few seconds.");
   } else {
     var amnt = isNaN(parseInt(command)) ? 1 : parseInt(command);
-    if (amnt > 5 || amnt < 0)
-      amnt = 1;
+    amnt = (amnt > 5 || amnt < 0) ? 1 : amnt;
 
     for (let i = 0; i < amnt; i++) {
       let rand = Math.floor(Math.random() * messageArray.length);
@@ -148,7 +147,11 @@ var massPingUser = function(message, command) {
   message.delete();
 
   // Send log message
-  qVars.CLIENT.channels.cache.get(qVars.LOGID).send("<@" + message.author + "> mentioned " + atUser + " " + amnt + " times in <#" + message.channel.id + ">");
+  var logMsg = new Discord.MessageEmbed()
+        .setColor('#FFFF33')
+        .setAuthor(`${message.member.user.tag} mentioned ${message.mentions.users.first().tag} ${amnt} times in ${message.channel.name}`);
+
+  qVars.CLIENT.channels.cache.get(qVars.LOGID).send({ embed: logMsg });
 
   // Mass ping
   for (let i = 0; i < amnt; i++) {

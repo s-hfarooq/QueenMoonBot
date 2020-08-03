@@ -11,20 +11,20 @@ var cmds = function(message, keyword, command, buffName) {
 
     case "usercount":
       const userAmnt = qVars.CLIENT.guilds.cache.get(message.guild.id).memberCount;
-      message.channel.send("There are currently " + userAmnt + " people in this server");
+      message.channel.send(`There are currently ${userAmnt} people in this server`);
       break;
 
     case "buff":
-      var output = "buff " + buffName + " buff " + buffName;
+      var output = `buff ${buffName} buff ${buffName}`;
       if(output.length > 2000)
         output = "too buff";
       message.channel.send(output);
       break;
 
     case "8ball":
-      var output = "That command can only be used in <#" + qVars.SPAMID + ">";
+      var output = `That command can only be used in <#${qVars.SPAMID}>`;
       if (message.channel.id === qVars.SPAMID)
-        output = "Question: " + command + "\nAnswer: " + qVars.RESPONSES[Math.floor(Math.random() * qVars.RESPONSES.length)];
+        output = `Question: ${command}\nAnswer: ${qVars.RESPONSES[Math.floor(Math.random() * qVars.RESPONSES.length)]}`;
       message.channel.send(output);
       break;
 
@@ -114,7 +114,7 @@ var cmds = function(message, keyword, command, buffName) {
       if (message.channel.id === qVars.BROWNOUTID)
         qFuncs.sendRandImage(message, command, qVars.brownoutOut, qVars.BROWNOUTID);
       else
-        message.channel.send("That command can only be used in <#" + qVars.BROWNOUTID + ">");
+        message.channel.send(`That command can only be used in <#${qVars.BROWNOUTID}>`);
       break;
 
     case "help":
@@ -197,8 +197,7 @@ var cmds = function(message, keyword, command, buffName) {
 
     case "snipe":
       var val = (isNaN(parseInt(command)) ? 0 : parseInt(command)) - 1;
-      if (val < 0 || val > 5)
-        val = 0;
+      val = (val < 0 || val > 5) ? 0 : val;
       message.channel.send({ embed: qVars.deletedMessages[val] });
       break;
 
