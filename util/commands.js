@@ -213,24 +213,20 @@ var cmds = function(message, keyword, command, buffName) {
         message.guild.emojis.cache.find(emoji => emoji.name == 'c_'),
         message.guild.emojis.cache.find(emoji => emoji.name == 'a_'),
         message.guild.emojis.cache.find(emoji => emoji.name == 't_'),
-      ];
-
-      var catPartsBackwards = [
         message.guild.emojis.cache.find(emoji => emoji.name == 'cB'),
         message.guild.emojis.cache.find(emoji => emoji.name == 'aB'),
         message.guild.emojis.cache.find(emoji => emoji.name == 'tB'),
       ];
 
+      var offset = 0;
       if (amnt < 0) {
         amnt *= -1;
-        for(let i = 0; i < amnt; i++)
-          output += `${catPartsBackwards[1]}`;
-        output = `${catPartsBackwards[0]}${output}${catPartsBackwards[2]}`;
-      } else {
-        for(let i = 0; i < amnt; i++)
-          output += `${catParts[1]}`;
-        output = `${catParts[0]}${output}${catParts[2]}`;
+        offset = 3;
       }
+
+      for(let i = 0; i < amnt; i++)
+        output += `${catParts[1 + offset]}`;
+      output = `${catParts[0 + offset]}${output}${catParts[2 + offset]}`;
 
       if (output.length > 2000)
         output = "too looong";
