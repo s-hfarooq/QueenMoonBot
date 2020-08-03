@@ -28,6 +28,10 @@ var cmds = function(message, keyword, command, buffName) {
       message.channel.send(output);
       break;
 
+    case "house":
+      message.channel.send("House may be house may not");
+      break;
+
     case "thirst":
       var rand = Math.floor(Math.random() * qVars.REMINDERS.length);
       message.channel.send(qVars.REMINDERS[rand]);
