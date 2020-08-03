@@ -215,10 +215,23 @@ var cmds = function(message, keyword, command, buffName) {
         message.guild.emojis.cache.find(emoji => emoji.name == 't_'),
       ];
 
-      for(let i = 0; i < amnt; i++)
-        output += `${catParts[1]}`;
+      var catPartsBackwards = [
+        message.guild.emojis.cache.find(emoji => emoji.name == 'cB'),
+        message.guild.emojis.cache.find(emoji => emoji.name == 'aB'),
+        message.guild.emojis.cache.find(emoji => emoji.name == 'tB'),
+      ];
 
-      output = `${catParts[0]}${output}${catParts[2]}`;
+      if (amnt < 0) {
+        amnt *= -1;
+        for(let i = 0; i < amnt; i++)
+          output += `${catPartsBackwards[1]}`;
+        output = `${catPartsBackwards[0]}${output}${catPartsBackwards[2]}`;
+      } else {
+        for(let i = 0; i < amnt; i++)
+          output += `${catParts[1]}`;
+        output = `${catParts[0]}${output}${catParts[2]}`;
+      }
+
       if (output.length > 2000)
         output = "too looong";
       message.channel.send(output);
