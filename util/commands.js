@@ -226,7 +226,7 @@ var cmds = function(message, keyword, command, buffName) {
 
       for(let i = 0; i < amnt; i++)
         output += `${catParts[1 + offset]}`;
-      output = `${catParts[0 + offset]}${output}${catParts[2 + offset]}`;
+      output = `${catParts[offset]}${output}${catParts[2 + offset]}`;
 
       if (output.length > 2000)
         output = "too looong";
