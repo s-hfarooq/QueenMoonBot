@@ -83,7 +83,7 @@ const tipsArray = [
   'Woah there bud, watch your language. I can’t read english.',
   'Corb should be legalized.',
   'Fun fact: You can have controversial and dramatic discussions without bigotry, racism, or even making fun of any demographic at all! *This post was funded by the server propaganda team.*',
-  'Take nsfw topics to #quarantine for maximum explosions.',
+  'Take nsfw topics to #social_general_nsfw for maximum explosions.',
 ];
 
 // Colors for tips command embed
@@ -114,7 +114,7 @@ var location = [
 var pronouns = [
   "He/Him",
   "She/Her",
-  "They,Them"
+  "They/Them"
 ];
 
 var colleges = [
@@ -146,7 +146,7 @@ var livingLoc = [
 
 var acesMajors = [
   "Agri-Accounting",
-  "AgBusiness",
+  "Ag Business",
   "Agricultural and Biological Engineering",
   "Agricultural and Consumer Economics",
   "Agricultural Communications",
