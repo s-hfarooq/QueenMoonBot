@@ -5,6 +5,7 @@ const config = require("./util/config.json");
 const qVars = require("./util/qVariables.js");
 const qFuncs = require("./util/functions.js");
 const commands = require("./util/commands.js");
+const userRoles = require("./util/userRoles.js");
 
 // Runs on start
 qVars.CLIENT.on("ready", () => {
@@ -169,43 +170,13 @@ qVars.CLIENT.on("message", async message => {
 // Runs on reaction added
 qVars.CLIENT.on('messageReactionAdd', async (reaction, user) => {
   let message = reaction.message;
-
-  // Set pronoun roles
-  if (message.channel.name == 'set_roles_here') {
-      if (reaction.emoji.name === "1️⃣") {
-        let he_him = message.guild.roles.cache.find(role => role.name === "He/Him");
-        reaction.message.guild.member(user.id).roles.add(he_him);
-      }
-      if (reaction.emoji.name === "2️⃣") {
-        let she_her = message.guild.roles.cache.find(role => role.name === "She/Her");
-        reaction.message.guild.member(user.id).roles.add(she_her);
-      }
-      if (reaction.emoji.name === "3️⃣") {
-        let they_them = message.guild.roles.cache.find(role => role.name === "They/Them");
-        reaction.message.guild.member(user.id).roles.add(they_them);
-      }
-  }
+  userRoles.userReactRoles(message, user, reaction, true);
 });
 
 // Runs on reaction removed
 qVars.CLIENT.on('messageReactionRemove', async (reaction, user) => {
   let message = reaction.message;
-
-  // Remove pronoun roles
-  if (message.channel.name == 'set_roles_here') {
-      if (reaction.emoji.name === "1️⃣") {
-        let he_him = message.guild.roles.cache.find(role => role.name === "He/Him");
-        reaction.message.guild.member(user.id).roles.remove(he_him);
-      }
-      if (reaction.emoji.name === "2️⃣") {
-        let she_her = message.guild.roles.cache.find(role => role.name === "She/Her");
-        reaction.message.guild.member(user.id).roles.remove(she_her);
-      }
-      if (reaction.emoji.name === "3️⃣") {
-        let they_them = message.guild.roles.cache.find(role => role.name === "They/Them");
-        reaction.message.guild.member(user.id).roles.remove(they_them);
-      }
-  }
+  userRoles.userReactRoles(message, user, reaction, false);
 });
 
 qVars.CLIENT.login(config.token);

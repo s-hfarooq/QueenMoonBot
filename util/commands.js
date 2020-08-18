@@ -64,11 +64,12 @@ var cmds = function(message, keyword, command, buffName) {
         files: ["https://cdn.discordapp.com/attachments/697639057592811650/712531761774461008/Corn_is_the_best_crop__wheat_is_worst.mp4"]
       });
       break;
-      
+
     case "korn":
       message.channel.send("https://youtu.be/vclUfHGKpOc");
       break;
 
+    case "il":
     case "illinois":
       message.channel.send({
         files: ['https://media.discordapp.net/attachments/654785556215103488/692035239366885416/tempFileForShare_20200302-175024.png?width=546&height=679']
