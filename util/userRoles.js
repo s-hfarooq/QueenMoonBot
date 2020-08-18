@@ -13,7 +13,7 @@ var userReactRoles = function(message, user, reaction, isSet) {
     if(isSet && getNumOfMajors(message, user.id) >= 1) {
       // DM user
       if(msgNum > 3 && msgNum < 19) {
-        qVars.CLIENT.users.cache.get(user.id).send("You may only set up to two majors using auto-roles. If you would like more, please DM a mod (anyone on the server with the @ESC or @mod roles) for assistance.");
+        qVars.CLIENT.users.cache.get(user.id).send("You may only set a single major using auto-roles. If you would like more, please DM a mod (anyone on the server with the @ESC or @mod roles) for assistance.");
         return;
       }
     }
