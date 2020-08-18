@@ -17,11 +17,29 @@ var userReactRoles = function(message, user, reaction, isSet) {
       if(locOfEmoji == -1 || locOfEmoji > qVars.YEARS.length - 1)
         return;
 
+      if (isSet) {
+        for(let i = 0; i < qVars.YEARS.length; i++) {
+          if(message.guild.member(user.id).roles.cache.find(r => r.name === qVars.YEARS[i])) {
+            qVars.CLIENT.users.cache.get(user.id).send("You may only have a single graduation year. Please de-select the other year before setting a new one.");
+            return;
+          }
+        }
+      }
+
       editRoles(message, user.id, qVars.YEARS[locOfEmoji], isSet);
     } else if (message.id == '745162371848208384') {
       // Location
       if(locOfEmoji == -1 || locOfEmoji > qVars.LOCATION.length - 1)
         return;
+
+      if (isSet) {
+        for(let i = 0; i < qVars.LOCATION.length; i++) {
+          if(message.guild.member(user.id).roles.cache.find(r => r.name === qVars.LOCATION[i])) {
+            qVars.CLIENT.users.cache.get(user.id).send("You may only have a single location. Please de-select the other location before setting a new one.");
+            return;
+          }
+        }
+      }
 
       editRoles(message, user.id, qVars.LOCATION[locOfEmoji], isSet);
     } else if (message.id == '745162420456259614') {
@@ -34,6 +52,15 @@ var userReactRoles = function(message, user, reaction, isSet) {
         // Staying
         if(locOfEmoji == -1 || locOfEmoji > qVars.LIVINGLOC.length - 1)
           return;
+
+        if (isSet) {
+          for(let i = 0; i < qVars.LOCATION.length; i++) {
+            if(message.guild.member(user.id).roles.cache.find(r => r.name === qVars.LIVINGLOC[i])) {
+              qVars.CLIENT.users.cache.get(user.id).send("You may only have a single living location. Please de-select the other living location before setting a new one.");
+              return;
+            }
+          }
+        }
 
         editRoles(message, user.id, qVars.LIVINGLOC[locOfEmoji], isSet);
     } else if (message.id == '745162532401971270') {
