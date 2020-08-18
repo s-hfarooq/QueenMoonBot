@@ -19,7 +19,7 @@ var userReactRoles = function(message, user, reaction, isSet) {
 
       if (isSet) {
         if(message.guild.member(user.id).roles.cache.find(r => r.name === "Prospective Student"))
-          editRoles(messaage, user.id, "Prospective Student", false);
+          editRoles(message, user.id, "Prospective Student", false);
 
         for(let i = 0; i < qVars.YEARS.length; i++) {
           if(message.guild.member(user.id).roles.cache.find(r => r.name === qVars.YEARS[i])) {
