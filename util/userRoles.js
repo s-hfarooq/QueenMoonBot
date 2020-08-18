@@ -10,7 +10,7 @@ var userReactRoles = function(message, user, reaction, isSet) {
       return;
 
     // Max of two majors using auto-roles
-    if(isSet && getNumOfMajors(message, user.id) >= 2) {
+    if(isSet && getNumOfMajors(message, user.id) >= 1) {
       // DM user
       if(msgNum > 3 && msgNum < 19) {
         qVars.CLIENT.users.cache.get(user.id).send("You may only set up to two majors using auto-roles. If you would like more, please DM a mod (anyone on the server with the @ESC or @mod roles) for assistance.");
@@ -27,7 +27,6 @@ var userReactRoles = function(message, user, reaction, isSet) {
           return;
 
         if (isSet) {
-          //if(message.guild.member(user.id).roles.cache.find(r => r.name === "Prospective Student"))
           editRoles(message, user.id, "Prospective Student", false);
 
           for(let i = 0; i < qVars.YEARS.length - 1; i++) {
@@ -297,6 +296,34 @@ var userReactRoles = function(message, user, reaction, isSet) {
         editRoles(message, user.id, qVars.SPECIALROLES[locOfEmoji], isSet);
         break;
     }
+
+    // if remove, look through roles and make sure college still exists - doesn't work properly, should probably fix at some point
+    // if (!isSet) {
+    //   var allMajors = [
+    //     qVars.ACESMAJORS,
+    //     qVars.HEALTHMAJORS,
+    //     qVars.EDUCATIONMAJORS,
+    //     qVars.ARTMAJORS,
+    //     qVars.LASMAJORS,
+    //     qVars.MEDIAMAJORS,
+    //     qVars.DGSMAJORS,
+    //     qVars.GIESMAJORS,
+    //     qVars.GRAINGERMAJORS,
+    //     qVars.INFOSCIMAJORS,
+    //     qVars.SOCIALMAJORS,
+    //   ];
+    //
+    //   for(let i = 0; i < allMajors.length; i++) {
+    //     for(let j = 0; j < allMajors[i].length; j++) {
+    //       if(message.guild.member(user.id).roles.cache.find(r => r.name === allMajors[i][j])) {
+    //         if(i == 10)
+    //           editRoles(message, user.id, qVars.COLLEGES[1], true);
+    //         else
+    //           editRoles(message, user.id, qVars.COLLEGES[i], true);
+    //       }
+    //     }
+    //   }
+    // }
 
     return;
   }
