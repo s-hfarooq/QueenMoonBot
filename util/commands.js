@@ -16,7 +16,7 @@ var cmds = function(message, keyword, command, buffName) {
 
     case "buff":
       var output = `buff ${buffName} buff ${buffName}`;
-      if(output.length > 2000)
+      if (output.length > 2000)
         output = "too buff";
       message.channel.send(output);
       break;
@@ -104,7 +104,9 @@ var cmds = function(message, keyword, command, buffName) {
     case "rat":
       var output = "That command cannot be used in this channel!";
       if (message.channel.id !== qVars.ACADEMICGENERALID)
-        output = { files: ['https://cdn.discordapp.com/attachments/697639057592811650/713237658020872192/image0.jpg'] };
+        output = {
+          files: ['https://cdn.discordapp.com/attachments/697639057592811650/713237658020872192/image0.jpg']
+        };
       message.channel.send(output);
       break;
 
@@ -124,31 +126,35 @@ var cmds = function(message, keyword, command, buffName) {
 
     case "help":
       const helpCommand = new Discord.MessageEmbed()
-            .setColor('#d60076')
-            .setAuthor('Help')
-            .addField('otter usercount', 'See how many users are currently in the server', false)
-            .addField('otter buff[name]', 'Buff [name]', false)
-            .addField('otter waitwhen', 'Get the when did I ask screenshot', false)
-            .addField('otter illinois', 'Get a map of Illinois',false)
-            .addField('otter quote', 'Get a random image from #quotes', false)
-            .addField('otter 8ball [message]', 'Get an 8ball reply (only works in #spam)', false)
-            .addField('otter thirst', 'Get water messages', false)
-            .addField('otter contribute', 'Get [a link to the GitHub repo](https://github.com/s-hfarooq/AlmaBotter)', false)
-            .addField('View all commands', '[View the README on GitHub](https://github.com/s-hfarooq/AlmaBotter/blob/master/README.md)', false);
-      message.channel.send({ embed: helpCommand });
+        .setColor('#d60076')
+        .setAuthor('Help')
+        .addField('otter usercount', 'See how many users are currently in the server', false)
+        .addField('otter buff[name]', 'Buff [name]', false)
+        .addField('otter waitwhen', 'Get the when did I ask screenshot', false)
+        .addField('otter illinois', 'Get a map of Illinois', false)
+        .addField('otter quote', 'Get a random image from #quotes', false)
+        .addField('otter 8ball [message]', 'Get an 8ball reply (only works in #spam)', false)
+        .addField('otter thirst', 'Get water messages', false)
+        .addField('otter contribute', 'Get [a link to the GitHub repo](https://github.com/s-hfarooq/AlmaBotter)', false)
+        .addField('View all commands', '[View the README on GitHub](https://github.com/s-hfarooq/AlmaBotter/blob/master/README.md)', false);
+      message.channel.send({
+        embed: helpCommand
+      });
       break;
 
     case "rules":
       const rulesEmbed = new Discord.MessageEmbed()
-            .setColor('#7CFC00')
-            .setAuthor('Rules')
-            .addField('Rule 1', 'Don\'t harass the mods or each other', false)
-            .addField('Rule 2', 'No comments aimed to offend or hurt anyone else', false)
-            .addField('Rule 3', 'Don\'t ask for mod or moderation privileges', false)
-            .addField('Rule 4', ' Don\'t grind @MEE6 XP points',false)
-            .addField('Rule 5', 'Don\'t spam (if you must, limit it to #spam)', false)
-            .addField('Note', 'Failure to follow these rules may result in a warning, mute, or ban', false)
-      message.channel.send({ embed: rulesEmbed });
+        .setColor('#7CFC00')
+        .setAuthor('Rules')
+        .addField('Rule 1', 'Don\'t harass the mods or each other', false)
+        .addField('Rule 2', 'No comments aimed to offend or hurt anyone else', false)
+        .addField('Rule 3', 'Don\'t ask for mod or moderation privileges', false)
+        .addField('Rule 4', ' Don\'t grind @MEE6 XP points', false)
+        .addField('Rule 5', 'Don\'t spam (if you must, limit it to #spam)', false)
+        .addField('Note', 'Failure to follow these rules may result in a warning, mute, or ban', false)
+      message.channel.send({
+        embed: rulesEmbed
+      });
       break;
 
     case "respect":
@@ -161,9 +167,11 @@ var cmds = function(message, keyword, command, buffName) {
         message.channel.send(qVars.TIPSARR[rand]);
       } else {
         const tipEmbed = new Discord.MessageEmbed()
-              .setColor(qVars.EMBEDCOL[Math.floor(Math.random() * qVars.EMBEDCOL.length)])
-              .addField('Tip', qVars.TIPSARR[rand], false)
-        message.channel.send({ embed: tipEmbed });
+          .setColor(qVars.EMBEDCOL[Math.floor(Math.random() * qVars.EMBEDCOL.length)])
+          .addField('Tip', qVars.TIPSARR[rand], false)
+        message.channel.send({
+          embed: tipEmbed
+        });
       }
       break;
 
@@ -203,7 +211,9 @@ var cmds = function(message, keyword, command, buffName) {
     case "snipe":
       var val = (isNaN(parseInt(command)) ? 0 : parseInt(command)) - 1;
       val = (val < 0 || val > 5) ? 0 : val;
-      message.channel.send({ embed: qVars.deletedMessages[val] });
+      message.channel.send({
+        embed: qVars.deletedMessages[val]
+      });
       break;
 
     case "flip":
@@ -229,7 +239,7 @@ var cmds = function(message, keyword, command, buffName) {
         offset = 3;
       }
 
-      for(let i = 0; i < amnt; i++)
+      for (let i = 0; i < amnt; i++)
         output += `${catParts[1 + offset]}`;
       output = `${catParts[offset]}${output}${catParts[2 + offset]}`;
 

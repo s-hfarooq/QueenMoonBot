@@ -5,7 +5,9 @@ const qVars = require("./qVariables.js");
 
 // Makes sure that counting game is on track
 var countingGameModeration = function(message) {
-  message.channel.messages.fetch({ limit: 2 }).then(messages => {
+  message.channel.messages.fetch({
+    limit: 2
+  }).then(messages => {
     // Delete bot messages
     const lastMessage = messages.array();
     if (lastMessage[1].author.bot) {
@@ -39,7 +41,9 @@ var countingGameModeration = function(message) {
 
 // owo and spongebobify command function
 var changeMessage = function(message, command, type) {
-  message.channel.messages.fetch({ limit: 2 }).then(messages => {
+  message.channel.messages.fetch({
+    limit: 2
+  }).then(messages => {
     const lastMessage = messages.array();
     var usingLast = true;
     var itemToChange = lastMessage[1].content;
@@ -148,15 +152,17 @@ var massPingUser = function(message, command) {
 
   // Send log message
   var logMsg = new Discord.MessageEmbed()
-        .setColor('#FFFF33')
-        .setAuthor(`${message.member.user.tag} mentioned ${message.mentions.users.first().tag} ${amnt} times in ${message.channel.name}`);
+    .setColor('#FFFF33')
+    .setAuthor(`${message.member.user.tag} mentioned ${message.mentions.users.first().tag} ${amnt} times in ${message.channel.name}`);
 
-  qVars.CLIENT.channels.cache.get(qVars.LOGID).send({ embed: logMsg });
+  qVars.CLIENT.channels.cache.get(qVars.LOGID).send({
+    embed: logMsg
+  });
 
   // Mass ping
   for (let i = 0; i < amnt; i++) {
     message.channel.send(atUser).then(sentMessage => {
-        sentMessage.delete();
+      sentMessage.delete();
     });
   }
 }

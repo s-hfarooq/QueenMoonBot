@@ -40,7 +40,9 @@ const reminders = [
   'u thirsty hoe',
   'It is important to drink 8 glasses of water a day.',
   "goddammit i'm running out of creative ways to insult you people",
-  { files: ['https://cdn.discordapp.com/attachments/669726484772159488/725548315479113778/iqggq6rypn651.png'] }
+  {
+    files: ['https://cdn.discordapp.com/attachments/669726484772159488/725548315479113778/iqggq6rypn651.png']
+  }
 ];
 
 // Responses for horny command
@@ -56,8 +58,9 @@ const hLinks = [
 ];
 
 // Responses for tips command
-const tipsArray = [
-  { files: ['https://cdn.discordapp.com/attachments/697648147941294160/732469969949818890/q-tip-1518552383.jpg'] },
+const tipsArray = [{
+    files: ['https://cdn.discordapp.com/attachments/697648147941294160/732469969949818890/q-tip-1518552383.jpg']
+  },
   'If you want consent, just send a polite DM! If they say no, chances are they are not being sarcastic. If they say yes, well that\'s not my business.',
   'Sexualizing people and harassing people can start #metoo 2 electric boogalo!',
   'If they didn\'t say they were comfortable with being sexualized, sexualizing them is a Russian roulette with 5 bullets in a 6 bullet chamber!',
@@ -334,20 +337,20 @@ var lastUpdate;
 var generalLastCommandTime = 0;
 var deletedMessages = [
   new Discord.MessageEmbed()
-      .setColor('#FF0000')
-      .setAuthor('No deleted messages yet'),
+  .setColor('#FF0000')
+  .setAuthor('No deleted messages yet'),
   new Discord.MessageEmbed()
-      .setColor('#FF0000')
-      .setAuthor('No deleted messages yet'),
+  .setColor('#FF0000')
+  .setAuthor('No deleted messages yet'),
   new Discord.MessageEmbed()
-      .setColor('#FF0000')
-      .setAuthor('No deleted messages yet'),
+  .setColor('#FF0000')
+  .setAuthor('No deleted messages yet'),
   new Discord.MessageEmbed()
-      .setColor('#FF0000')
-      .setAuthor('No deleted messages yet'),
+  .setColor('#FF0000')
+  .setAuthor('No deleted messages yet'),
   new Discord.MessageEmbed()
-      .setColor('#FF0000')
-      .setAuthor('No deleted messages yet'),
+  .setColor('#FF0000')
+  .setAuthor('No deleted messages yet'),
 ];
 
 module.exports = {

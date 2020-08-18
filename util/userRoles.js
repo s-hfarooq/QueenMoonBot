@@ -3,34 +3,36 @@ const qVars = require("./qVariables.js");
 
 var userReactRoles = function(message, user, reaction, isSet) {
   if (message.channel.id == '745160938692280360') {
-    // Find which message
-    var msgs = ['745162331662843984', '745162371848208384', '745162420456259614', '745162473275129869', '745162532401971270', '745162562588639261', '745162595991814155', '745162634554376242', '745162672320020490', '745162688476217375', '745162728934735884', '745162751248171059', '745162770617598032', '745162802137792655', '745162844579823637', '745162874434879549', '745162909335814145', '745162937890635896', '745162964973125672', '745162998473162852'];
+    // Find which message was reacted
+    var msgs = ['745162331662843984', '745162371848208384', '745162420456259614', '745162473275129869', '745162532401971270', '745162562588639261',
+      '745162595991814155', '745162634554376242', '745162672320020490', '745162688476217375', '745162728934735884', '745162751248171059',
+      '745162770617598032', '745162802137792655', '745162844579823637', '745162874434879549', '745162909335814145', '745162937890635896',
+      '745162964973125672', '745162998473162852'
+    ];
+
     var msgNum = msgs.indexOf(message.id);
-    if(msgNum < 0)
+    if (msgNum < 0)
       return;
 
-    // Max of two majors using auto-roles
-    if(isSet && getNumOfMajors(message, user.id) >= 1) {
-      // DM user
-      if(msgNum > 3 && msgNum < 19) {
-        qVars.CLIENT.users.cache.get(user.id).send("You may only set a single major using auto-roles. If you would like more, please DM a mod (anyone on the server with the @ESC or @mod roles) for assistance.");
-        return;
-      }
+    // Max of one major using auto-roles
+    if (isSet && msgNum > 3 && msgNum < 19 && getNumOfMajors(message, user.id) >= 1) {
+      qVars.CLIENT.users.cache.get(user.id).send("You may only set a single major using auto-roles. If you would like more, please DM a mod (anyone on the server with the @ESC or @mod roles) for assistance.");
+      return;
     }
 
     var locOfEmoji = qVars.LETTEREMOJIS.indexOf(reaction.emoji.name);
 
-    switch(msgNum) {
+    switch (msgNum) {
       case 0:
         // Year
-        if(locOfEmoji == -1 || locOfEmoji > qVars.YEARS.length - 1)
+        if (locOfEmoji == -1 || locOfEmoji > qVars.YEARS.length - 1)
           return;
 
         if (isSet) {
           editRoles(message, user.id, "Prospective Student", false);
 
-          for(let i = 0; i < qVars.YEARS.length - 1; i++) {
-            if(message.guild.member(user.id).roles.cache.find(r => r.name === qVars.YEARS[i])) {
+          for (let i = 0; i < qVars.YEARS.length - 1; i++) {
+            if (message.guild.member(user.id).roles.cache.find(r => r.name === qVars.YEARS[i])) {
               qVars.CLIENT.users.cache.get(user.id).send("You may only have a single graduation year. Please de-select the other year before setting a new one.");
               return;
             }
@@ -38,16 +40,27 @@ var userReactRoles = function(message, user, reaction, isSet) {
         }
 
         editRoles(message, user.id, qVars.YEARS[locOfEmoji], isSet);
+
+        if (!isSet) {
+          var amnt = 0;
+          for (let i = 0; i < qVars.YEARS.length - 1; i++) {
+            if (message.guild.member(user.id).roles.cache.find(r => r.name === qVars.YEARS[i]))
+              amnt++
+          }
+
+          if (amnt == 0)
+            editRoles(message, user.id, "Prospective Student", true);
+        }
         break;
 
       case 1:
         // Location
-        if(locOfEmoji == -1 || locOfEmoji > qVars.LOCATION.length - 1)
+        if (locOfEmoji == -1 || locOfEmoji > qVars.LOCATION.length - 1)
           return;
 
         if (isSet) {
-          for(let i = 0; i < qVars.LOCATION.length; i++) {
-            if(message.guild.member(user.id).roles.cache.find(r => r.name === qVars.LOCATION[i])) {
+          for (let i = 0; i < qVars.LOCATION.length; i++) {
+            if (message.guild.member(user.id).roles.cache.find(r => r.name === qVars.LOCATION[i])) {
               qVars.CLIENT.users.cache.get(user.id).send("You may only have a single location. Please de-select the other location before setting a new one.");
               return;
             }
@@ -59,33 +72,33 @@ var userReactRoles = function(message, user, reaction, isSet) {
 
       case 2:
         // Pronouns
-        if(locOfEmoji == -1 || locOfEmoji > qVars.PRONOUNS.length - 1)
+        if (locOfEmoji == -1 || locOfEmoji > qVars.PRONOUNS.length - 1)
           return;
 
         editRoles(message, user.id, qVars.PRONOUNS[locOfEmoji], isSet);
         break;
 
       case 3:
-          // Staying
-          if(locOfEmoji == -1 || locOfEmoji > qVars.LIVINGLOC.length - 1)
-            return;
+        // Staying
+        if (locOfEmoji == -1 || locOfEmoji > qVars.LIVINGLOC.length - 1)
+          return;
 
-          if (isSet) {
-            for(let i = 0; i < qVars.LIVINGLOC.length; i++) {
-              if(message.guild.member(user.id).roles.cache.find(r => r.name === qVars.LIVINGLOC[i])) {
-                qVars.CLIENT.users.cache.get(user.id).send("You may only have a single living location. Please de-select the other living location before setting a new one.");
-                return;
-              }
+        if (isSet) {
+          for (let i = 0; i < qVars.LIVINGLOC.length; i++) {
+            if (message.guild.member(user.id).roles.cache.find(r => r.name === qVars.LIVINGLOC[i])) {
+              qVars.CLIENT.users.cache.get(user.id).send("You may only have a single living location. Please de-select the other living location before setting a new one.");
+              return;
             }
           }
+        }
 
-          editRoles(message, user.id, qVars.LIVINGLOC[locOfEmoji], isSet);
-          break;
+        editRoles(message, user.id, qVars.LIVINGLOC[locOfEmoji], isSet);
+        break;
 
       case 4:
         // ACES 1
         // Handle special case roles
-        switch(locOfEmoji) {
+        switch (locOfEmoji) {
           case -1:
             return;
 
@@ -111,7 +124,7 @@ var userReactRoles = function(message, user, reaction, isSet) {
             break;
         }
 
-        if(locOfEmoji > 6)
+        if (locOfEmoji > 6)
           locOfEmoji -= 3;
         else
           locOfEmoji--;
@@ -129,7 +142,7 @@ var userReactRoles = function(message, user, reaction, isSet) {
 
       case 6:
         // Health Sciences
-        if(locOfEmoji == -1 || locOfEmoji > 5)
+        if (locOfEmoji == -1 || locOfEmoji > 5)
           return;
 
         editRoles(message, user.id, qVars.COLLEGES[1], isSet);
@@ -138,7 +151,7 @@ var userReactRoles = function(message, user, reaction, isSet) {
 
       case 7:
         // Education
-        if(locOfEmoji == -1 || locOfEmoji > 4)
+        if (locOfEmoji == -1 || locOfEmoji > 4)
           return;
 
         editRoles(message, user.id, qVars.COLLEGES[2], isSet);
@@ -147,7 +160,7 @@ var userReactRoles = function(message, user, reaction, isSet) {
 
       case 8:
         // Fine/Applied Arts 1
-        if(locOfEmoji == -1 || locOfEmoji > 19)
+        if (locOfEmoji == -1 || locOfEmoji > 19)
           return;
 
         editRoles(message, user.id, qVars.COLLEGES[3], isSet);
@@ -156,7 +169,7 @@ var userReactRoles = function(message, user, reaction, isSet) {
 
       case 9:
         // Fine/Applied Arts 2
-        if(locOfEmoji == -1 || locOfEmoji > 8)
+        if (locOfEmoji == -1 || locOfEmoji > 8)
           return;
 
         locOfEmoji += 20;
@@ -166,7 +179,7 @@ var userReactRoles = function(message, user, reaction, isSet) {
 
       case 10:
         // LAS 1
-        if(locOfEmoji == -1 || locOfEmoji > 19)
+        if (locOfEmoji == -1 || locOfEmoji > 19)
           return;
 
         editRoles(message, user.id, qVars.COLLEGES[4], isSet);
@@ -175,7 +188,7 @@ var userReactRoles = function(message, user, reaction, isSet) {
 
       case 11:
         // LAS 2
-        if(locOfEmoji == -1 || locOfEmoji > 19)
+        if (locOfEmoji == -1 || locOfEmoji > 19)
           return;
 
         locOfEmoji += 20;
@@ -185,17 +198,17 @@ var userReactRoles = function(message, user, reaction, isSet) {
 
       case 12:
         // LAS 3
-        if(locOfEmoji == -1 || locOfEmoji > 17)
+        if (locOfEmoji == -1 || locOfEmoji > 17)
           return;
 
         editRoles(message, user.id, qVars.COLLEGES[4], isSet);
 
-        if(locOfEmoji > 8) {
+        if (locOfEmoji > 8) {
           // add CS role
           editRoles(message, user.id, "CompSci + X", isSet);
           locOfEmoji -= 8;
 
-          switch(locOfEmoji) {
+          switch (locOfEmoji) {
             // add +x role
             case 1:
               editRoles(message, user.id, "Geography", isSet);
@@ -236,7 +249,7 @@ var userReactRoles = function(message, user, reaction, isSet) {
 
       case 13:
         // Media
-        if(locOfEmoji == -1 || locOfEmoji > qVars.MEDIAMAJORS.length - 1)
+        if (locOfEmoji == -1 || locOfEmoji > qVars.MEDIAMAJORS.length - 1)
           return;
 
         editRoles(message, user.id, qVars.COLLEGES[5], isSet);
@@ -245,7 +258,7 @@ var userReactRoles = function(message, user, reaction, isSet) {
 
       case 14:
         // DGS
-        if(locOfEmoji == -1 || locOfEmoji > qVars.DGSMAJORS.length - 1)
+        if (locOfEmoji == -1 || locOfEmoji > qVars.DGSMAJORS.length - 1)
           return;
 
         editRoles(message, user.id, qVars.COLLEGES[6], isSet);
@@ -254,7 +267,7 @@ var userReactRoles = function(message, user, reaction, isSet) {
 
       case 15:
         // Gies
-        if(locOfEmoji == -1 || locOfEmoji > qVars.GIESMAJORS.length - 1)
+        if (locOfEmoji == -1 || locOfEmoji > qVars.GIESMAJORS.length - 1)
           return;
 
         editRoles(message, user.id, qVars.COLLEGES[7], isSet);
@@ -263,7 +276,7 @@ var userReactRoles = function(message, user, reaction, isSet) {
 
       case 16:
         // Grainger
-        if(locOfEmoji == -1 || locOfEmoji > qVars.GRAINGERMAJORS.length - 1)
+        if (locOfEmoji == -1 || locOfEmoji > qVars.GRAINGERMAJORS.length - 1)
           return;
 
         editRoles(message, user.id, qVars.COLLEGES[8], isSet);
@@ -272,7 +285,7 @@ var userReactRoles = function(message, user, reaction, isSet) {
 
       case 17:
         // Info Sci
-        if(locOfEmoji == -1 || locOfEmoji > qVars.INFOSCIMAJORS.length - 1)
+        if (locOfEmoji == -1 || locOfEmoji > qVars.INFOSCIMAJORS.length - 1)
           return;
 
         editRoles(message, user.id, qVars.COLLEGES[9], isSet);
@@ -281,7 +294,7 @@ var userReactRoles = function(message, user, reaction, isSet) {
 
       case 18:
         // Social Work
-        if(locOfEmoji == -1 || locOfEmoji > qVars.SOCIALMAJORS.length - 1)
+        if (locOfEmoji == -1 || locOfEmoji > qVars.SOCIALMAJORS.length - 1)
           return;
 
         editRoles(message, user.id, qVars.COLLEGES[1], isSet);
@@ -290,40 +303,12 @@ var userReactRoles = function(message, user, reaction, isSet) {
 
       case 19:
         // Special Roles
-        if(locOfEmoji == -1 || locOfEmoji > qVars.SPECIALROLES.length - 1)
+        if (locOfEmoji == -1 || locOfEmoji > qVars.SPECIALROLES.length - 1)
           return;
 
         editRoles(message, user.id, qVars.SPECIALROLES[locOfEmoji], isSet);
         break;
     }
-
-    // if remove, look through roles and make sure college still exists - doesn't work properly, should probably fix at some point
-    // if (!isSet) {
-    //   var allMajors = [
-    //     qVars.ACESMAJORS,
-    //     qVars.HEALTHMAJORS,
-    //     qVars.EDUCATIONMAJORS,
-    //     qVars.ARTMAJORS,
-    //     qVars.LASMAJORS,
-    //     qVars.MEDIAMAJORS,
-    //     qVars.DGSMAJORS,
-    //     qVars.GIESMAJORS,
-    //     qVars.GRAINGERMAJORS,
-    //     qVars.INFOSCIMAJORS,
-    //     qVars.SOCIALMAJORS,
-    //   ];
-    //
-    //   for(let i = 0; i < allMajors.length; i++) {
-    //     for(let j = 0; j < allMajors[i].length; j++) {
-    //       if(message.guild.member(user.id).roles.cache.find(r => r.name === allMajors[i][j])) {
-    //         if(i == 10)
-    //           editRoles(message, user.id, qVars.COLLEGES[1], true);
-    //         else
-    //           editRoles(message, user.id, qVars.COLLEGES[i], true);
-    //       }
-    //     }
-    //   }
-    // }
 
     return;
   }
@@ -332,7 +317,7 @@ var userReactRoles = function(message, user, reaction, isSet) {
 var editRoles = function(message, userId, roleName, isSet) {
   var currRole = message.guild.roles.cache.find(role => role.name === roleName);
 
-  if(isSet)
+  if (isSet)
     message.guild.member(userId).roles.add(currRole);
   else
     message.guild.member(userId).roles.remove(currRole);
@@ -355,12 +340,12 @@ var getNumOfMajors = function(message, userId) {
     qVars.SOCIALMAJORS,
   ];
 
-  for(let i = 0; i < allMajors.length; i++) {
-    for(let j = 0; j < allMajors[i].length; j++) {
-      if(message.guild.member(userId).roles.cache.find(r => r.name === allMajors[i][j]))
+  for (let i = 0; i < allMajors.length; i++) {
+    for (let j = 0; j < allMajors[i].length; j++) {
+      if (message.guild.member(userId).roles.cache.find(r => r.name === allMajors[i][j]))
         amnt++;
 
-      if(amnt >= 2)
+      if (amnt >= 2)
         return amnt;
     }
   }

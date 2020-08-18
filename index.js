@@ -52,11 +52,14 @@ qVars.CLIENT.on('messageDelete', message => {
 
   // Create embed
   currDeleted = new Discord.MessageEmbed()
-        .setColor('#FF0000')
-        .setAuthor('Message Deleted')
-        .addField(message.member.user.tag, msg)
-        .addField("Channel", message.channel.name)
-        .addField("Time", new Date().toLocaleString('en-US', { timeZone: 'America/Chicago', timeZoneName: 'short' }));
+    .setColor('#FF0000')
+    .setAuthor('Message Deleted')
+    .addField(message.member.user.tag, msg)
+    .addField("Channel", message.channel.name)
+    .addField("Time", new Date().toLocaleString('en-US', {
+      timeZone: 'America/Chicago',
+      timeZoneName: 'short'
+    }));
 
   // Add attachment to embed
   if (message.attachments.size > 0) {
@@ -74,7 +77,9 @@ qVars.CLIENT.on('messageDelete', message => {
   qVars.deletedMessages.unshift(currDeleted);
 
   // Send log message
-  qVars.CLIENT.channels.cache.get(qVars.LOGID).send({ embed: currDeleted });
+  qVars.CLIENT.channels.cache.get(qVars.LOGID).send({
+    embed: currDeleted
+  });
 });
 
 // Runs on message edit
@@ -86,22 +91,28 @@ qVars.CLIENT.on('messageUpdate', (oldMessage, newMessage) => {
   // Ensure messages aren't blank
   if (oldMessage.cleanContent && newMessage.cleanContent) {
     // Make sure text isn't too long
-    var oldMsg = oldMessage.cleanContent, newMsg = newMessage.cleanContent;
+    var oldMsg = oldMessage.cleanContent,
+      newMsg = newMessage.cleanContent;
     if (oldMsg.length > 1020)
       oldMsg = oldMsg.substr(0, 1020) + "...";
     if (newMsg.length > 1020)
       newMsg = newMsg.substr(0, 1020) + "...";
 
     var logMsg = new Discord.MessageEmbed()
-          .setColor('#F0E68C')
-          .setAuthor('Message Edited')
-          .addField("Old message", oldMsg)
-          .addField("New message", newMsg)
-          .addField("User", newMessage.member.user.tag)
-          .addField("Channel", newMessage.channel.name)
-          .addField("Time", new Date().toLocaleString('en-US', { timeZone: 'America/Chicago', timeZoneName: 'short' }));
+      .setColor('#F0E68C')
+      .setAuthor('Message Edited')
+      .addField("Old message", oldMsg)
+      .addField("New message", newMsg)
+      .addField("User", newMessage.member.user.tag)
+      .addField("Channel", newMessage.channel.name)
+      .addField("Time", new Date().toLocaleString('en-US', {
+        timeZone: 'America/Chicago',
+        timeZoneName: 'short'
+      }));
 
-    qVars.CLIENT.channels.cache.get(qVars.LOGID).send({ embed: logMsg });
+    qVars.CLIENT.channels.cache.get(qVars.LOGID).send({
+      embed: logMsg
+    });
   }
 });
 
@@ -146,7 +157,7 @@ qVars.CLIENT.on("message", async message => {
 
     if (message.channel.id !== qVars.ACADEMICGENERALID || timeDiff >= qVars.GENERALTIMEGAP) {
       // Get command keyword
-      var keyword = command.replace(/\s.*/,'').toLowerCase();
+      var keyword = command.replace(/\s.*/, '').toLowerCase();
 
       // If trying to use buff command, get the [name] desired
       var buffName = "";
