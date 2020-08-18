@@ -93,6 +93,240 @@ const embedColors = [
   '5E6669',
 ];
 
+// Roles arrays
+var letterEmojis = ["🇦", "🇧", "🇨", "🇩", "🇪", "🇫", "🇬", "🇭", "🇮", "🇯", "🇰", "🇱", "🇲", "🇳", "🇴", "🇵", "🇶", "🇷", "🇸", "🇹"];
+
+var years = [
+  "Alumni",
+  "2021",
+  "2022",
+  "2023",
+  "2024",
+  "Prospective Student"
+];
+
+var location = [
+  "In State",
+  "OOS",
+  "Int"
+]
+
+var pronouns = [
+  "He/Him",
+  "She/Her",
+  "They,Them"
+];
+
+var colleges = [
+  "ACES",
+  "AHS",
+  "Education",
+  "FAA",
+  "LAS",
+  "Media",
+  "DGS",
+  "Gies",
+  "Grainger",
+  "iSchool"
+];
+
+var livingLoc = [
+  "Apartment",
+  "Remote",
+  "PCH",
+  "Unit One LLC",
+  "Busey Evans",
+  "ISR",
+  "LAR",
+  "FAR",
+  "PAR",
+  "Ike North",
+  "Ike South"
+];
+
+var acesMajors = [
+  "Agri-Accounting",
+  "AgBusiness",
+  "Agricultural and Biological Engineering",
+  "Agricultural and Consumer Economics",
+  "Agricultural Communications",
+  "Agricultural Education",
+  "Agricultural Leadership, Education, and Communications",
+  "AnimalSci",
+  "Consumer Economics & Finance",
+  "CropSci",
+  "Dietetics",
+  "Environmental Economics & Policy",
+  "Farm Management",
+  "Finance in Agri-Business",
+  "Financial Planning",
+  "Food Science",
+  "Food Science & Human Nutrition",
+  "Hospitality Management",
+  "Human Development and Family Studies",
+  "Human Nutrition",
+  "Metropolitan Food & Environmental Sciences",
+  "Natural Resources and Environmental Sciences",
+  "Organizational and Community Leadership",
+  "Policy, International Trade & Development",
+  "Public Policy & Law",
+  "Technical Systems Management",
+  "AgComm",
+];
+
+var healthMajors = [
+  "Community Health",
+  "HealthSci",
+  "Kinesiology",
+  "Recreation, Sport, and Tourism",
+  "Speech and Hearing Science",
+  "Teacher Education: Kinesiology - Physical Education (K-12)"
+];
+
+var educationMajors = [
+  "EarlyEdu",
+  "ElementaryEdu",
+  "Learning & Education Studies",
+  "Middle Grades Edu",
+  "SpecialEdu"
+];
+
+var artMajors = [
+  "Acting",
+  "Architecture",
+  "Art and Art History",
+  "Art Education",
+  "Arts & Entertainment Tech",
+  "Costume Design and Tech",
+  "Dance",
+  "Graphic Design",
+  "Industrial Design",
+  "Jazz Performance",
+  "Landscape Architecture",
+  "Lighting Design and Technology",
+  "Lyric Theatre",
+  "Music",
+  "Music Composition",
+  "Music Education",
+  "Music Instrumental Performance",
+  "Music Open Studies",
+  "Music Voice Performance",
+  "Musicology",
+  "Photography",
+  "Scenic Design",
+  "Scenic Technology",
+  "Sound Design and Tech",
+  "Stage Management",
+  "Studio Art",
+  "Sustainable Design",
+  "Theatre",
+  "Urban Studies and Planning"
+];
+
+var lasMajors = [
+  "Actuarial Science",
+  "African American Studies",
+  "Anthro",
+  "Asian American Studies",
+  "Astronomy",
+  "Atmospheric Sciences",
+  "BioChem",
+  "Biology",
+  "Brain and Cog Sci",
+  "ChemEng",
+  "Chemistry",
+  "Classics",
+  "Communication",
+  "Comparative and World Literature",
+  "Creative Writing",
+  "Earth, Society, and Environmental Sustainability",
+  "EALC",
+  "Econometrics and Quantitative Economics",
+  "Economics",
+  "English",
+  "French",
+  "Gender and Women's Studies",
+  "Geography",
+  "Geology",
+  "Germanic Studies",
+  "Global Studies",
+  "History",
+  "History of Art",
+  "Biology",
+  "Interdisciplinary Studies",
+  "Italian",
+  "Latin American Studies",
+  "Latina/Latino Studies",
+  "Linguistics",
+  "Math",
+  "MCB",
+  "Philosophy",
+  "Physics",
+  "PolySci",
+  "Portuguese",
+  "Psychology",
+  "Religion",
+  "Russian, East European, and Eurasian Studies",
+  "Secondary Education",
+  "Slavic Studies",
+  "Sociology",
+  "Spanish",
+  "Statistics",
+  "Teacher Education: Language"
+];
+
+var mediaMajors = [
+  "Advertising",
+  "Journalism",
+  "Media and Cinema Studies"
+];
+
+var dgsMajors = [
+  "Undeclared",
+  "Pre-Eng"
+];
+
+var giesMajors = [
+  "Accounting",
+  "Finance",
+  "Information Systems",
+  "Management",
+  "Marketing",
+  "Operations Management",
+  "Strategic Business Development and Entrepreneurship",
+  "Supply Chain Management"
+];
+
+var graingerMajors = [
+  "AeroEng",
+  "Agricultural and Biological Engineering",
+  "BioEng",
+  "CivEng",
+  "CompEng",
+  "CompSci",
+  "ElecEng",
+  "EngMech",
+  "IndustrialEng",
+  "MatSciEng",
+  "MechEng",
+  "NuclearEng",
+  "EngPhys",
+  "SystemsEng"
+];
+
+var infosciMajors = [
+  "InfoSci"
+];
+
+var socialWorkMajors = [
+  "Social Work"
+];
+
+var specialRoles = [
+  "VC GANG"
+];
+
+
 var quotesOut = [];
 var brownoutOut = [];
 var lastUpdate;
@@ -121,6 +355,24 @@ module.exports = {
   lastUpdate,
   generalLastCommandTime,
   deletedMessages,
+  LETTEREMOJIS: letterEmojis,
+  YEARS: years,
+  LOCATION: location,
+  PRONOUNS: pronouns,
+  COLLEGES: colleges,
+  LIVINGLOC: livingLoc,
+  ACESMAJORS: acesMajors,
+  HEALTHMAJORS: healthMajors,
+  EDUCATIONMAJORS: educationMajors,
+  ARTMAJORS: artMajors,
+  LASMAJORS: lasMajors,
+  MEDIAMAJORS: mediaMajors,
+  DGSMAJORS: dgsMajors,
+  GIESMAJORS: giesMajors,
+  GRAINGERMAJORS: graingerMajors,
+  INFOSCIMAJORS: infosciMajors,
+  SOCIALMAJORS: socialWorkMajors,
+  SPECIALROLES: specialRoles,
   TIPSARR: tipsArray,
   EMBEDCOL: embedColors,
   CLIENT: client,
