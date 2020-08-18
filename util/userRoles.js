@@ -3,6 +3,13 @@ const qVars = require("./qVariables.js");
 
 var userReactRoles = function(message, user, reaction, isSet) {
   if (message.channel.id == '745160938692280360') {
+    // Max of two majors using auto-roles
+    if(isSet && getNumOfMajors(message, user.id) >= 2) {
+      // DM user
+      qVars.CLIENT.users.cache.get(user.id).send("You may only set up to two majors at a time using auto-roles. If you would like more, please DM a mod (anyone on the server with the @ESC or @mod roles) for assistance.");
+      return;
+    }
+
     var locOfEmoji = qVars.LETTEREMOJIS.indexOf(reaction.emoji.name);
 
     if (message.id == '745162331662843984') {
@@ -31,7 +38,6 @@ var userReactRoles = function(message, user, reaction, isSet) {
         editRoles(message, user.id, qVars.LIVINGLOC[locOfEmoji], isSet);
     } else if (message.id == '745162532401971270') {
       // ACES 1
-
       // Handle special case roles
       switch(locOfEmoji) {
         case -1:
@@ -228,7 +234,33 @@ var editRoles = function(message, userId, roleName, isSet) {
 };
 
 var getNumOfMajors = function(message, userId) {
+  var amnt = 0;
 
+  var allMajors = [
+    qVars.ACESMAJORS,
+    qVars.HEALTHMAJORS,
+    qVars.EDUCATIONMAJORS,
+    qVars.ARTMAJORS,
+    qVars.LASMAJORS,
+    qVars.MEDIAMAJORS,
+    qVars.DGSMAJORS,
+    qVars.GIESMAJORS,
+    qVars.GRAINGERMAJORS,
+    qVars.INFOSCIMAJORS,
+    qVars.SOCIALMAJORS,
+  ];
+
+  for(let i = 0; i < allMajors.length; i++) {
+    for(let j = 0; j < allMajors[i].length; j++) {
+      if(message.guild.member(userId).roles.cache.find(r => r.name === allMajors[i][j]))
+        amnt++;
+
+      if(amnt >= 2)
+        return amnt;
+    }
+  }
+
+  return amnt;
 };
 
 module.exports = {
