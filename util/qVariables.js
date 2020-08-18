@@ -102,6 +102,7 @@ var years = [
   "2022",
   "2023",
   "2024",
+  "Illini Traitor",
   "Prospective Student"
 ];
 
