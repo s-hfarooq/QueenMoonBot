@@ -192,10 +192,17 @@ async function getMessagesWithAttachments(channel, limit = 500) {
   return output;
 }
 
+// Helper function to add a role (taken in as a string) to a given user
+var setUserRoles = function(message, userId, roleName) {
+  var currRole = message.guild.roles.cache.find(role => role.name === roleName);
+  message.guild.member(userId).roles.add(currRole);
+};
+
 module.exports = {
   countingGameModeration,
   changeMessage,
   sendRandImage,
   getMessagesWithAttachments,
-  massPingUser
+  massPingUser,
+  setUserRoles
 };
