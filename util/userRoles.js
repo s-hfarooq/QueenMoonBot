@@ -232,17 +232,17 @@ var userReactRoles = function(message, user, reaction, isSet) {
               editRoles(message, user.id, "Linguistics", isSet);
               break;
             case 8:
-              editRoles(message, user.id, "Statistics", isSet);
+              editRoles(message, user.id, "Math", isSet);
               break;
             case 9:
-              editRoles(message, user.id, "Math", isSet);
+              editRoles(message, user.id, "Statistics", isSet);
               break;
           }
 
           return;
         }
 
-        locOfEmoji += 20;
+        locOfEmoji += 40;
 
         editRoles(message, user.id, qVars.LASMAJORS[locOfEmoji], isSet);
         break;

@@ -276,7 +276,7 @@ var lasMajors = [
   "Sociology",
   "Spanish",
   "Statistics",
-  "Teacher Education: Language"
+  "Teacher Education - Language"
 ];
 
 var mediaMajors = [
