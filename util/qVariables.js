@@ -315,7 +315,8 @@ var graingerMajors = [
   "MechEng",
   "NuclearEng",
   "EngPhys",
-  "SystemsEng"
+  "SystemsEng",
+  "Undeclared"
 ];
 
 var infosciMajors = [
