@@ -39,6 +39,27 @@ var countingGameModeration = function(message) {
   return;
 }
 
+// Moderate Quinn.GG
+var quinnModeration = function(message) {
+  message.channel.messages.fetch({
+    limit: 1
+  }).then(messages => {
+    const lastMessage = messages.array()
+    // Validate sender is Quinn.GG
+    if (lastMessage[0].member.id != '69629557941993472') {
+      return;
+    }
+    
+    if (lastMessage[0].content.includes(".")) {
+      message.delete(lastMessage[0]);
+    }
+    
+    return;
+  }).catch(err => {
+    console.error(err);
+  });
+}
+
 // owo and spongebobify command function
 var changeMessage = function(message, command, type) {
   message.channel.messages.fetch({

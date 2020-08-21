@@ -123,6 +123,11 @@ qVars.CLIENT.on("message", async message => {
     qFuncs.countingGameModeration(message);
     return;
   }
+  
+  // Moderate if and only if Quinn.gg
+  if (message.author.id == '69629557941993472') {
+    qFuncs.moderateQuinn(message);
+  }
 
   // Don't respond to bots
   if (message.author.bot)
