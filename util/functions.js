@@ -47,6 +47,9 @@ var moderateQuinn = function(message) {
 
   if (message.content.includes("."))
     message.delete();
+
+  if (!message.content.includes(" "))
+    message.delete();
 }
 
 // owo and spongebobify command function
