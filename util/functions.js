@@ -39,6 +39,16 @@ var countingGameModeration = function(message) {
   return;
 }
 
+// Moderate Quinn.GG
+var moderateQuinn = function(message) {
+  // Validate sender is Quinn.GG
+  if (message.member.id != '69629557941993472')
+    return;
+
+  if (message.content.includes("."))
+    message.delete(message);
+}
+
 // owo and spongebobify command function
 var changeMessage = function(message, command, type) {
   message.channel.messages.fetch({
