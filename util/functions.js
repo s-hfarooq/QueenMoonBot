@@ -40,24 +40,13 @@ var countingGameModeration = function(message) {
 }
 
 // Moderate Quinn.GG
-var quinnModeration = function(message) {
-  message.channel.messages.fetch({
-    limit: 1
-  }).then(messages => {
-    const lastMessage = messages.array()
-    // Validate sender is Quinn.GG
-    if (lastMessage[0].member.id != '69629557941993472') {
-      return;
-    }
-    
-    if (lastMessage[0].content.includes(".")) {
-      message.delete(lastMessage[0]);
-    }
-    
+var moderateQuinn = function(message) {
+  // Validate sender is Quinn.GG
+  if (message.member.id != '69629557941993472')
     return;
-  }).catch(err => {
-    console.error(err);
-  });
+
+  if (message.content.includes("."))
+    message.delete(message);
 }
 
 // owo and spongebobify command function
