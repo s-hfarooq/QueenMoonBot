@@ -48,7 +48,7 @@ var moderateQuinn = function(message) {
   if (message.content.includes("."))
     message.delete();
 
-  if (!message.content.includes(" ") && message.attachment.size <= 0)
+  if (!message.content.includes(" ") && !(message.attachment.size > 0))
     message.delete();
 }
 
