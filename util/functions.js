@@ -46,7 +46,7 @@ var moderateQuinn = function(message) {
     return;
 
   if (message.content.includes("."))
-    message.delete(message);
+    message.delete();
 }
 
 // owo and spongebobify command function
@@ -214,4 +214,5 @@ module.exports = {
   sendRandImage,
   getMessagesWithAttachments,
   massPingUser,
+  moderateQuinn
 };
