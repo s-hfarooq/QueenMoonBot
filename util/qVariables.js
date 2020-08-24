@@ -153,7 +153,6 @@ var acesMajors = [
   "Ag Business",
   "Agricultural and Biological Engineering",
   "Agricultural and Consumer Economics",
-  "Agricultural Communications",
   "Agricultural Education",
   "Agricultural Leadership, Education, and Communications",
   "AnimalSci",
