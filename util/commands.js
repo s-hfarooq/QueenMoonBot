@@ -88,6 +88,12 @@ var cmds = function(message, keyword, command, buffName) {
         files: ['https://cdn.discordapp.com/attachments/710425704524677211/711129644992036884/tim.png']
       });
       break;
+    
+    case "whoasked":
+      message.channel.send({
+        files: ['https://cdn.discordapp.com/attachments/669726484772159488/748679335405289563/video0.mov']
+      });
+      break;
 
     case "snitch":
       message.channel.send({
