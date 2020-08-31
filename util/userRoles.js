@@ -249,10 +249,16 @@ var userReactRoles = function(message, user, reaction, isSet) {
 
       case 13:
         // Media
-        if (locOfEmoji == -1 || locOfEmoji > qVars.MEDIAMAJORS.length - 1)
+        if (locOfEmoji == -1 || locOfEmoji > qVars.MEDIAMAJORS.length)
           return;
 
         editRoles(message, user.id, qVars.COLLEGES[5], isSet);
+
+        if (locOfEmoji == 3) {
+          editRoles(message, user.id, "CompSci + X", isSet);
+          locOfEmoji = 0;
+        }
+
         editRoles(message, user.id, qVars.MEDIAMAJORS[locOfEmoji], isSet);
         break;
 
