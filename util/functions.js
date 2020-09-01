@@ -2,6 +2,8 @@ const Discord = require("discord.js");
 const owoify = require("owoify-js").default;
 const spongebobify = require("spongebobify");
 const qVars = require("./qVariables.js");
+const fs = require('fs');
+const request = require('request');
 
 // Makes sure that counting game is on track
 var countingGameModeration = function(message) {
@@ -211,11 +213,20 @@ async function getMessagesWithAttachments(channel, limit = 500) {
   return output;
 }
 
+var downloadImg = function(uri, filename, callback){
+  request.head(uri, function(err, res, body){
+    console.log("starting new image...");
+
+    request(uri).pipe(fs.createWriteStream(filename)).on('close', callback);
+  });
+};
+
 module.exports = {
   countingGameModeration,
   changeMessage,
   sendRandImage,
   getMessagesWithAttachments,
   massPingUser,
-  moderateQuinn
+  moderateQuinn,
+  downloadImg
 };

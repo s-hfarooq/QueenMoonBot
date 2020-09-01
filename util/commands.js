@@ -88,7 +88,7 @@ var cmds = function(message, keyword, command, buffName) {
         files: ['https://cdn.discordapp.com/attachments/710425704524677211/711129644992036884/tim.png']
       });
       break;
-    
+
     case "whoasked":
       message.channel.send({
         files: ['https://cdn.discordapp.com/attachments/669726484772159488/748679335405289563/video0.mov']
@@ -253,6 +253,25 @@ var cmds = function(message, keyword, command, buffName) {
         output = "too looong";
       message.channel.send(output);
       break;
+    case "dwnld":
+      // Download all images in quotes and brownout - only HAFAR can do this
+      if(message.member.id != '243774954955341828')
+        return;
+      for(let i = 0; i < qVars.quotesOut.length; i++) {
+        var fType = qVars.quotesOut[i].attachments.first().url.substr(qVars.quotesOut[i].attachments.first().url.lastIndexOf(".") + 1);
+        //console.log(fType);
+        qFuncs.downloadImg(qVars.quotesOut[i].attachments.first().url, `quotes/${i}.${fType}`, function(){
+          console.log(`done with quote img ${i}`);
+        });
+      }
+
+      for(let i = 0; i < qVars.brownoutOut.length; i++) {
+        var fType = qVars.brownoutOut[i].attachments.first().url.substr(qVars.brownoutOut[i].attachments.first().url.lastIndexOf(".") + 1);
+        if(fType.length < 5)
+          qFuncs.downloadImg(qVars.brownoutOut[i].attachments.first().url, `brownout/${i}.${fType}`, function(){
+            console.log(`done with brownout img ${i}`);
+          });
+      }
   }
 }
 
