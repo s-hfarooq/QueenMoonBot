@@ -32,6 +32,7 @@ var cmds = function(message, keyword, command, buffName) {
       message.channel.send("House may be house may not");
       break;
 
+    case "water":
     case "thirst":
       var rand = Math.floor(Math.random() * qVars.REMINDERS.length);
       message.channel.send(qVars.REMINDERS[rand]);
@@ -63,10 +64,6 @@ var cmds = function(message, keyword, command, buffName) {
       message.channel.send({
         files: ["https://cdn.discordapp.com/attachments/697639057592811650/712531761774461008/Corn_is_the_best_crop__wheat_is_worst.mp4"]
       });
-      break;
-
-    case "korn":
-      message.channel.send("https://youtu.be/vclUfHGKpOc");
       break;
 
     case "il":
@@ -157,6 +154,7 @@ var cmds = function(message, keyword, command, buffName) {
         .addField('Rule 3', 'Don\'t ask for mod or moderation privileges', false)
         .addField('Rule 4', ' Don\'t grind @MEE6 XP points', false)
         .addField('Rule 5', 'Don\'t spam (if you must, limit it to #spam)', false)
+        .addField('6. No NSFW content outside marked channels (ie. #social_general_nsfw)', false)
         .addField('Note', 'Failure to follow these rules may result in a warning, mute, or ban', false)
       message.channel.send({
         embed: rulesEmbed
@@ -179,20 +177,6 @@ var cmds = function(message, keyword, command, buffName) {
           embed: tipEmbed
         });
       }
-      break;
-
-    case "massping":
-    case "sp":
-      // Make sure user has ESC role
-      if (message.member.roles.cache.has(qVars.ESCID))
-        qFuncs.massPingUser(message, command);
-      else
-        message.channel.send("You do not have permission to use this command!");
-      break;
-
-    case "rankdegen":
-      var degenRank = Math.floor(Math.random() * 100);
-      message.channel.send("you are " + degenRank + "% degenerate");
       break;
 
     case "owoify":
@@ -222,11 +206,6 @@ var cmds = function(message, keyword, command, buffName) {
       });
       break;
 
-    case "flip":
-      var options = ["Heads", "Tails"];
-      message.channel.send(options[Math.floor(Math.random() * options.length)]);
-      break;
-
     case "cat":
       var output = "";
       var amnt = isNaN(parseInt(command)) ? 1 : parseInt(command);
@@ -253,25 +232,6 @@ var cmds = function(message, keyword, command, buffName) {
         output = "too looong";
       message.channel.send(output);
       break;
-    case "dwnld":
-      // Download all images in quotes and brownout - only HAFAR can do this
-      if(message.member.id != '243774954955341828')
-        return;
-      for(let i = 0; i < qVars.quotesOut.length; i++) {
-        var fType = qVars.quotesOut[i].attachments.first().url.substr(qVars.quotesOut[i].attachments.first().url.lastIndexOf(".") + 1);
-        //console.log(fType);
-        qFuncs.downloadImg(qVars.quotesOut[i].attachments.first().url, `quotes/${i}.${fType}`, function(){
-          console.log(`done with quote img ${i}`);
-        });
-      }
-
-      for(let i = 0; i < qVars.brownoutOut.length; i++) {
-        var fType = qVars.brownoutOut[i].attachments.first().url.substr(qVars.brownoutOut[i].attachments.first().url.lastIndexOf(".") + 1);
-        if(fType.length < 5)
-          qFuncs.downloadImg(qVars.brownoutOut[i].attachments.first().url, `brownout/${i}.${fType}`, function(){
-            console.log(`done with brownout img ${i}`);
-          });
-      }
   }
 }
 

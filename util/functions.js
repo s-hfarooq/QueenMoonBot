@@ -41,19 +41,6 @@ var countingGameModeration = function(message) {
   return;
 }
 
-// Moderate Quinn.GG
-var moderateQuinn = function(message) {
-  // Validate sender is Quinn.GG
-  if (message.member.id != '69629557941993472')
-    return;
-
-  if (message.content.includes("."))
-    message.delete();
-
-  if (!message.content.includes(" ") && !(message.attachment.size > 0))
-    message.delete();
-}
-
 // owo and spongebobify command function
 var changeMessage = function(message, command, type) {
   message.channel.messages.fetch({
@@ -144,44 +131,6 @@ var sendRandImage = function(message, command, messageArray, channelID) {
   return;
 }
 
-var massPingUser = function(message, command) {
-  var start = command.indexOf("<@");
-  var end = command.indexOf(">");
-
-  // Make sure someone was mentioned
-  if (start < 0 || end < 0) {
-    message.channel.send("You must mention someone!");
-    return;
-  }
-
-  // Get number of @'s wanted
-  var amnt = parseInt(command.substr(end + 1));
-  if (isNaN(amnt) || amnt < 1 || amnt > 100) {
-    console.log(amnt);
-    message.channel.send("You must input a valid number! (must be between 0 and 100)");
-    return;
-  }
-
-  var atUser = command.substr(command.indexOf("<"), command.indexOf(">") + 1);
-  message.delete();
-
-  // Send log message
-  var logMsg = new Discord.MessageEmbed()
-    .setColor('#FFFF33')
-    .setAuthor(`${message.member.user.tag} mentioned ${message.mentions.users.first().tag} ${amnt} times in ${message.channel.name}`);
-
-  qVars.CLIENT.channels.cache.get(qVars.LOGID).send({
-    embed: logMsg
-  });
-
-  // Mass ping
-  for (let i = 0; i < amnt; i++) {
-    message.channel.send(atUser).then(sentMessage => {
-      sentMessage.delete();
-    });
-  }
-}
-
 // Gets all messages with attachments in a given channel and returns as an array
 async function getMessagesWithAttachments(channel, limit = 500) {
   const sum_messages = [];
@@ -213,20 +162,9 @@ async function getMessagesWithAttachments(channel, limit = 500) {
   return output;
 }
 
-var downloadImg = function(uri, filename, callback){
-  request.head(uri, function(err, res, body){
-    console.log("starting new image...");
-
-    request(uri).pipe(fs.createWriteStream(filename)).on('close', callback);
-  });
-};
-
 module.exports = {
   countingGameModeration,
   changeMessage,
   sendRandImage,
   getMessagesWithAttachments,
-  massPingUser,
-  moderateQuinn,
-  downloadImg
 };
