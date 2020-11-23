@@ -114,7 +114,9 @@ var location = [
 var pronouns = [
   "He/Him",
   "She/Her",
-  "They/Them"
+  "They/Them",
+  "genderfluid",
+  "multiple pronouns"
 ];
 
 var colleges = [
