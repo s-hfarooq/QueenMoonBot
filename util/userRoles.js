@@ -323,10 +323,12 @@ var userReactRoles = function(message, user, reaction, isSet) {
 var editRoles = function(message, userId, roleName, isSet) {
   var currRole = message.guild.roles.cache.find(role => role.name === roleName);
 
-  if (isSet)
-    message.guild.member(userId).roles.add(currRole);
-  else
-    message.guild.member(userId).roles.remove(currRole);
+  message.guild.members.fetch(userId).then(member => {
+    if(isSet)
+      member.roles.add(currRole);
+    else
+      member.roles.remove(currRole);
+  })
 };
 
 var getNumOfMajors = function(message, userId) {
