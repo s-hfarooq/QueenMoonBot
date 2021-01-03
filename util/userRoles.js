@@ -18,7 +18,7 @@ var userReactRoles = function(message, user, reaction, isSet) {
 
     // Max of one major using auto-roles
     if (isSet && msgNum > 3 && msgNum < 19 && getNumOfMajors(message, user.id) >= 1) {
-      qVars.CLIENT.users.cache.get(user.id).send("You may only set a single major using auto-roles. If you would like more, please DM a mod (anyone on the server with the @ESC or @mod roles) for assistance.");
+      qVars.CLIENT.users.cache.get(user.id).send("You may only set a single major using auto-roles. If you would like more, please DM a mod (anyone on the server with the @Moderator role) for assistance.");
       return;
     }
 
@@ -35,7 +35,7 @@ var userReactRoles = function(message, user, reaction, isSet) {
 
           for (let i = 0; i < qVars.YEARS.length - 1; i++) {
             if (message.guild.member(user.id).roles.cache.find(r => r.name === qVars.YEARS[i])) {
-              qVars.CLIENT.users.cache.get(user.id).send("You may only have a single graduation year. Please de-select the other year before setting a new one.");
+              qVars.CLIENT.users.cache.get(user.id).send("You may only have a single graduation year. Please unselect the other year before setting a new one.");
               return;
             }
           }
@@ -88,7 +88,7 @@ var userReactRoles = function(message, user, reaction, isSet) {
         if (isSet) {
           for (let i = 0; i < qVars.LIVINGLOC.length; i++) {
             if (message.guild.member(user.id).roles.cache.find(r => r.name === qVars.LIVINGLOC[i])) {
-              qVars.CLIENT.users.cache.get(user.id).send("You may only have a single living location. Please de-select the other living location before setting a new one.");
+              qVars.CLIENT.users.cache.get(user.id).send("You may only have a single living location. Please unselect the other living location before setting a new one.");
               return;
             }
           }
