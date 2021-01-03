@@ -3,6 +3,8 @@ const qVars = require("./qVariables.js");
 
 var userReactRoles = function(message, user, reaction, isSet) {
   if (message.channel.id == '745160938692280360') {
+    console.log("message reacted");
+
     // Find which message was reacted
     var msgs = ['745162331662843984', '745162371848208384', '745162420456259614', '745162473275129869', '745162532401971270', '745162562588639261',
       '745162595991814155', '745162634554376242', '745162672320020490', '745162688476217375', '745162728934735884', '745162751248171059',
@@ -322,6 +324,7 @@ var userReactRoles = function(message, user, reaction, isSet) {
 
 var editRoles = function(message, userId, roleName, isSet) {
   var currRole = message.guild.roles.cache.find(role => role.name === roleName);
+  message.guild.members.fetch();
 
   message.guild.members.fetch(userId).then(member => {
     if(isSet)
