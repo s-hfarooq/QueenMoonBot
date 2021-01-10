@@ -1,6 +1,6 @@
 # Alma Botter
 
-A bot for the [UIUC 2024 Discord server](https://discord.gg/2pFv4Wq)
+A bot for the [UIUC 202x Discord server](https://discord.gg/2pFv4Wq)
 
 ## Commands
 * `otter rules` to send the server rules
