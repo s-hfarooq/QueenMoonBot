@@ -169,8 +169,14 @@ var userReactRoles = function(message, user, reaction, isSet) {
 
       case 9:
         // Fine/Applied Arts 2
-        if (locOfEmoji == -1 || locOfEmoji > 8)
+        if (locOfEmoji == -1 || locOfEmoji > 9)
           return;
+
+        if (locOfEmoji == 9) {
+            editRoles(message, user.id, "CompSci + X", isSet);
+            editRoles(message, user.id, "Music", isSet);
+            break;
+        }
 
         locOfEmoji += 20;
         editRoles(message, user.id, qVars.COLLEGES[3], isSet);
